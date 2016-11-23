@@ -57,12 +57,14 @@ highlight LineNr ctermfg=DarkGrey ctermbg=236
 call pathogen#infect()
 
 " Vim-Go
-let g:go_disable_autoinstall = 0
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
+:inoremap <C-Space> <C-x><C-o>
 
 " Neocomplete
 let g:neocomplete#enable_at_startup = 1
@@ -82,6 +84,10 @@ inoremap <s-tab> <c-n>
 
 " NERDtree
 map <C-n> :NERDTreeToggle<CR>
+let NERDTreeQuitOnOpen = 1
+autocmd StdinReadPre * let s:std_in = 1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Better-whitespace remove empty spaces on save
 autocmd BufWritePre * StripWhitespace
@@ -91,6 +97,9 @@ set laststatus=2
 set ttimeoutlen=50
 let g:airline_theme='luna'
 let g:airline_powerline_fonts = 1
+
+" Enable tabs to use Airline
+let g:airline#extensions#tabline#enabled = 1
 
 " enable Airline symbols
 if !exists('g:airline_symbols')
