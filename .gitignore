@@ -3,6 +3,8 @@
 /*/
 
 # Don't ignore Vim-related stuff
-!.gitignore 
+!.gitignore
+!.gitconfig
+!.bash_profile
 !/.vim/
 !.vimrc
