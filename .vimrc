@@ -7,6 +7,10 @@ set nocompatible
 syntax enable
 colorscheme Chasing_Logic
 
+" highlight current line
+set cursorline
+highlight CursorLine cterm=none
+
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
@@ -26,6 +30,9 @@ set hlsearch
 map  <F12> :set hls!<CR>
 imap <F12> <ESC>:set hls!<CR>a
 vmap <F12> <ESC>:set hls!<CR>gv
+
+" This removes the previous search when pressing / again
+nmap <silent> <leader>/ :nohlsearch<CR>
 
 " Makes search act like search in modern browsers
 set incsearch
@@ -52,6 +59,18 @@ set tm=500
 " Enable line numbers and set them to be dark
 set number
 highlight LineNr ctermfg=DarkGrey ctermbg=236
+
+" Making it so ; works like : for commands.
+" Saves typing and eliminates :W style
+" typos due to lazy holding shift.
+nnoremap ; :
+
+" Easier moving in tabs and windows
+map <C-J> <C-W>j<C-W>_
+map <C-K> <C-W>k<C-W>_
+map <C-L> <C-W>l<C-W>_
+map <C-H> <C-W>h<C-W>_
+map <C-K> <C-W>k<C-W>_
 
 " Enable Pathogen
 call pathogen#infect()
