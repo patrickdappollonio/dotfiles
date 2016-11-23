@@ -1,0 +1,8 @@
+# Ignore everything
+/*
+/*/
+
+# Don't ignore Vim-related stuff
+!.gitignore 
+!/.vim/
+!.vimrc
