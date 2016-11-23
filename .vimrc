@@ -136,3 +136,6 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
+" CTRL+u won't screw my code
+noremap <c-u> <c-g>u<c-u>
+inoremap <c-w> <c-g>u<c-w>
