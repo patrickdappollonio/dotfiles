@@ -1,11 +1,11 @@
 set t_Co=256
 
+" vi is not vim
 set nocompatible
-filetype off
-colorscheme Chasing_Logic
 
 " Appearance
 syntax enable
+colorscheme Chasing_Logic
 
 " Enable filetype plugins
 filetype plugin on
@@ -20,8 +20,12 @@ set ruler
 " When searching try to be smart about cases
 set smartcase
 
-" Highlight search results
+" Highlight search results and allow
+" highlighting back and forth with F12 (toggle)
 set hlsearch
+map  <F12> :set hls!<CR>
+imap <F12> <ESC>:set hls!<CR>a
+vmap <F12> <ESC>:set hls!<CR>gv
 
 " Makes search act like search in modern browsers
 set incsearch
@@ -82,7 +86,35 @@ map <C-n> :NERDTreeToggle<CR>
 " Better-whitespace remove empty spaces on save
 autocmd BufWritePre * StripWhitespace
 
-" AirlineTheme
+" Airline Setup
 set laststatus=2
 set ttimeoutlen=50
-let g:airline_theme='simple'
+let g:airline_theme='luna'
+let g:airline_powerline_fonts = 1
+
+" enable Airline symbols
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" Proper unicode symbols for Airline
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
