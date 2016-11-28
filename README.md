@@ -8,6 +8,7 @@
 * `/` to search, `F12` to toggle highlight of found words
 * `V` (uppercase) selects a line, up, down to add or remove lines, then `d` cuts, `y` copy and `p` paste after cursor.
 * `CTRL-n` twice to show or hide line numbers
+* `F5` to show a list of buffers with numbers, and use them to change between them
 
 ### Remember to create symlinks
 
