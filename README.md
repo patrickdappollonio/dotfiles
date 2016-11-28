@@ -7,6 +7,7 @@
 * `\cc` will comment the source code
 * `/` to search, `F12` to toggle highlight of found words
 * `V` (uppercase) selects a line, up, down to add or remove lines, then `d` cuts, `y` copy and `p` paste after cursor.
+* `CTRL-n` twice to show or hide line numbers
 
 ### Remember to create symlinks
 

@@ -37,6 +37,18 @@ nmap <silent> <leader>/ :nohlsearch<CR>
 " Makes search act like search in modern browsers
 set incsearch
 
+" allow to copy-paste to other apps, using the selection with "v", "V" or
+" similar and Ctrl-y to copy to clipboard, and Ctrl-p to paste from it
+nnoremap <C-y> "+y
+vnoremap <C-y> "+y
+nnoremap <C-p> "+gP
+vnoremap <C-p> "+gP
+
+" this also allows to toggle line numbers when working via ssh
+" using CTRL-n twice in visual mode
+nmap <C-N><C-N> :set invnumber<CR>
+
+
 " For regular expressions turn magic on
 set magic
 
