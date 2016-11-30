@@ -5,10 +5,8 @@
 # configure proxy for git while on corporate network
 function proxy_on(){
    # on Windows env vars are UPPERCASE even in git bash
-   export HTTP_PROXY="web-proxy.houston.hpecorp.net:8080"
-   export HTTPS_PROXY=$HTTP_PROXY
-   export FTP_PROXY=$HTTP_PROXY
-   export ALL_PROXY=$HTTP_PROXY # for SOCKS use ALL_PROXY or SOCKS_PROXY?
+   export {HTTP,HTTPS,FTP,ALL}_PROXY="web-proxy.houston.hpecorp.net:8080"
+   export {http,https,ftp,all}_proxy="web-proxy.houston.hpecorp.net:8080"
 
    export NO_PROXY="localhost,127.0.0.1,$USERDNSDOMAIN,192.168.99.100"
 
@@ -28,6 +26,7 @@ function proxy_off(){
    variables=( \
       "PASSWORD" "PROXY_SERVER" "PROXY_PORT" \
       "HTTP_PROXY" "HTTPS_PROXY" "FTP_PROXY" "ALL_PROXY" \
+      "http_proxy" "https_proxy" "ftp_proxy" "all_proxy" \
       "NO_PROXY" "GIT_CURL_VERBOSE" "GIT_SSL_NO_VERIFY" \
    )
 
