@@ -9,6 +9,7 @@
 * `V` (uppercase) selects a line, up, down to add or remove lines, then `d` cuts, `y` copy and `p` paste after cursor.
 * `CTRL-n` twice to show or hide line numbers
 * `F5` to show a list of buffers with numbers, and use them to change between them
+* In visual mode, `CTRL-b` is pageUp, `CTRL-f` is pageDown
 
 ### tmux
 
@@ -17,6 +18,7 @@
 * `CTRL-a [` allows to scroll the window content.
 * `CTRL-a (1-0)` allows to move between open windows, using numbers between 1 and 0.
 * `CTRL-a [` to use selection mode... Space starts text selection, and enter copies, then, exit selection with `q`. Paste with `CTRL-a ]`.
+* In visual mode, `CTRL-b` is pageUp, `CTRL-f` is pageDown
 
 ### Remember to create symlinks
 
