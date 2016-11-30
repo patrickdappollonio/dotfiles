@@ -10,6 +10,13 @@
 * `CTRL-n` twice to show or hide line numbers
 * `F5` to show a list of buffers with numbers, and use them to change between them
 
+### tmux
+
+* `CTRL-a` is the master key.
+* `CTRL-a c` creates new window.
+* `CTRL-a [` allows to scroll the window content.
+* `CTRL-a (1-0)` allows to move between open windows, using numbers between 1 and 0.
+
 ### Remember to create symlinks
 
 In order to use these files, create a `.dotfiles` folder in your `$HOME` and then create a symlink to the given files...
