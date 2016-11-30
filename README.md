@@ -16,6 +16,7 @@
 * `CTRL-a c` creates new window.
 * `CTRL-a [` allows to scroll the window content.
 * `CTRL-a (1-0)` allows to move between open windows, using numbers between 1 and 0.
+* `CTRL-a [` to use selection mode... Space starts text selection, and enter copies, then, exit selection with `q`. Paste with `CTRL-a ]`.
 
 ### Remember to create symlinks
 
