@@ -50,7 +50,7 @@ autocmd bufwritepost .vimrc source $MYVIMRC
 
 " this also allows to toggle line numbers when working via ssh
 " using CTRL-n twice in visual mode
-nmap <C-N><C-N> :set invnumber<CR>
+autocmd VimEnter * if exists(":GitGutterToggle") | exe "nmap <C-N><C-N> :set invnumber <bar> :GitGutterToggle<CR>" | endif
 
 " For regular expressions turn magic on
 set magic
