@@ -1,0 +1,13 @@
+# Export as TTY, since we're using a remote connection
+# to an SSH Server
+export GPG_TTY=`tty`
+
+# Enable a 256-color term if possible
+if [ -e /usr/share/terminfo/x/xterm-256color ]; then
+   export TERM='xterm-256color'
+else
+   export TERM='xterm-color'
+fi
+
+# Enable support for 256-colors
+if [[ $TERM == xterm ]]; then TERM=xterm-256color; fi

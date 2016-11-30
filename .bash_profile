@@ -31,5 +31,8 @@ function gs() {
    cd $(find-project $1)
 }
 
+# Source tty-specific settings
+source ~/.dotfiles/.bash_profile_tty
+
 # Source HPE-specific settings
-source .bash_profile_hpe
+source ~/.dotfiles/.bash_profile_hpe
