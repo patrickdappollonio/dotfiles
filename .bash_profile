@@ -1,6 +1,5 @@
 # Aliases, since I may forget it
 alias subl=vim
-alias gpom='git push origin master'
 
 # Add PS1
 export PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\]@\h \[\e[0m\]\[\e[01;36m\][\W]\$(__git_ps1)\[\e[0m\]\[\e[00;36m\]:\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"

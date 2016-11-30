@@ -30,6 +30,8 @@
 	le = log --oneline --decorate
 	dl = "!git ll -1"
 	aliases = "!git config -l | grep alias | cut -c 7-"
+   pom = push origin master
+
 
 ; HPE SPECIFIC - allows to use ssh only
 [url "ssh://git@github.hpe.com/"]
