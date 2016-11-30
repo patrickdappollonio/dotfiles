@@ -7,6 +7,7 @@ export GPG_TTY=`tty`
 
 # Aliases, since I may forget it
 alias subl=vim
+alias gpom='git push origin master'
 
 # Enable a 256-color term if possible
 if [ -e /usr/share/terminfo/x/xterm-256color ]; then
