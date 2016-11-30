@@ -44,10 +44,13 @@ vnoremap <C-y> "+y
 nnoremap <C-p> "+gP
 vnoremap <C-p> "+gP
 
+" enable to open and reload vim settings on save
+map <leader>vimrc :tabe $MYVIMRC<cr>
+autocmd bufwritepost .vimrc source $MYVIMRC
+
 " this also allows to toggle line numbers when working via ssh
 " using CTRL-n twice in visual mode
 nmap <C-N><C-N> :set invnumber<CR>
-
 
 " For regular expressions turn magic on
 set magic
@@ -112,6 +115,9 @@ function! InsertTabWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
+
+" Buffergator toggle
+map <F5> :BuffergatorToggle<CR>
 
 " NERDtree
 map <C-n> :NERDTreeToggle<CR>
@@ -192,9 +198,6 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 " CTRL+u won't screw my code
 noremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
-
-" allows to switch buffers by pressing F5
-nnoremap <F5> :buffers<CR>:buffer<Space>
 
 " also warns if you're leaving an unsaved buffer
 set confirm
