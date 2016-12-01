@@ -52,6 +52,3 @@
 [submodule ".vim/bundle/emmet-vim"]
 	path = .vim/bundle/emmet-vim
 	url = https://github.com/mattn/emmet-vim
-[submodule ".vim/bundle/vim-ctrlp-cmdpalette"]
-	path = .vim/bundle/vim-ctrlp-cmdpalette
-	url = https://github.com/fisadev/vim-ctrlp-cmdpalette.git
