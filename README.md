@@ -10,6 +10,7 @@
 * `CTRL-n` twice to show or hide line numbers
 * `F5` to show a list of buffers with numbers, and use them to change between them
 * In visual mode, `CTRL-b` is pageUp, `CTRL-f` is pageDown
+* In any mode, write an emmet HTML markup, then press `CTRL-y-,` to get full completion
 
 ### tmux
 
