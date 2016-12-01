@@ -9,6 +9,7 @@
 * `V` (uppercase) selects a line, up, down to add or remove lines, then `d` cuts, `y` copy and `p` paste after cursor.
 * `CTRL-n` twice to show or hide line numbers
 * `F5` to show a list of buffers with numbers, and use them to change between them
+* `\(1-9)` allows to switch between buffers with numbers as well.
 * In visual mode, `CTRL-b` is pageUp, `CTRL-f` is pageDown
 * In any mode, write an emmet HTML markup, then press `CTRL-y-,` to get full completion
 
