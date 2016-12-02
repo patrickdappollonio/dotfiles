@@ -101,21 +101,19 @@ let g:go_fmt_command = "goimports"
 :inoremap <C-Space> <C-x><C-o>
 
 " Neocomplete
+let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#auto_completion_start_length = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#auto_completion_start_length = 2
 
-" Enable a multipurpose tab key, if we're at the
-" beginning of a line, then indent, else do autocomplete
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
+" Neocomplete keyword pattern
+if !exists('g:neocomplete#keyword_patterns')
+   let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Enable Neocomplete to run with CTRL-Space
+inoremap <expr> <C-Space> neocomplete#start_manual_complete()
 
 " Buffergator toggle
 map <F5> :BuffergatorToggle<CR>
