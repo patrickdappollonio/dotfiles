@@ -119,11 +119,12 @@ inoremap <expr> <C-Space> neocomplete#start_manual_complete()
 map <F5> :BuffergatorToggle<CR>
 
 " NERDtree
-map <C-n> :NERDTreeToggle<CR>
-let NERDTreeQuitOnOpen = 1
-let NERDTreeShowHidden = 1
-autocmd StdinReadPre * let s:std_in = 1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-n> :NERDTreeTabsToggle<CR>
+let NERDTreeQuitOnOpen=1
+let NERDTreeShowHidden=1
+let NERDTreeMapOpenInTab='<Enter>'
+let g:nerdtree_tabs_open_on_console_startup = 2
+let g:nerdtree_tabs_autoclose = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Better-whitespace remove empty spaces on save
