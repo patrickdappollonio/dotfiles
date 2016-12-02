@@ -102,6 +102,7 @@ let g:go_fmt_command = "goimports"
 
 " Neocomplete
 let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#auto_completion_start_length = 1
 
 " Enable a multipurpose tab key, if we're at the
 " beginning of a line, then indent, else do autocomplete

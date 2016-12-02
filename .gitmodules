@@ -52,6 +52,3 @@
 [submodule ".vim/bundle/emmet-vim"]
 	path = .vim/bundle/emmet-vim
 	url = https://github.com/mattn/emmet-vim
-[submodule ".vim/bundle/Terminus"]
-	path = .vim/bundle/Terminus
-	url = https://github.com/vim-scripts/Terminus
