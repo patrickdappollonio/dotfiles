@@ -22,6 +22,9 @@
 * `CTRL-a [` to use selection mode... Space starts text selection, and enter copies, then, exit selection with `q`. Paste with `CTRL-a ]`.
 * `CTRL-a ,` allows to change the window name
 * In visual mode, `CTRL-b` is pageUp, `CTRL-f` is pageDown
+* `CTRL-a w` shows a list of windows
+* `CTRL-a &` prompts to kill the window
+* `CTRL-a .` prompts for a new window number
 
 ### Remember to create symlinks
 
