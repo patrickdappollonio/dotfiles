@@ -20,11 +20,17 @@
 * `CTRL-a [` allows to scroll the window content.
 * `CTRL-a (1-0)` allows to move between open windows, using numbers between 1 and 0.
 * `CTRL-a [` to use selection mode... Space starts text selection, and enter copies, then, exit selection with `q`. Paste with `CTRL-a ]`.
-* `CTRL-a ,` allows to change the window name
-* In visual mode, `CTRL-b` is pageUp, `CTRL-f` is pageDown
+* `CTRL-a n` allows to change the window name
 * `CTRL-a w` shows a list of windows
-* `CTRL-a &` prompts to kill the window
-* `CTRL-a .` prompts for a new window number
+* `CTRL-a x` prompts to kill the window
+* In visual mode, `CTRL-b` is pageUp, `CTRL-f` is pageDown
+
+To manage panels:
+
+* `CTRL-a |` creates a new vertical panel
+* `CTRL-a -` creates a new horizontal panel
+* `Alt-Up`, `Alt-Down`, `Alt-Left`, `Alt-Right` allows to move between panels
+* Resize panels by using `CTRL-a-(h,l)` to resize left or right, and `CTRL-a-(j,k)` to resize up and down
 
 ### Remember to create symlinks
 
