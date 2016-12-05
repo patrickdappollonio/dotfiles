@@ -50,7 +50,7 @@ autocmd bufwritepost .vimrc source $MYVIMRC
 
 " this also allows to toggle line numbers when working via ssh
 " using CTRL-n twice in visual mode
-autocmd VimEnter * if exists(":GitGutterToggle") | exe "nmap <C-N><C-N> :set invnumber <bar> :GitGutterToggle<CR>" | endif
+autocmd VimEnter * if exists(":GitGutterToggle") | exe "map <C-/> :set invnumber <bar> :GitGutterToggle<CR>" | endif
 
 " For regular expressions turn magic on
 set magic
@@ -79,13 +79,6 @@ highlight LineNr ctermfg=DarkGrey ctermbg=236
 " Saves typing and eliminates :W style
 " typos due to lazy holding shift.
 nnoremap ; :
-
-" Easier moving in tabs and windows
-map <C-J> <C-W>j<C-W>_
-map <C-K> <C-W>k<C-W>_
-map <C-L> <C-W>l<C-W>_
-map <C-H> <C-W>h<C-W>_
-map <C-K> <C-W>k<C-W>_
 
 " Enable Pathogen
 call pathogen#infect()
@@ -119,12 +112,10 @@ inoremap <expr> <C-Space> neocomplete#start_manual_complete()
 map <F5> :BuffergatorToggle<CR>
 
 " NERDtree
-map <C-n> :NERDTreeTabsToggle<CR>
-let NERDTreeQuitOnOpen=1
+map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
-let NERDTreeMapOpenInTab='<Enter>'
-let g:nerdtree_tabs_open_on_console_startup = 2
-let g:nerdtree_tabs_autoclose = 1
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Better-whitespace remove empty spaces on save
