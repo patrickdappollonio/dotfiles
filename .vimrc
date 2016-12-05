@@ -31,6 +31,9 @@ map  <F12> :set hls!<CR>
 imap <F12> <ESC>:set hls!<CR>a
 vmap <F12> <ESC>:set hls!<CR>gv
 
+" Allows to toggle paste with F2
+set pastetoggle=<F2>
+
 " This removes the previous search when pressing / again
 nmap <silent> <leader>/ :nohlsearch<CR>
 
@@ -116,6 +119,13 @@ inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
    return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
+
+" Enable omni-completion for known file types
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Buffergator toggle
 map <F5> :BuffergatorToggle<CR>
