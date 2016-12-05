@@ -102,14 +102,20 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#auto_completion_start_length = 2
 
+" Also selects automatically the first option
+let g:neocomplete#enable_auto_select = 1
+
 " Neocomplete keyword pattern
 if !exists('g:neocomplete#keyword_patterns')
    let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" Enable Neocomplete to run with CTRL-Space
-inoremap <expr> <C-Space> neocomplete#start_manual_complete()
+" ENTER closes the popup and saves indent
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+   return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
 
 " Buffergator toggle
 map <F5> :BuffergatorToggle<CR>
@@ -119,7 +125,7 @@ map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeQuitOnOpen=1
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Better-whitespace remove empty spaces on save
