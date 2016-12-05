@@ -13,6 +13,7 @@
 * `CTRL-g` toggle line numbers and git gutter
 * In visual mode, `CTRL-b` is pageUp, `CTRL-f` is pageDown
 * In any mode, write an emmet HTML markup, then press `CTRL-y-,` to get full completion
+* In any mode, press `F7` to fix indentation problems
 
 ### tmux
 

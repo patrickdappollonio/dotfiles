@@ -31,6 +31,9 @@ map  <F12> :set hls!<CR>
 imap <F12> <ESC>:set hls!<CR>a
 vmap <F12> <ESC>:set hls!<CR>gv
 
+" Reformat the indentation on a file by pressing <F7>
+map <F7> mzgg=G`z
+
 " Allows to toggle paste with F2
 set pastetoggle=<F2>
 
@@ -159,7 +162,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Agressive autocompletion
 if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
+   let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
 " Buffergator toggle
@@ -209,7 +212,7 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 
 " enable Airline symbols
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+   let g:airline_symbols = {}
 endif
 
 " Proper unicode symbols for Airline
@@ -247,8 +250,8 @@ let g:user_emmet_mode='a'
 
 " this also allows to toggle line numbers when working via ssh
 function! NumberToggle()
-	set number!
-	:GitGutterToggle
+   set number!
+   :GitGutterToggle
 endfunc
 nnoremap <C-g> :call NumberToggle()<cr>
 
