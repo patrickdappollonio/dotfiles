@@ -49,8 +49,11 @@ map <leader>vimrc :tabe $MYVIMRC<cr>
 autocmd bufwritepost .vimrc source $MYVIMRC
 
 " this also allows to toggle line numbers when working via ssh
-" using CTRL-n twice in visual mode
-autocmd VimEnter * if exists(":GitGutterToggle") | exe "map <C-/> :set invnumber <bar> :GitGutterToggle<CR>" | endif
+function! NumberToggle()
+	set number!
+	:GitGutterToggle
+endfunc
+nnoremap <C-g> :call NumberToggle()<cr>
 
 " For regular expressions turn magic on
 set magic
@@ -91,7 +94,7 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
-:inoremap <C-Space> <C-x><C-o>
+inoremap <C-Space> <C-x><C-o>
 
 " Neocomplete
 let g:acp_enableAtStartup = 0
@@ -114,6 +117,7 @@ map <F5> :BuffergatorToggle<CR>
 " NERDtree
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
+let NERDTreeQuitOnOpen=1
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif

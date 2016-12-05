@@ -10,6 +10,7 @@
 * `CTRL-n` twice to show or hide line numbers
 * `F5` to show a list of buffers with numbers, and use them to change between them
 * `\(1-9)` allows to switch between buffers with numbers as well.
+* `CTRL-g` toggle line numbers and git gutter
 * In visual mode, `CTRL-b` is pageUp, `CTRL-f` is pageDown
 * In any mode, write an emmet HTML markup, then press `CTRL-y-,` to get full completion
 
