@@ -106,7 +106,7 @@ let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#auto_completion_start_length = 2
 
 " Also selects automatically the first option
-let g:neocomplete#enable_auto_select = 1
+" let g:neocomplete#enable_auto_select = 1
 
 " Neocomplete keyword pattern
 if !exists('g:neocomplete#keyword_patterns')
@@ -126,6 +126,11 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Agressive autocompletion
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
 
 " Buffergator toggle
 map <F5> :BuffergatorToggle<CR>
