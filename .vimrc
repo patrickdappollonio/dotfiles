@@ -51,13 +51,15 @@ vnoremap <C-p> "+gP
 map <leader>vimrc :tabe $MYVIMRC<cr>
 autocmd bufwritepost .vimrc source $MYVIMRC
 
-" this also allows to toggle line numbers when working via ssh
-function! NumberToggle()
-	set number!
-	:GitGutterToggle
-endfunc
-nnoremap <C-g> :call NumberToggle()<cr>
+" CTRL+u won't screw my code
+noremap <c-u> <c-g>u<c-u>
+inoremap <c-w> <c-g>u<c-w>
 
+" also warns if you're leaving an unsaved buffer
+set confirm
+
+" clean colors when running inside tmux
+set t_ut=
 " For regular expressions turn magic on
 set magic
 
@@ -86,8 +88,36 @@ highlight LineNr ctermfg=DarkGrey ctermbg=236
 " typos due to lazy holding shift.
 nnoremap ; :
 
-" Enable Pathogen
-call pathogen#infect()
+" Set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+
+" ---------- START Vundle VIM Plugins
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'kien/ctrlp.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'mtth/scratch.vim'
+Plugin 'felixhummel/setcolors.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'alvan/vim-closetag'
+Plugin 'eugen0329/vim-esearch'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'fatih/vim-go'
+Plugin 'vim-ruby/vim-ruby'
+" ---------- END Vundle VIM Plugins
+
+" All of your Plugins must be added before the following line
+call vundle#end()
+filetype plugin indent on
 
 " Vim-Go
 let g:go_highlight_functions = 1
@@ -215,12 +245,10 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 " use it by pressing CTRL+y+, (control, letter y, comma)
 let g:user_emmet_mode='a'
 
-" CTRL+u won't screw my code
-noremap <c-u> <c-g>u<c-u>
-inoremap <c-w> <c-g>u<c-w>
+" this also allows to toggle line numbers when working via ssh
+function! NumberToggle()
+	set number!
+	:GitGutterToggle
+endfunc
+nnoremap <C-g> :call NumberToggle()<cr>
 
-" also warns if you're leaving an unsaved buffer
-set confirm
-
-" clean colors when running inside tmux
-set t_ut=
