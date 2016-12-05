@@ -69,6 +69,9 @@ set magic
 " Show matching brackets when text indicator is over them
 set showmatch
 
+" Perform case-insensitive search
+set ignorecase
+
 " Tab management
 set tabstop=3
 set smarttab
@@ -116,6 +119,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'godlygeek/tabular'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-endwise'
+Plugin 'Nopik/vim-nerdtree-direnter'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -204,6 +208,9 @@ let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
+
+" Allow to open NERDTree files by pressing enter
+let g:NERDTreeMapOpenInTab='<Enter>'
 
 " UndoTree is cool to revert changes! Use it with <Leader>u
 nnoremap <Leader>u :UndotreeToggle<CR>
