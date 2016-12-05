@@ -25,11 +25,11 @@ set ruler
 set smartcase
 
 " Highlight search results and allow
-" highlighting back and forth with F12 (toggle)
+" highlighting back and forth with F8 (toggle)
 set hlsearch
-map  <F12> :set hls!<CR>
-imap <F12> <ESC>:set hls!<CR>a
-vmap <F12> <ESC>:set hls!<CR>gv
+map  <F8> :set hls!<CR>
+imap <F8> <ESC>:set hls!<CR>a
+vmap <F8> <ESC>:set hls!<CR>gv
 
 " Reformat the indentation on a file by pressing <F7>
 map <F7> mzgg=G`z
@@ -95,7 +95,6 @@ nnoremap ; :
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-
 " ---------- START Vundle VIM Plugins
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'jiangmiao/auto-pairs'
@@ -114,11 +113,32 @@ Plugin 'eugen0329/vim-esearch'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'fatih/vim-go'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'godlygeek/tabular'
+Plugin 'mbbill/undotree'
+Plugin 'nathanaelkane/vim-indent-guides'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
 call vundle#end()
 filetype plugin indent on
+
+" Tabularize with <Leader>a{=,:}
+nmap <Leader>a& :Tabularize /&<CR>
+vmap <Leader>a& :Tabularize /&<CR>
+nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+vmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+nmap <Leader>a=> :Tabularize /=><CR>
+vmap <Leader>a=> :Tabularize /=><CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: :Tabularize /:<CR>
+nmap <Leader>a:: :Tabularize /:\zs<CR>
+vmap <Leader>a:: :Tabularize /:\zs<CR>
+nmap <Leader>a, :Tabularize /,<CR>
+vmap <Leader>a, :Tabularize /,<CR>
+nmap <Leader>a,, :Tabularize /,\zs<CR>
+vmap <Leader>a,, :Tabularize /,\zs<CR>
+nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
 " Vim-Go
 let g:go_highlight_functions = 1
@@ -163,6 +183,13 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
    let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
+" Aggresive autocompletion of the following types
+let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+
 " Buffergator toggle
 map <F5> :BuffergatorToggle<CR>
 
@@ -179,6 +206,15 @@ let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
+
+" UndoTree is cool to revert changes! Use it with <Leader>u
+nnoremap <Leader>u :UndotreeToggle<CR>
+let g:undotree_SetFocusWhenToggle=1
+
+" Vim indent lines, to help knowing where the line is
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup = 1
 
 " Better-whitespace remove empty spaces on save
 autocmd BufWritePre * StripWhitespace

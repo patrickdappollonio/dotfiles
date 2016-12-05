@@ -5,7 +5,7 @@
 * `CTRL+p` opens a fast jump-to-file
 * In normal mode, `\ff` search for text in files
 * `\cc` will comment the source code
-* `/` to search, `F12` to toggle highlight of found words
+* `/` to search, `F8` to toggle highlight of found words
 * `V` (uppercase) selects a line, up, down to add or remove lines, then `d` cuts, `y` copy and `p` paste after cursor.
 * `CTRL-n` twice to show or hide line numbers
 * `F5` to show a list of buffers with numbers, and use them to change between them
@@ -14,6 +14,8 @@
 * In visual mode, `CTRL-b` is pageUp, `CTRL-f` is pageDown
 * In any mode, write an emmet HTML markup, then press `CTRL-y-,` to get full completion
 * In any mode, press `F7` to fix indentation problems
+* `\u` shows an undo-history. Useful to move back and forth between changes
+* `\a:` or `\a=` will sort variable declaration "a la Golang"
 
 ### tmux
 
