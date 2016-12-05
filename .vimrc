@@ -115,7 +115,6 @@ Plugin 'fatih/vim-go'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'godlygeek/tabular'
 Plugin 'mbbill/undotree'
-Plugin 'nathanaelkane/vim-indent-guides'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -210,11 +209,6 @@ let g:NERDTrimTrailingWhitespace = 1
 " UndoTree is cool to revert changes! Use it with <Leader>u
 nnoremap <Leader>u :UndotreeToggle<CR>
 let g:undotree_SetFocusWhenToggle=1
-
-" Vim indent lines, to help knowing where the line is
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-let g:indent_guides_enable_on_vim_startup = 1
 
 " Better-whitespace remove empty spaces on save
 autocmd BufWritePre * StripWhitespace
