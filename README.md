@@ -24,6 +24,8 @@ Jumping to definitions and in the file:
 * `g#` same as `g*` but in backward direction.
 * `gg` goes to the first line in the buffer (or provide a count before the command for a specific line).
 * `G` goes to the last line (or provide a count before the command for a specific line).
+* `gf` will go to the file under the cursor
+* `g]` and other commands will jump to a tag definition (a tag can be a function or variable name, or more).
 
 ### tmux
 
