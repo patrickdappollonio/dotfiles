@@ -21,8 +21,17 @@ set autoread
 " Always show current position
 set ruler
 
+" Enable backspacing properly
+set backspace=indent,eol,start
+
+" Fix displaying last line
+set display+=lastline
+
 " When searching try to be smart about cases
 set smartcase
+
+" Allow to see lines below/above when navigating a file
+set scrolloff=3
 
 " Highlight search results and allow
 " highlighting back and forth with F8 (toggle)
@@ -298,4 +307,3 @@ function! NumberToggle()
    :GitGutterToggle
 endfunc
 nnoremap <C-g> :call NumberToggle()<cr>
-
