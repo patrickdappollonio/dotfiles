@@ -17,6 +17,14 @@
 * `\u` shows an undo-history. Useful to move back and forth between changes
 * `\a:` or `\a=` will sort variable declaration "a la Golang"
 
+Jumping to definitions and in the file:
+* `gd` will take you to the local declaration.
+* `gD` will take you to the global declaration.
+* `g*` search for the word under the cursor (like `*`, but `g*` on 'rain' will find words like 'rainbow').
+* `g#` same as `g*` but in backward direction.
+* `gg` goes to the first line in the buffer (or provide a count before the command for a specific line).
+* `G` goes to the last line (or provide a count before the command for a specific line).
+
 ### tmux
 
 * `CTRL-a` is the master key.
