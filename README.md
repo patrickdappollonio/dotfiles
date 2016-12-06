@@ -59,3 +59,11 @@ ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/.dotfiles/.vimrc ~/.vimrc
 ln -s ~/.dotfiles/.vim ~/.vim/
 ```
+
+### Attach tmux session automatically
+
+```
+which tmux >/dev/null 2>&1 && { tmux attach || tmux new -s ssh-conn;  } || bash -l
+```
+
+The command above will create a tmux session or attach to an existent one called `ssh-conn`.
