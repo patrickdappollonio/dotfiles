@@ -129,6 +129,9 @@ Plugin 'godlygeek/tabular'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-endwise'
 Plugin 'Nopik/vim-nerdtree-direnter'
+Plugin 'wavded/vim-stylus'
+Plugin 'ekalinin/dockerfile.vim'
+Plugin 'henrik/vim-indexed-search'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -167,33 +170,36 @@ inoremap <C-Space> <C-x><C-o>
 let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#auto_completion_start_length = 2
+let g:neocomplete#auto_completion_start_length = 3
+let g:neocomplete#max_list = 8
+let g:neocomplete#force_overwrite_completefunc = 1
 
 " Also selects automatically the first option
 " let g:neocomplete#enable_auto_select = 1
 
 " Neocomplete keyword pattern
 if !exists('g:neocomplete#keyword_patterns')
-   let g:neocomplete#keyword_patterns = {}
+	let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " ENTER closes the popup and saves indent
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-   return pumvisible() ? "\<C-y>" : "\<CR>"
+	return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
 
-" Enable omni-completion for known file types
+" Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
 " Agressive autocompletion
 if !exists('g:neocomplete#sources#omni#input_patterns')
-   let g:neocomplete#sources#omni#input_patterns = {}
+	let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
 " Aggresive autocompletion of the following types
@@ -211,6 +217,11 @@ map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeQuitOnOpen=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Make nerdtree looks nice
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let g:NERDTreeWinSize = 30
 
 " NERDCommenter settings
 let g:NERDSpaceDelims = 1
@@ -261,7 +272,7 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 
 " enable Airline symbols
 if !exists('g:airline_symbols')
-   let g:airline_symbols = {}
+	let g:airline_symbols = {}
 endif
 
 " Proper unicode symbols for Airline
@@ -294,8 +305,8 @@ let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_dont_split = 'NERD'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_prompt_mappings = {
-   \ 'AcceptSelection("t")': ['<cr>'],
-\ }
+			\ 'AcceptSelection("t")': ['<cr>'],
+			\ }
 
 " enable Emmet in different modes, line visual or insert
 " use it by pressing CTRL+y+, (control, letter y, comma)
@@ -303,7 +314,32 @@ let g:user_emmet_mode='a'
 
 " this also allows to toggle line numbers when working via ssh
 function! NumberToggle()
-   set number!
-   :GitGutterToggle
+	set number!
+	:GitGutterToggle
 endfunc
 nnoremap <C-g> :call NumberToggle()<cr>
+
+" Use Q to intelligently close a window
+" (if there are multiple windows into the same buffer)
+" or kill the buffer entirely if it's the last window looking into that buffer
+function! CloseWindowOrKillBuffer()
+	let number_of_windows_to_this_buffer = len(filter(range(1, winnr('$')), "winbufnr(v:val) == bufnr('%')"))
+
+	" We should never bdelete a nerd tree
+	if matchstr(expand("%"), 'NERD') == 'NERD'
+		wincmd c
+		return
+	endif
+
+	if number_of_windows_to_this_buffer > 1
+		wincmd c
+	else
+		bdelete
+	endif
+endfunction
+
+nnoremap <silent> Q :call CloseWindowOrKillBuffer()<CR>
+
+" Use w!! to write a file as sudo
+cmap w!! w !sudo tee % >/dev/null
+
