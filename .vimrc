@@ -145,6 +145,10 @@ Plugin 'tpope/vim-endwise'
 Plugin 'wavded/vim-stylus'
 Plugin 'ekalinin/dockerfile.vim'
 Plugin 'henrik/vim-indexed-search'
+Plugin 'yggdroot/indentline'
+Plugin 't9md/vim-chef'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -168,6 +172,14 @@ nmap <Leader>a,, :Tabularize /,\zs<CR>
 vmap <Leader>a,, :Tabularize /,\zs<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+
+" Vim color for tab indentation lines
+let g:indentLine_color_term = 239
+let g:indentLine_char = '┆'
+
+" Enable easytags on save
+let g:easytags_events = ['BufWritePost']
+let g:easytags_async = 1
 
 " Vim-Go
 let g:go_highlight_functions = 1
