@@ -59,6 +59,16 @@ vnoremap <C-y> "+y
 nnoremap <C-p> "+gP
 vnoremap <C-p> "+gP
 
+" Make j and k, Up and Down move between visual lines
+nnoremap k gk
+nnoremap j gj
+nnoremap gk k
+nnoremap gj j
+nnoremap <Down> gj
+nnoremap <Up> gk
+vnoremap <Down> gj
+vnoremap <Up> gk
+
 " enable to open and reload vim settings on save
 map <leader>vimrc :tabe $MYVIMRC<cr>
 autocmd bufwritepost .vimrc source $MYVIMRC
@@ -102,6 +112,10 @@ highlight LineNr ctermfg=DarkGrey ctermbg=236
 " Saves typing and eliminates :W style
 " typos due to lazy holding shift.
 nnoremap ; :
+
+" Enable indenting and deindenting visually using < and >
+vnoremap < <gv
+vnoremap > >gv
 
 " Set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
