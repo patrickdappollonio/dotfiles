@@ -33,6 +33,13 @@ function gs() {
 # Disable screen flow control XON/XOFF
 stty -ixon
 
+# Add AppEngine folder to path if present
+# Download from: https://cloud.google.com/appengine/docs/go/download
+APPENGINE_DIR=/home/marlex/.appengine
+if [ -d $APPENGINE_DIR ]; then
+   export PATH=$PATH:$APPENGINE_DIR
+fi
+
 # Source tty-specific settings
 source ~/.dotfiles/.bash_profile_tty
 
