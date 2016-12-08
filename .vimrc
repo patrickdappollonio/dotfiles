@@ -189,7 +189,13 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
-inoremap <C-Space> <C-x><C-o>
+" inoremap <C-Space> <C-x><C-o>
+
+" Rename the identifier under the cursor to a new name
+nmap <Leader>e <Plug>(go-rename)
+
+" By default the mapping gd is enabled, which opens the target identifier in current buffer.
+nmap <Leader>dt <Plug>(go-def-tab)
 
 " Neocomplete
 let g:acp_enableAtStartup = 0
