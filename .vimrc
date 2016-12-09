@@ -56,8 +56,8 @@ set incsearch
 " similar and Ctrl-y to copy to clipboard, and Ctrl-p to paste from it
 nnoremap <C-y> "+y
 vnoremap <C-y> "+y
-nnoremap <C-p> "+gP
-vnoremap <C-p> "+gP
+nnoremap <C-e> "+gP
+vnoremap <C-e> "+gP
 
 " Make j and k, Up and Down move between visual lines
 nnoremap k gk
