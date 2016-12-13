@@ -66,3 +66,8 @@ which tmux >/dev/null 2>&1 && { tmux attach || tmux new -s ssh-conn;  } || bash 
 ```
 
 The command above will create a tmux session or attach to an existent one called `ssh-conn`.
+
+### Git configuration
+
+* [Create the SSH keys](https://help.github.com/articles/generating-an-ssh-key/)
+* [Signing commits](https://help.github.com/articles/generating-a-new-gpg-key/)
