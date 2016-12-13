@@ -56,7 +56,7 @@ In order to use these files, create a `.dotfiles` folder in your `$HOME` and the
 ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
 ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/.dotfiles/.vimrc ~/.vimrc
-ln -s ~/.dotfiles/.vim ~/.vim/
+ln -s ~/.dotfiles/.vim ~/.vim
 ```
 
 ### Attach tmux session automatically
