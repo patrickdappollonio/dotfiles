@@ -29,6 +29,10 @@ alias environ='subl ~/.bash_profile'
 alias srcenv='source ~/.bash_profile'
 alias gd='cd $HOME/Development'
 
+# Pbcopy and pbpaste
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
 # Golang switch, requires `find-project`: github.com/patrickdappollonio/find-project
 function gs() {
    cd $(find-project $1)
