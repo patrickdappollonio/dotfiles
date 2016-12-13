@@ -11,7 +11,7 @@ function proxy_on(){
    export NO_PROXY="localhost,127.0.0.1,$USERDNSDOMAIN,192.168.99.100"
 
    # optional for debugging
-   export GIT_CURL_VERBOSE=1
+   # export GIT_CURL_VERBOSE=1
 
    # optional Self Signed SSL certs and
    # internal CA certificate in an corporate environment
