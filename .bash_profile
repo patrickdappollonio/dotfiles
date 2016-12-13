@@ -14,7 +14,7 @@ alias gob='go build'
 alias tmux='tmux -2'
 
 # Golang setup
-export GOPATH=/home/marlex/Golang
+export GOPATH=$HOME/Golang
 export PATH=$PATH:$GOPATH/bin
 
 # Other commonly used aliases
