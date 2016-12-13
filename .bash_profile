@@ -35,7 +35,7 @@ function gs() {
 stty -ixon
 
 # Source tty-specific settings
-source ~/.dotfiles/.bash_profile_tty
+# source ~/.dotfiles/.bash_profile_tty
 
 # Source HPE-specific settings
 source ~/.dotfiles/.bash_profile_hpe
