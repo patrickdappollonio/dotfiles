@@ -2,11 +2,28 @@
 #   HPE SPECIFIC   #
 ####################
 
+# Corporate proxy
+CORP_PROXY="web-proxy.houston.hpecorp.net:8080"
+
+# Enables proxy based on the given configuration for APT
+function apt_proxy_on() {
+   sudo tee /etc/apt/apt.conf > /dev/null <<EOF
+      Acquire::http::proxy "http://$CORP_PROXY";
+      Acquire::https::proxy "http://$CORP_PROXY";
+      Acquire::ftp::proxy "http://$CORP_PROXY";
+EOF
+}
+
+# Disable APT proxy
+function apt_proxy_off {
+   echo "" | sudo tee /etc/apt/apt.conf > /dev/null
+}
+
 # configure proxy for git while on corporate network
 function proxy_on(){
    # on Windows env vars are UPPERCASE even in git bash
-   export {HTTP,HTTPS,FTP,ALL}_PROXY="web-proxy.houston.hpecorp.net:8080"
-   export {http,https,ftp,all}_proxy="web-proxy.houston.hpecorp.net:8080"
+   export {HTTP,HTTPS,FTP,ALL}_PROXY="$CORP_PROXY"
+   export {http,https,ftp,all}_proxy="$CORP_PROXY"
 
    export NO_PROXY="localhost,127.0.0.1,$USERDNSDOMAIN,192.168.99.100"
 
@@ -16,6 +33,9 @@ function proxy_on(){
    # optional Self Signed SSL certs and
    # internal CA certificate in an corporate environment
    export GIT_SSL_NO_VERIFY=1
+
+   # Add proxy to apt
+   apt_proxy_on
 
    # env | grep -e _PROXY -e GIT_ | sort
    echo -e "Proxy-related environment variables set."
@@ -34,6 +54,9 @@ function proxy_off(){
    do
       unset $i
    done
+
+   # Remove proxy to apt
+   apt_proxy_off
 
    # env | grep -e _PROXY -e GIT_ | sort
    echo -e "Proxy-related environment variables removed."

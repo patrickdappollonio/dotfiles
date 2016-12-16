@@ -26,13 +26,23 @@ alias gd='cd $HOME/Development'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 
+# MKDir and CD
+function mkcd() {
+	mkdir -p $1 && cd $1
+}
+
 # Golang switch, requires `find-project`: github.com/patrickdappollonio/find-project
 function gs() {
-   cd $(find-project $1)
+	cd $(find-project $1)
+}
+
+# Go get with update and verbose
+function gg() {
+	go get -u -v $1
 }
 
 # Disable screen flow control XON/XOFF
-stty -ixon
+# stty -ixon
 
 # Source tty-specific settings
 # source ~/.dotfiles/.bash_profile_tty

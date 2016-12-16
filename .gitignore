@@ -1,3 +1,6 @@
 # Vim-specific files
 *.swp
 *.swo
+
+# Remove bundles
+.vim/bundle/*
