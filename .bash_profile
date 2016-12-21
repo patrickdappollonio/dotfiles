@@ -41,6 +41,9 @@ function gg() {
 	go get -u -v $1
 }
 
+# Add git __git_ps1 prompt
+source ~/.dotfiles/.git_sh
+
 # Disable screen flow control XON/XOFF
 # stty -ixon
 
