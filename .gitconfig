@@ -7,8 +7,8 @@
 
 ; Requires enabling GPG signing for Git
 ; commits. So they show as verified online.
-[commit]
-	gpgsign = true
+; [commit]
+; 	gpgsign = true
 
 ; Simple aliases to simplify commands
 [alias]
@@ -21,7 +21,6 @@
 	cma = commit -a -S -s -m
 	ca = commit --amend -S -s
 	amend = commit --amend -s
-	commit = commit -S -s
 	diff = diff --word-diff
 	br = branch
 	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
