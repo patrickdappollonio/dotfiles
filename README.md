@@ -68,6 +68,17 @@ which tmux >/dev/null 2>&1 && { tmux attach || tmux new -s ssh-conn;  } || bash 
 
 The command above will create a tmux session or attach to an existent one called `ssh-conn`.
 
+### Set up Xfce terminal to always open Tmux
+
+```bash
+# Source my own
+source ~/.bash_profile                                                                                                                                                                                                                                  
+# Then enable tmux if exists 
+VERSION=$(lsb_release -sc)
+CODENAME=$(lsb_release -sr)
+which tmux >/dev/null 2>&1 && { tmux attach || tmux new -s $VERSION-${CODENAME//./};  } || bash -l
+```
+
 ### Git configuration
 
 * [Create the SSH keys](https://help.github.com/articles/generating-an-ssh-key/)
