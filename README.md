@@ -80,8 +80,9 @@ The command above will create a tmux session or attach to an existent one called
 
 ```bash
 # Source my own
-source ~/.bash_profile                                                                                                                                                                                                                                  
-# Then enable tmux if exists 
+source ~/.bash_profile
+
+# Then enable tmux if exists
 VERSION=$(lsb_release -sc)
 CODENAME=$(lsb_release -sr)
 which tmux >/dev/null 2>&1 && { tmux attach || tmux new -s $VERSION-${CODENAME//./};  } || bash -l
@@ -89,5 +90,5 @@ which tmux >/dev/null 2>&1 && { tmux attach || tmux new -s $VERSION-${CODENAME//
 
 ### Git configuration
 
-* [Create the SSH keys](https://help.github.com/articles/generating-an-ssh-key/)
-* [Signing commits](https://help.github.com/articles/generating-a-new-gpg-key/)
+   * [Create the SSH keys](https://help.github.com/articles/generating-an-ssh-key/)
+   * [Signing commits](https://help.github.com/articles/generating-a-new-gpg-key/)
