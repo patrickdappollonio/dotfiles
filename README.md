@@ -90,5 +90,5 @@ which tmux >/dev/null 2>&1 && { tmux attach || tmux new -s $VERSION-${CODENAME//
 
 ### Git configuration
 
-   * [Create the SSH keys](https://help.github.com/articles/generating-an-ssh-key/)
+   * [Create the SSH keys](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
    * [Signing commits](https://help.github.com/articles/generating-a-new-gpg-key/)
