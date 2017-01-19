@@ -1,6 +1,6 @@
 BoldAsFont=-1
-Font=Anonymice Powerline
-FontHeight=14
+Font=Consolas
+FontHeight=12
 FontSmoothing=full
 Locale=en_US
 Charset=UTF-8
