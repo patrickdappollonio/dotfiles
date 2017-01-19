@@ -7,25 +7,21 @@ CORP_PROXY="web-proxy.houston.hpecorp.net:8080"
 
 # Enables proxy based on the given configuration for APT
 function apt_proxy_on() {
-   if [ "$(uname -o)" == "Msys" ]; then
-      return
+   if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+      sudo tee /etc/apt/apt.conf > /dev/null <<EOF
+      Acquire::http::proxy "http://$CORP_PROXY";
+      Acquire::https::proxy "http://$CORP_PROXY";
+      Acquire::ftp::proxy "http://$CORP_PROXY";
+EOF
    fi
 
-   sudo tee /etc/apt/apt.conf > /dev/null <<EOF
-Acquire::http::proxy "http://$CORP_PROXY";
-Acquire::https::proxy "http://$CORP_PROXY";
-Acquire::ftp::proxy "http://$CORP_PROXY";
-EOF
 }
 
 # Disable APT proxy
 function apt_proxy_off {
-   if [ "$(uname -o)" == "Msys" ]; then
-      return
+   if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+      echo "" | sudo tee /etc/apt/apt.conf > /dev/null
    fi
-
-
-   echo "" | sudo tee /etc/apt/apt.conf > /dev/null
 }
 
 # configure proxy for git while on corporate network
@@ -57,7 +53,7 @@ function proxy_off(){
       "HTTP_PROXY" "HTTPS_PROXY" "FTP_PROXY" "ALL_PROXY" \
       "http_proxy" "https_proxy" "ftp_proxy" "all_proxy" \
       "NO_PROXY" "GIT_CURL_VERBOSE" "GIT_SSL_NO_VERIFY" \
-   )
+      )
 
    for i in "${variables[@]}"
    do
