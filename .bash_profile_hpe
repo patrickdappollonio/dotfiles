@@ -7,6 +7,10 @@ CORP_PROXY="web-proxy.houston.hpecorp.net:8080"
 
 # Enables proxy based on the given configuration for APT
 function apt_proxy_on() {
+   if [ "$(uname -o)" == "Msys" ]; then
+      return
+   fi
+
    sudo tee /etc/apt/apt.conf > /dev/null <<EOF
 Acquire::http::proxy "http://$CORP_PROXY";
 Acquire::https::proxy "http://$CORP_PROXY";
@@ -16,6 +20,11 @@ EOF
 
 # Disable APT proxy
 function apt_proxy_off {
+   if [ "$(uname -o)" == "Msys" ]; then
+      return
+   fi
+
+
    echo "" | sudo tee /etc/apt/apt.conf > /dev/null
 }
 
