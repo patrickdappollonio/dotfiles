@@ -25,7 +25,7 @@ function apt_proxy_on() {
         return
     fi
 
-    if ! type "apt-get" > /dev/null; then
+    if [ ! -f /etc/apt/apt.conf ]; then
         return
     fi
 
@@ -42,7 +42,7 @@ function apt_proxy_off {
         return
     fi
 
-    if ! type "apt-get" > /dev/null; then
+    if [ ! -f /etc/apt/apt.conf ]; then
         return
     fi
 
