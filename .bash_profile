@@ -51,6 +51,7 @@ function mkcd() {
 function gs() {
 	if ! type "find-project" > /dev/null; then
 		echo -e "Install find-project first by doing: go get -u -v github.com/patrickdappollonio/find-project"
+		exit 1
 	fi
 
 	cd $(find-project $1)
