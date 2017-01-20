@@ -5,8 +5,13 @@ else
     IS_LINUX_OS=false
 fi
 
+# Simple way to print the git branch
+parse_git_branch() {
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
 # Add PS1
-export PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\]@\h \[\e[0m\]\[\e[01;36m\][\W]\$(__git_ps1)\[\e[0m\]\[\e[00;36m\]:\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
+export PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\]@\h \[\e[0m\]\[\e[01;36m\][\W]\$(parse_git_branch)\[\e[0m\]\[\e[00;36m\]:\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
 
 # Diverse aliases for my common tasks
 alias ll='ls -aFhlG --color=auto'
@@ -61,9 +66,6 @@ function gs() {
 function gg() {
 	go get -u -v $1
 }
-
-# Add git __git_ps1 prompt
-source ~/.dotfiles/.git_sh
 
 # Source HPE-specific settings
 source ~/.dotfiles/.bash_profile_hpe
