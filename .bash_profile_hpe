@@ -5,70 +5,89 @@
 # Corporate proxy
 CORP_PROXY="web-proxy.houston.hpecorp.net:8080"
 
+# Find if it's on the HPE network
+if [ "$(ipconfig | grep -m 1 Suffix | awk '{ print $NF }')" == "americas.hpqcorp.net" ]; then
+    IS_HPE_NETWORK=true
+else
+    IS_HPE_NETWORK=false
+fi
+
+# Find if it's linux what we are running
+if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    IS_LINUX_OS=true
+else
+    IS_LINUX_OS=false
+fi
+
 # Enables proxy based on the given configuration for APT
 function apt_proxy_on() {
-   if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-      sudo tee /etc/apt/apt.conf > /dev/null <<EOF
-      Acquire::http::proxy "http://$CORP_PROXY";
-      Acquire::https::proxy "http://$CORP_PROXY";
-      Acquire::ftp::proxy "http://$CORP_PROXY";
-EOF
-   fi
+    if [ "$IS_LINUX_OS" = false ]; then
+        return
+    fi
 
+    sudo tee /etc/apt/apt.conf > /dev/null <<EOF
+Acquire::http::proxy "http://$CORP_PROXY";
+Acquire::https::proxy "http://$CORP_PROXY";
+Acquire::ftp::proxy "http://$CORP_PROXY";
+EOF
 }
 
 # Disable APT proxy
 function apt_proxy_off {
-   if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-      echo "" | sudo tee /etc/apt/apt.conf > /dev/null
-   fi
+    if [ "$IS_LINUX_OS" = false ]; then
+        return
+    fi
+
+    echo "" | sudo tee /etc/apt/apt.conf > /dev/null
 }
 
 # configure proxy for git while on corporate network
 function proxy_on(){
-   # on Windows env vars are UPPERCASE even in git bash
-   export HTTP_PROXY="http://$CORP_PROXY/"
-   export HTTPS_PROXY="https://$CORP_PROXY/"
-   export http_proxy=$HTTP_PROXY
-   export https_proxy=$HTTPS_PROXY
+    # on Windows env vars are UPPERCASE even in git bash
+    export HTTP_PROXY="http://$CORP_PROXY/"
+    export HTTPS_PROXY="https://$CORP_PROXY/"
+    export http_proxy=$HTTP_PROXY
+    export https_proxy=$HTTPS_PROXY
 
-   # Additionals for FTP and ALL (needed in some environments)
-   export {FTP,ALL}_PROXY="$CORP_PROXY"
-   export {ftp,all}_proxy="$CORP_PROXY"
+    # Additionals for FTP and ALL (needed in some environments)
+    export {FTP,ALL}_PROXY="$CORP_PROXY"
+    export {ftp,all}_proxy="$CORP_PROXY"
 
-   export NO_PROXY="localhost,127.0.0.1,$USERDNSDOMAIN,192.168.99.100"
+    export NO_PROXY="localhost,127.0.0.1,$USERDNSDOMAIN,192.168.99.100"
 
-   # internal CA certificate in corporate environment
-   export GIT_SSL_NO_VERIFY=1
+    # internal CA certificate in corporate environment
+    export GIT_SSL_NO_VERIFY=1
 
-   # Add proxy to apt
-   apt_proxy_on
+    # Add proxy to apt
+    apt_proxy_on
 
-   # env | grep -e _PROXY -e GIT_ | sort
-   echo -e "Proxy-related environment variables set."
+    # env | grep -e _PROXY -e GIT_ | sort
+    echo -e "Proxy-related environment variables set."
 }
 
 # remove proxy settings when off corporate network
 function proxy_off(){
-   variables=( \
-      "PASSWORD" "PROXY_SERVER" "PROXY_PORT" \
-      "HTTP_PROXY" "HTTPS_PROXY" "FTP_PROXY" "ALL_PROXY" \
-      "http_proxy" "https_proxy" "ftp_proxy" "all_proxy" \
-      "NO_PROXY" "GIT_CURL_VERBOSE" "GIT_SSL_NO_VERIFY" \
-      )
+    variables=( \
+        "PASSWORD" "PROXY_SERVER" "PROXY_PORT" \
+        "HTTP_PROXY" "HTTPS_PROXY" "FTP_PROXY" "ALL_PROXY" \
+        "http_proxy" "https_proxy" "ftp_proxy" "all_proxy" \
+        "NO_PROXY" "GIT_CURL_VERBOSE" "GIT_SSL_NO_VERIFY" \
+        )
 
-   for i in "${variables[@]}"
-   do
-      unset $i
-   done
+    for i in "${variables[@]}"
+    do
+        unset $i
+    done
 
-   # Remove proxy to apt
-   apt_proxy_off
+    # Remove proxy to apt
+    apt_proxy_off
 
-   # env | grep -e _PROXY -e GIT_ | sort
-   echo -e "Proxy-related environment variables removed."
+    # env | grep -e _PROXY -e GIT_ | sort
+    echo -e "Proxy-related environment variables removed."
 }
 
 # This enables proxy by default every time the shell opens
 # to disable, just run "proxy_off"
-proxy_on
+if [ "$IS_HPE_NETWORK" = true ]; then
+    proxy_on
+fi

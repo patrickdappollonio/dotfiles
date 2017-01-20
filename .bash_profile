@@ -1,3 +1,10 @@
+# Find if it's linux what we are running
+if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    IS_LINUX_OS=true
+else
+    IS_LINUX_OS=false
+fi
+
 # Add PS1
 export PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\]@\h \[\e[0m\]\[\e[01;36m\][\W]\$(__git_ps1)\[\e[0m\]\[\e[00;36m\]:\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
 
@@ -14,7 +21,7 @@ alias gob='go build'
 alias tmux='tmux -2'
 
 # Golang setup
-if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+if [ "$IS_LINUX_OS" = true ]; then
 	export GOPATH=$HOME/Golang
 else
 	export GOPATH=/c/Golang
@@ -22,13 +29,18 @@ fi
 export PATH=$PATH:$GOPATH/bin
 
 # Other commonly used aliases
-alias environ='subl ~/.bash_profile'
-alias srcenv='source ~/.bash_profile'
 alias gd='cd $HOME/Development'
 
 # Pbcopy and pbpaste
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
+if [ "$IS_LINUX_OS" = true ]; then
+	alias pbcopy='xclip -selection clipboard'
+	alias pbpaste='xclip -selection clipboard -o'
+fi
+
+# Open folders
+if [ "$IS_LINUX_OS" = false ]; then
+	alias open="start"
+fi
 
 # MKDir and CD
 function mkcd() {
@@ -37,6 +49,10 @@ function mkcd() {
 
 # Golang switch, requires `find-project`: github.com/patrickdappollonio/find-project
 function gs() {
+	if ! type "find-project" > /dev/null; then
+		echo -e "Install find-project first by doing: go get -u -v github.com/patrickdappollonio/find-project"
+	fi
+
 	cd $(find-project $1)
 }
 
@@ -48,11 +64,5 @@ function gg() {
 # Add git __git_ps1 prompt
 source ~/.dotfiles/.git_sh
 
-# Disable screen flow control XON/XOFF
-# stty -ixon
-
-# Source tty-specific settings
-# source ~/.dotfiles/.bash_profile_tty
-
 # Source HPE-specific settings
-# source ~/.dotfiles/.bash_profile_hpe
+source ~/.dotfiles/.bash_profile_hpe
