@@ -14,7 +14,11 @@ alias gob='go build'
 alias tmux='tmux -2'
 
 # Golang setup
-export GOPATH=$HOME/Golang
+if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+	export GOPATH=$HOME/Golang
+else
+	export GOPATH=/c/Golang
+fi
 export PATH=$PATH:$GOPATH/bin
 
 # Other commonly used aliases

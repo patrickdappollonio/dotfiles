@@ -175,7 +175,7 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
 " Vim color for tab indentation lines
 let g:indentLine_color_term = 239
-let g:indentLine_char = '┆'
+let g:indentLine_char = '|'
 
 " Enable easytags on save
 let g:easytags_events = ['BufWritePost']
