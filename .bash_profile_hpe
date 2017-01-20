@@ -27,16 +27,18 @@ function apt_proxy_off {
 # configure proxy for git while on corporate network
 function proxy_on(){
    # on Windows env vars are UPPERCASE even in git bash
-   export {HTTP,HTTPS,FTP,ALL}_PROXY="$CORP_PROXY"
-   export {http,https,ftp,all}_proxy="$CORP_PROXY"
+   export HTTP_PROXY="http://$CORP_PROXY/"
+   export HTTPS_PROXY="https://$CORP_PROXY/"
+   export http_proxy=$HTTP_PROXY
+   export https_proxy=$HTTPS_PROXY
+
+   # Additionals for FTP and ALL (needed in some environments)
+   export {FTP,ALL}_PROXY="$CORP_PROXY"
+   export {ftp,all}_proxy="$CORP_PROXY"
 
    export NO_PROXY="localhost,127.0.0.1,$USERDNSDOMAIN,192.168.99.100"
 
-   # optional for debugging
-   # export GIT_CURL_VERBOSE=1
-
-   # optional Self Signed SSL certs and
-   # internal CA certificate in an corporate environment
+   # internal CA certificate in corporate environment
    export GIT_SSL_NO_VERIFY=1
 
    # Add proxy to apt
