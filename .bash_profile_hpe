@@ -25,6 +25,10 @@ function apt_proxy_on() {
         return
     fi
 
+    if ! type "apt-get" > /dev/null; then
+        return
+    fi
+
     sudo tee /etc/apt/apt.conf > /dev/null <<EOF
 Acquire::http::proxy "http://$CORP_PROXY";
 Acquire::https::proxy "http://$CORP_PROXY";
@@ -35,6 +39,10 @@ EOF
 # Disable APT proxy
 function apt_proxy_off {
     if [ "$IS_LINUX_OS" = false ]; then
+        return
+    fi
+
+    if ! type "apt-get" > /dev/null; then
         return
     fi
 
