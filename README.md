@@ -66,7 +66,7 @@ ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/.dotfiles/.vimrc ~/.vimrc
 ln -s ~/.dotfiles/.vim ~/.vim
 ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/.minttyrc .minttyrc
+ln -s ~/.dotfiles/.minttyrc ~/.minttyrc
 ```
 
 To remove the symlinks, just do...
@@ -77,7 +77,7 @@ rm -rf ~/.gitconfig
 rm -rf ~/.vimrc
 rm -rf ~/.vim
 rm -rf ~/.tmux.conf
-rm -rf .minttyrc
+rm -rf ~/.minttyrc
 ```
 
 ### Install vundle.vim
