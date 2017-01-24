@@ -1,16 +1,9 @@
-####################
+################
 #   HPE SPECIFIC   #
 ####################
 
 # Corporate proxy
 CORP_PROXY="web-proxy.houston.hpecorp.net:8080"
-
-# Find if it's on the HPE network
-if [ "$(ipconfig | grep -m 1 Suffix | awk '{ print $NF }')" == "americas.hpqcorp.net" ]; then
-    IS_HPE_NETWORK=true
-else
-    IS_HPE_NETWORK=false
-fi
 
 # Find if it's linux what we are running
 if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
@@ -19,35 +12,14 @@ else
     IS_LINUX_OS=false
 fi
 
-# Enables proxy based on the given configuration for APT
-function apt_proxy_on() {
-    if [ "$IS_LINUX_OS" = false ]; then
-        return
-    fi
-
-    if [ ! -f /etc/apt/apt.conf ]; then
-        return
-    fi
-
-    sudo tee /etc/apt/apt.conf > /dev/null <<EOF
-Acquire::http::proxy "http://$CORP_PROXY";
-Acquire::https::proxy "http://$CORP_PROXY";
-Acquire::ftp::proxy "http://$CORP_PROXY";
-EOF
-}
-
-# Disable APT proxy
-function apt_proxy_off {
-    if [ "$IS_LINUX_OS" = false ]; then
-        return
-    fi
-
-    if [ ! -f /etc/apt/apt.conf ]; then
-        return
-    fi
-
-    echo "" | sudo tee /etc/apt/apt.conf > /dev/null
-}
+# Find if it's on the HPE network
+if [ "$IS_LINUX_OS" = false ] && [ "$(ipconfig | grep -m 1 Suffix | awk '{ print $NF }')" == "americas.hpqcorp.net" ]; then
+    IS_HPE_NETWORK=true
+elif [ "$IS_LINUX_OS" = true ] && [ "$(ping -c 2 web-proxy.houston.hpecorp.net | grep -m 1 proxy | awk '{ print $1 }')" == "PING" ]; then
+    IS_HPE_NETWORK=true
+else
+    IS_HPE_NETWORK=false
+fi
 
 # configure proxy for git while on corporate network
 function proxy_on(){
@@ -66,9 +38,6 @@ function proxy_on(){
     # internal CA certificate in corporate environment
     export GIT_SSL_NO_VERIFY=1
 
-    # Add proxy to apt
-    apt_proxy_on
-
     # env | grep -e _PROXY -e GIT_ | sort
     echo -e "Proxy-related environment variables set."
 }
@@ -86,9 +55,6 @@ function proxy_off(){
     do
         unset $i
     done
-
-    # Remove proxy to apt
-    apt_proxy_off
 
     # env | grep -e _PROXY -e GIT_ | sort
     echo -e "Proxy-related environment variables removed."
