@@ -69,6 +69,17 @@ ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/.minttyrc .minttyrc
 ```
 
+To remove the symlinks, just do...
+
+```bash
+rm -rf ~/.bash_profile
+rm -rf ~/.gitconfig
+rm -rf ~/.vimrc
+rm -rf ~/.vim
+rm -rf ~/.tmux.conf
+rm -rf .minttyrc
+```
+
 ### Install vundle.vim
 
 ```
