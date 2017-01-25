@@ -95,6 +95,10 @@ which tmux >/dev/null 2>&1 && { tmux attach || tmux new -s ssh-conn;  } || bash 
 
 The command above will create a tmux session or attach to an existent one called `ssh-conn`.
 
+### Allow environment variables to be passed to `sudo`
+
+Just call `add_envs_to_sudoers` to modify the sudoers file with the needed variables.
+
 ### Set up Xfce terminal to always open Tmux
 
 ```bash
