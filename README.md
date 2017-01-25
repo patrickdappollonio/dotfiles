@@ -95,7 +95,9 @@ Just call `add_envs_to_sudoers` to modify the sudoers file with the needed varia
 
 ```bash
 # Source my own
-source ~/.bash_profile
+if [ -f ~/.dotfiles/.bash_profile ]; then 
+    . ~/.dotfiles/.bash_profile
+fi
 
 # Then enable tmux if exists
 VERSION=$(lsb_release -sc)
