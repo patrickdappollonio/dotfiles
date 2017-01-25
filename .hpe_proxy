@@ -3,22 +3,22 @@
 ####################
 
 # Corporate proxy
-local CORP_PROXY="web-proxy.houston.hpecorp.net:8080"
+CORP_PROXY="web-proxy.houston.hpecorp.net:8080"
 
 # Find if it's linux what we are running
 if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    local IS_LINUX_OS=true
+    IS_LINUX_OS=true
 else
-    local IS_LINUX_OS=false
+    IS_LINUX_OS=false
 fi
 
 # Find if it's on the HPE network
 if [ "$IS_LINUX_OS" = false ] && [ "$(ipconfig | grep -m 1 Suffix | awk '{ print $NF }')" == "americas.hpqcorp.net" ]; then
-    local IS_HPE_NETWORK=true
+    IS_HPE_NETWORK=true
 elif [ "$IS_LINUX_OS" = true ] && [ "$(ifconfig | grep -m 1 inet | awk -F ':' '{ print $2 }' | awk -F '.' '{ print $1 }')" == "16" ]; then
-    local IS_HPE_NETWORK=true
+    IS_HPE_NETWORK=true
 else
-    local IS_HPE_NETWORK=false
+    IS_HPE_NETWORK=false
 fi
 
 # configure proxy for git while on corporate network
