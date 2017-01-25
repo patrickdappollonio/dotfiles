@@ -60,6 +60,36 @@ function proxy_off(){
     echo -e "Proxy-related environment variables removed."
 }
 
+function add_envs_to_sudoers() {
+    if sudo grep -q "# Keep" /etc/sudoers ; then 
+        echo -e "Politely refusing to add env vars to sudoers: vars already exists."
+        return
+    fi
+
+    local variables=( \
+        "PASSWORD" "PROXY_SERVER" "PROXY_PORT" \
+        "HTTP_PROXY" "HTTPS_PROXY" "FTP_PROXY" "ALL_PROXY" \
+        "http_proxy" "https_proxy" "ftp_proxy" "all_proxy" \
+        "NO_PROXY" "GIT_CURL_VERBOSE" "GIT_SSL_NO_VERIFY" \
+	"GOPATH" "GOBIN" "PATH" \  # Go-specific paths
+        )
+
+    local data=()
+
+    for i in "${variables[@]}"
+    do
+        if [ ! -z "${i// }" ]; then
+            data+=("$i")
+        fi
+    done
+
+    local content='Defaults env_keep += "'"${data[@]}"'"'
+
+    sudo bash -c "echo ' ' | (EDITOR='tee -a' visudo)"
+    sudo bash -c "echo '# Keep environment variables' | (EDITOR='tee -a' visudo)"
+    sudo bash -c "echo '$content' | (EDITOR='tee -a' visudo)"
+}
+
 # This enables proxy by default every time the shell opens
 # to disable, just run "proxy_off"
 if [ "$IS_HPE_NETWORK" = true ]; then
