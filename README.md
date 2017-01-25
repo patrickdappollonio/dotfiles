@@ -29,14 +29,6 @@ Jumping to definitions and in the file:
 Moving in a file:
 * `k` is Up, `j` is Down, `h` is Left, `l` is Right. `w` moves a word forward.
 
-### vundle
-
-Install is easy with:
-
-```
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-```
-
 ### tmux
 
 * `CTRL-a` is the master key.
