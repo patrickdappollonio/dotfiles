@@ -68,4 +68,4 @@ function gg() {
 }
 
 # Source HPE-specific settings
-source ~/.dotfiles/.bash_profile_hpe
+source ~/.dotfiles/.hpe_proxy
