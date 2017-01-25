@@ -3,22 +3,22 @@
 ####################
 
 # Corporate proxy
-CORP_PROXY="web-proxy.houston.hpecorp.net:8080"
+local CORP_PROXY="web-proxy.houston.hpecorp.net:8080"
 
 # Find if it's linux what we are running
 if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    IS_LINUX_OS=true
+    local IS_LINUX_OS=true
 else
-    IS_LINUX_OS=false
+    local IS_LINUX_OS=false
 fi
 
 # Find if it's on the HPE network
 if [ "$IS_LINUX_OS" = false ] && [ "$(ipconfig | grep -m 1 Suffix | awk '{ print $NF }')" == "americas.hpqcorp.net" ]; then
-    IS_HPE_NETWORK=true
+    local IS_HPE_NETWORK=true
 elif [ "$IS_LINUX_OS" = true ] && [ "$(ifconfig | grep -m 1 inet | awk -F ':' '{ print $2 }' | awk -F '.' '{ print $1 }')" == "16" ]; then
-    IS_HPE_NETWORK=true
+    local IS_HPE_NETWORK=true
 else
-    IS_HPE_NETWORK=false
+    local IS_HPE_NETWORK=false
 fi
 
 # configure proxy for git while on corporate network
@@ -44,7 +44,7 @@ function proxy_on(){
 
 # remove proxy settings when off corporate network
 function proxy_off(){
-    variables=( \
+    local variables=( \
         "PASSWORD" "PROXY_SERVER" "PROXY_PORT" \
         "HTTP_PROXY" "HTTPS_PROXY" "FTP_PROXY" "ALL_PROXY" \
         "http_proxy" "https_proxy" "ftp_proxy" "all_proxy" \
@@ -56,7 +56,6 @@ function proxy_off(){
         unset $i
     done
 
-    # env | grep -e _PROXY -e GIT_ | sort
     echo -e "Proxy-related environment variables removed."
 }
 
