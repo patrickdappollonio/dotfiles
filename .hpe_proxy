@@ -66,7 +66,7 @@ function proxy_off(){
 	done
 
 	# check if it's Linux OS
-	if [ "$IS_LINUX_OS" = true ]; then 
+	if [ "$IS_LINUX_OS" = true ]; then
 		gsettings set org.gnome.system.proxy mode "none";
 	fi
 
@@ -74,7 +74,7 @@ function proxy_off(){
 }
 
 function sudo_env() {
-	if sudo grep -q "# Keep" /etc/sudoers ; then 
+	if sudo grep -q "# Keep" /etc/sudoers ; then
 		echo -e "Politely refusing to add env vars to sudoers: vars already exists."
 		return
 	fi
