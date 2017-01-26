@@ -41,8 +41,8 @@ function proxy_on(){
 	export GIT_SSL_NO_VERIFY=1
 
 	# check if it's Linux OS
-	if [ "$IS_LINUX_OS" = true ]; then
-		gsettings set org.gnome.system.proxy mode "manual";
+	if [ "$IS_LINUX_OS" = true ] && [ ! -z `which gsettings` ]; then
+      gsettings set org.gnome.system.proxy mode "manual";
 		gsettings set org.gnome.system.proxy.http host "$CORP_PROXY_HOST";
 		gsettings set org.gnome.system.proxy.http port "$CORP_PROXY_PORT";
 	fi
@@ -66,7 +66,7 @@ function proxy_off(){
 	done
 
 	# check if it's Linux OS
-	if [ "$IS_LINUX_OS" = true ]; then
+	if [ "$IS_LINUX_OS" = true ] && [ ! -z `which gsettings` ]; then
 		gsettings set org.gnome.system.proxy mode "none";
 	fi
 
