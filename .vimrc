@@ -370,4 +370,3 @@ nnoremap <silent> Q :call CloseWindowOrKillBuffer()<CR>
 
 " Use w!! to write a file as sudo
 cmap w!! w !sudo tee % >/dev/null
-

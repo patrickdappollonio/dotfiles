@@ -29,14 +29,6 @@ Jumping to definitions and in the file:
 Moving in a file:
 * `k` is Up, `j` is Down, `h` is Left, `l` is Right. `w` moves a word forward.
 
-### vundle
-
-Install is easy with:
-
-```
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-```
-
 ### tmux
 
 * `CTRL-a` is the master key.
@@ -66,7 +58,7 @@ ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/.dotfiles/.vimrc ~/.vimrc
 ln -s ~/.dotfiles/.vim ~/.vim
 ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/.minttyrc .minttyrc
+ln -s ~/.dotfiles/.minttyrc ~/.minttyrc
 ```
 
 To remove the symlinks, just do...
@@ -77,7 +69,7 @@ rm -rf ~/.gitconfig
 rm -rf ~/.vimrc
 rm -rf ~/.vim
 rm -rf ~/.tmux.conf
-rm -rf .minttyrc
+rm -rf ~/.minttyrc
 ```
 
 ### Install vundle.vim
@@ -95,11 +87,17 @@ which tmux >/dev/null 2>&1 && { tmux attach || tmux new -s ssh-conn;  } || bash 
 
 The command above will create a tmux session or attach to an existent one called `ssh-conn`.
 
+### Allow environment variables to be passed to `sudo`
+
+Just call `add_envs_to_sudoers` to modify the sudoers file with the needed variables.
+
 ### Set up Xfce terminal to always open Tmux
 
 ```bash
 # Source my own
-source ~/.bash_profile
+if [ -f ~/.dotfiles/.bash_profile ]; then 
+    . ~/.dotfiles/.bash_profile
+fi
 
 # Then enable tmux if exists
 VERSION=$(lsb_release -sc)

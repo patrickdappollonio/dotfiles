@@ -35,3 +35,5 @@
 ; HPE SPECIFIC - allows to use ssh only
 [url "ssh://git@github.hpe.com/"]
 	insteadOf = https://github.hpe.com/
+[push]
+	default = current
