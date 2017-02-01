@@ -103,9 +103,9 @@ function sudo_env() {
    sudo bash -c "echo '$content' | (EDITOR='tee -a' visudo)"
 }
 
-function sudoe() {
+function sudo() {
    echo -e "\033[1m Invoking sudo with all current environment variables.\033[0m"
-   sudo -E "$@"
+   command sudo -E "$@"
 }
 
 # This enables proxy by default every time the shell opens
