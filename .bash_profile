@@ -1,3 +1,7 @@
+# Env vars
+export VERSION=$(lsb_release -sc)
+export CODENAME=$(lsb_release -sr)
+
 # Find if it's linux what we are running
 if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
    IS_LINUX_OS=true
