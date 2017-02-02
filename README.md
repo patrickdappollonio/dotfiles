@@ -100,7 +100,7 @@ if [ -f ~/.dotfiles/.bash_profile ]; then
 fi
 
 # Then enable tmux if exists
-which tmux >/dev/null 2>&1 && { tmux attach || export COD=$(lsb_release -sr); tmux new -s $(lsb_release -sc)-${CODENAME//./};  } || bash -l
+which tmux >/dev/null 2>&1 && { tmux attach || export CODENAME=$(lsb_release -sr); tmux new -s $(lsb_release -sc)-${CODENAME//./};  } || bash -l
  ```
 
 ### Git configuration
