@@ -17,9 +17,9 @@
 	cb = checkout -b
 	st = status -s
 	cl = clone
-	cm = commit -S -s -m
-	cma = commit -a -S -s -m
-	ca = commit --amend -S -s
+	cm = commit -s -m
+	cma = commit -a -s -m
+	ca = commit --amend -s
 	amend = commit --amend -s
 	diff = diff --word-diff
 	br = branch
