@@ -21,6 +21,7 @@ export PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\]@\h \[\e[0m\]\[\e[01;36m\][\W]\
 
 # Diverse aliases for my common tasks
 alias ll='ls -aFhlG --color=auto'
+alias l="ll"
 alias ..='cd ..'
 alias ...='cd ../..'
 

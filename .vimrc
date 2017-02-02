@@ -152,6 +152,10 @@ Plugin 't9md/vim-chef'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'hashivim/vim-terraform'
+Plugin 'hashivim/vim-packer'
+Plugin 'hashivim/vim-vaultproject'
+Plugin 'hashivim/vim-consul'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -342,6 +346,9 @@ let g:ctrlp_prompt_mappings = {
 " enable Emmet in different modes, line visual or insert
 " use it by pressing CTRL+y+, (control, letter y, comma)
 let g:user_emmet_mode='a'
+
+" Terraform format on save
+let g:terraform_fmt_on_save=1
 
 " this also allows to toggle line numbers when working via ssh
 function! NumberToggle()
