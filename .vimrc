@@ -92,11 +92,14 @@ set showmatch
 set ignorecase
 
 " Tab management
-set tabstop=3
-set smarttab
-set shiftwidth=3
-set expandtab
-set autoindent
+" set tabstop=4
+" set shiftwidth=4
+" set softtabstop=4
+" set smarttab
+" set autoindent
+set noet sts=0 sw=4 ts=4
+set cindent
+set cinoptions=(0,u0,U0)
 
 " No annoying sound on errors
 set noerrorbells
