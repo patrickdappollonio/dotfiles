@@ -92,12 +92,11 @@ set showmatch
 set ignorecase
 
 " Tab management
-" set tabstop=4
-" set shiftwidth=4
-" set softtabstop=4
-" set smarttab
-" set autoindent
-set noet sts=0 sw=4 ts=4
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set autoindent
+set smartindent
 set cindent
 set cinoptions=(0,u0,U0)
 
