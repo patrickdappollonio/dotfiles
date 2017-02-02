@@ -53,16 +53,16 @@ To manage panels:
 In order to use these files, create a `.dotfiles` folder in your `$HOME` and then create a symlink to the given files...
 
 ```bash
-chmod +x ~/.dotfiles/update-symlinks.sh
+chmod +x ~/.dotfiles/symlinks.sh
 
 # to create symlinks
-~/.dotfiles/update-symlinks.sh create
+~/.dotfiles/symlinks.sh create
 
 # to update symlinks
-~/.dotfiles/update-symlinks.sh update
+~/.dotfiles/symlinks.sh update
 
 # to delete symlinks
-~/.dotfiles/update-symlinks.sh delete
+~/.dotfiles/symlinks.sh delete
 ```
 
 ### Install vundle.vim
