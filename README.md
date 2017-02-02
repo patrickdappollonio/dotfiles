@@ -53,23 +53,16 @@ To manage panels:
 In order to use these files, create a `.dotfiles` folder in your `$HOME` and then create a symlink to the given files...
 
 ```bash
-ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
-ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/.dotfiles/.vimrc ~/.vimrc
-ln -s ~/.dotfiles/.vim ~/.vim
-ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/.minttyrc ~/.minttyrc
-```
+chmod +x ~/.dotfiles/update-symlinks.sh
 
-To remove the symlinks, just do...
+# to create symlinks
+~/.dotfiles/update-symlinks.sh create
 
-```bash
-rm -rf ~/.bash_profile
-rm -rf ~/.gitconfig
-rm -rf ~/.vimrc
-rm -rf ~/.vim
-rm -rf ~/.tmux.conf
-rm -rf ~/.minttyrc
+# to update symlinks
+~/.dotfiles/update-symlinks.sh update
+
+# to delete symlinks
+~/.dotfiles/update-symlinks.sh delete
 ```
 
 ### Install vundle.vim
@@ -78,29 +71,13 @@ rm -rf ~/.minttyrc
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 
-
-### Attach tmux session automatically
-
-```
-which tmux >/dev/null 2>&1 && { tmux attach || tmux new -s ssh-conn;  } || bash -l
-```
-
-The command above will create a tmux session or attach to an existent one called `ssh-conn`.
-
-### Allow environment variables to be passed to `sudo`
-
-Just call `add_envs_to_sudoers` to modify the sudoers file with the needed variables.
-
-### Set up Xfce terminal to always open Tmux
+### Source bash profile if it exists
 
 ```bash
 # Source my own
-if [ -f ~/.dotfiles/.bash_profile ]; then 
+if [ -f ~/.dotfiles/.bash_profile ]; then
     . ~/.dotfiles/.bash_profile
 fi
-
-# Then enable tmux if exists
-which tmux >/dev/null 2>&1 && { tmux attach || tmux new -s $VERSION-${CODENAME//./};  } || bash -l 
 ```
 
 ### Git configuration
