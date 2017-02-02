@@ -1,12 +1,14 @@
-# Env vars
-export VERSION=$(lsb_release -sc)
-export CODENAME=$(lsb_release -sr)
-
 # Find if it's linux what we are running
 if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
    IS_LINUX_OS=true
 else
    IS_LINUX_OS=false
+fi
+
+# Env vars
+if [ "$IS_LINUX_OS" = true ]; then
+   export VERSION=$(lsb_release -sc)
+   export CODENAME=$(lsb_release -sr)
 fi
 
 # Simple way to print the git branch
