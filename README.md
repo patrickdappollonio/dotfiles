@@ -35,6 +35,7 @@ Moving in a file:
 * `CTRL-a` is the master key.
 * `CTRL-a c` creates new window.
 * `CTRL-a [` allows to scroll the window content.
+* `CTRL-a [` then `enter` allows to copy the content selected (using `CTRL+v` or `space`), while `CTRL-a ]` paste it.
 * `CTRL-a (1-0)` allows to move between open windows, using numbers between 1 and 0.
 * `CTRL-a [` to use selection mode... Space starts text selection, and enter copies, then, exit selection with `q`. Paste with `CTRL-a ]`.
 * `CTRL-a n` allows to change the window name
