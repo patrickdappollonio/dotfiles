@@ -180,6 +180,10 @@ vmap <Leader>a,, :Tabularize /,\zs<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
+" Close preview buffer with Leader-z
+nmap <Leader>z :pc!<CR>
+vmap <Leader>z :pc!<CR>
+
 " Vim color for tab indentation lines
 let g:indentLine_color_term = 239
 let g:indentLine_char = '|'

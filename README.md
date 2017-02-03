@@ -15,6 +15,7 @@
 * In any mode, press `F7` to fix indentation problems
 * `\u` shows an undo-history. Useful to move back and forth between changes
 * `\a:` or `\a=` will sort variable declaration "a la Golang"
+* `\z` closes a buffer preview windows (such as the ones created by vim-go)
 
 Jumping to definitions and in the file:
 * `gd` will take you to the local declaration.
