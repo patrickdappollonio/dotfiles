@@ -157,6 +157,7 @@ Plugin 'hashivim/vim-packer'
 Plugin 'hashivim/vim-vaultproject'
 Plugin 'hashivim/vim-consul'
 Plugin 'stephpy/vim-yaml'
+Plugin 'chase/vim-ansible-yaml'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
