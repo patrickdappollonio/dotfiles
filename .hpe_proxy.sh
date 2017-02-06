@@ -19,6 +19,8 @@ if [ "$IS_LINUX_OS" = false ] && [ "$(ipconfig | grep -m 1 Suffix | awk '{ print
     IS_HPE_NETWORK=true
 elif [ "$IS_LINUX_OS" = true ] && [ "$(hostname -I | awk -F '.' '{ print $1  }')" == "16" ]; then
     IS_HPE_NETWORK=true
+elif [ "$IS_LINUX_OS" = true ] && [ "$(hostname -I | awk -F '.' '{ print $1  }')" == "172" ]; then
+    IS_HPE_NETWORK=true
 else
     IS_HPE_NETWORK=false
 fi
