@@ -42,6 +42,7 @@ vmap <F8> <ESC>:set hls!<CR>gv
 
 " Reformat the indentation on a file by pressing <F7>
 map <F7> mzgg=G`z
+imap <F7> <ESC>mzgg=G`z<ESC>a
 
 " Allows to toggle paste with F2
 set pastetoggle=<F2>
@@ -223,14 +224,14 @@ let g:neocomplete#force_overwrite_completefunc = 1
 
 " Neocomplete keyword pattern
 if !exists('g:neocomplete#keyword_patterns')
-   let g:neocomplete#keyword_patterns = {}
+    let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " ENTER closes the popup and saves indent
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-   return pumvisible() ? "\<C-y>" : "\<CR>"
+    return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
 
 " Enable omni completion.
@@ -243,7 +244,7 @@ autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
 " Agressive autocompletion
 if !exists('g:neocomplete#sources#omni#input_patterns')
-   let g:neocomplete#sources#omni#input_patterns = {}
+    let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
 " Aggresive autocompletion of the following types
@@ -313,7 +314,7 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 
 " enable Airline symbols
 if !exists('g:airline_symbols')
-   let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 
 " Proper unicode symbols for Airline
@@ -346,8 +347,8 @@ let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_dont_split = 'NERD'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_prompt_mappings = {
-         \ 'AcceptSelection("t")': ['<cr>'],
-         \ }
+            \ 'AcceptSelection("t")': ['<cr>'],
+            \ }
 
 " enable Emmet in different modes, line visual or insert
 " use it by pressing CTRL+y+, (control, letter y, comma)
@@ -358,8 +359,8 @@ let g:terraform_fmt_on_save=1
 
 " this also allows to toggle line numbers when working via ssh
 function! NumberToggle()
-   set number!
-   :GitGutterToggle
+    set number!
+    :GitGutterToggle
 endfunc
 nnoremap <C-g> :call NumberToggle()<cr>
 
@@ -367,22 +368,35 @@ nnoremap <C-g> :call NumberToggle()<cr>
 " (if there are multiple windows into the same buffer)
 " or kill the buffer entirely if it's the last window looking into that buffer
 function! CloseWindowOrKillBuffer()
-   let number_of_windows_to_this_buffer = len(filter(range(1, winnr('$')), "winbufnr(v:val) == bufnr('%')"))
+    let number_of_windows_to_this_buffer = len(filter(range(1, winnr('$')), "winbufnr(v:val) == bufnr('%')"))
 
-   " We should never bdelete a nerd tree
-   if matchstr(expand("%"), 'NERD') == 'NERD'
-      wincmd c
-      return
-   endif
+    " We should never bdelete a nerd tree
+    if matchstr(expand("%"), 'NERD') == 'NERD'
+        wincmd c
+        return
+    endif
 
-   if number_of_windows_to_this_buffer > 1
-      wincmd c
-   else
-      bdelete
-   endif
+    if number_of_windows_to_this_buffer > 1
+        wincmd c
+    else
+        bdelete
+    endif
 endfunction
 
 nnoremap <silent> Q :call CloseWindowOrKillBuffer()<CR>
 
 " Use w!! to write a file as sudo
 cmap w!! w !sudo tee % >/dev/null
+
+" These are to cancel the default behavior of d, D, c, C
+" to put the text they delete in the default register.
+" Note that this means e.g. "ad won't copy the text into
+" register a anymore.  You have to explicitly yank it.
+nnoremap d "_d
+vnoremap d "_d
+nnoremap D "_D
+vnoremap D "_D
+nnoremap c "_c
+vnoremap c "_c
+nnoremap C "_C
+vnoremap C "_C
