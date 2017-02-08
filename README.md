@@ -3,7 +3,6 @@
 * `CTRL+n` opens and closes NERDtree, `enter` to open it, `t` alone to open in tab
 * `gt` to scroll between tabs, `gT` to go to the previous tab
 * `CTRL+p` opens a fast jump-to-file
-* In normal mode, `\ff` search for text in files
 * `\cc` will comment the source code
 * `/` to search, `F8` to toggle highlight of found words
 * `V` (uppercase) selects a line, up, down to add or remove lines, then `d` cuts, `y` copy and `p` paste after cursor.
@@ -29,6 +28,45 @@ Jumping to definitions and in the file:
 
 Moving in a file:
 * `k` is Up, `j` is Down, `h` is Left, `l` is Right. `w` moves a word forward.
+
+From vim wiki:
+
+```
+h       move one character left
+j       move one row down
+k       move one row up
+l       move one character right
+w       move to beginning of next word
+b       move to previous beginning of word
+e       move to end of word
+W       move to beginning of next word after a whitespace
+B       move to beginning of previous word before a whitespace
+E       move to end of word before a whitespace
+
+0       move to beginning of line
+$       move to end of line
+_       move to first non-blank character of the line
+g_      move to last non-blank character of the line
+
+gg      move to first line
+G       move to last line
+nG      move to n'th line of file (n is a number; 12G moves to line 12)
+
+H       move to top of screen
+M       move to middle of screen
+L       move to bottom of screen
+
+z.      scroll the line with the cursor to the center of the screen
+zt      scroll the line with the cursor to the top
+zb      scroll the line with the cursor to the bottom
+
+Ctrl-D  move half-page down
+Ctrl-U  move half-page up
+Ctrl-B  page up
+Ctrl-F  page down
+Ctrl-O  jump to last (older) cursor position
+Ctrl-I  jump to next cursor position (after Ctrl-O)
+```
 
 ### tmux
 

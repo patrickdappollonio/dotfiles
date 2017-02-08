@@ -3,6 +3,9 @@ set t_Co=256
 " vi is not vim
 set nocompatible
 
+" enable fast tty network
+set ttyfast
+
 " Appearance
 syntax enable
 colorscheme Chasing_Logic
@@ -138,7 +141,6 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'alvan/vim-closetag'
-Plugin 'eugen0329/vim-esearch'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'fatih/vim-go'
 Plugin 'vim-ruby/vim-ruby'
