@@ -165,6 +165,8 @@ Plugin 'sdanielf/vim-stdtabs'
 Plugin 'Yggdroot/indentLine'
 Plugin 'sickill/vim-pasta'
 Plugin 'tpope/vim-surround'
+Plugin 'mattn/gist-vim'
+Plugin 'mattn/webapi-vim'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -219,6 +221,9 @@ nmap <Leader>e <Plug>(go-rename)
 
 " By default the mapping gd is enabled, which opens the target identifier in current buffer.
 nmap <Leader>dt <Plug>(go-def-tab)
+
+" Gists are private by default
+let g:gist_post_private = 1
 
 " Neocomplete
 let g:acp_enableAtStartup = 0
