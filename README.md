@@ -15,6 +15,9 @@
 * `\u` shows an undo-history. Useful to move back and forth between changes
 * `\a:` or `\a=` will sort variable declaration "a la Golang"
 * `\z` closes a buffer preview windows (such as the ones created by vim-go)
+* `ds"` will delete surrounding double quotes (as in `[d]elete-[s]urrounding-"`). You can change quotes to anything.
+* `cs'"` will change surrounding single quotes to double (as in `[c]hange-[s]urrounding-'-"`). You can change quotes to anything.
+* `ysiw"` will add quotes to the given word (as in `[y]ank-[s]urrounding-[i]nner-[w]ord-"`). You can change quotes to anything.
 
 Jumping to definitions and in the file:
 * `gd` will take you to the local declaration.

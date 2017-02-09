@@ -196,7 +196,7 @@ nmap <Leader>z :pc!<CR>
 vmap <Leader>z :pc!<CR>
 
 " Indent guides
-let g:indentLine_color_term=245
+let g:indentLine_color_term=238
 let g:indentLine_char = '┆'
 
 " Enable easytags on save
