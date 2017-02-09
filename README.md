@@ -120,6 +120,16 @@ if [ -f ~/.dotfiles/.bash_profile ]; then
 fi
 ```
 
+### Update Vim to Vim 8.0
+
+```bash
+# add ppa repository
+sudo add-apt-repository ppa:jonathonf/vim
+
+# update and install
+sudo apt-get update && sudo apt-get install vim vim-nox
+```
+
 ### Git configuration
 
    * [Create the SSH keys](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
