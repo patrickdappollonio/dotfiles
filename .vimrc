@@ -150,7 +150,6 @@ Plugin 'tpope/vim-endwise'
 Plugin 'wavded/vim-stylus'
 Plugin 'ekalinin/dockerfile.vim'
 Plugin 'henrik/vim-indexed-search'
-Plugin 'yggdroot/indentline'
 Plugin 't9md/vim-chef'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
@@ -161,6 +160,11 @@ Plugin 'hashivim/vim-vaultproject'
 Plugin 'hashivim/vim-consul'
 Plugin 'stephpy/vim-yaml'
 Plugin 'chase/vim-ansible-yaml'
+Plugin 'elzr/vim-json'
+Plugin 'sdanielf/vim-stdtabs'
+Plugin 'Yggdroot/indentLine'
+Plugin 'sickill/vim-pasta'
+Plugin 'tpope/vim-surround'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -189,13 +193,16 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 nmap <Leader>z :pc!<CR>
 vmap <Leader>z :pc!<CR>
 
-" Vim color for tab indentation lines
-let g:indentLine_color_term = 239
-let g:indentLine_char = '|'
+" Indent guides
+let g:indentLine_color_term=245
+let g:indentLine_char = '┆'
 
 " Enable easytags on save
 let g:easytags_events = ['BufWritePost']
 let g:easytags_async = 1
+
+" Conceal Level for vim-json
+let g:vim_json_syntax_conceal = 0
 
 " Vim-Go
 let g:go_highlight_functions = 1
@@ -363,6 +370,7 @@ let g:terraform_fmt_on_save=1
 function! NumberToggle()
     set number!
     :GitGutterToggle
+    :IndentLinesToggle
 endfunc
 nnoremap <C-g> :call NumberToggle()<cr>
 
