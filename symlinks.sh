@@ -7,6 +7,7 @@ function destroy_symlinks() {
     rm -rf ~/.tmux.conf
     rm -rf ~/.minttyrc
     rm -rf ~/.gist-vim
+    rm -rf ~/.gemrc
 }
 
 # Add new symlinks
@@ -18,6 +19,7 @@ function create_symlinks() {
     ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
     ln -s ~/.dotfiles/.minttyrc ~/.minttyrc
     ln -s ~/.dotfiles/.gist-vim ~/.gist-vim
+    ln -s ~/.dotfiles/.gemrc ~/.gemrc
 }
 
 # Options for the command

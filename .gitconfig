@@ -39,3 +39,5 @@
 	default = current
 [github]
 	user = patrickdappollonio
+[core]
+	excludesfile = /home/patrick/.dotfiles/.global-gitignore
