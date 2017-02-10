@@ -110,6 +110,15 @@ function sudo() {
     command sudo -E "$@"
 }
 
+function dockerb() {
+    echo -e "\033[1m Invoking docker build with pull=true and rm=true with environment.\033[0m"
+    docker build --pull=true --rm=true -t $1 . \
+        --build-arg http_proxy=$HTTP_PROXY \
+        --build-arg https_proxy=$HTTPS_PROXY \
+        --build-arg HTTP_PROXY=$HTTP_PROXY \
+        --build-arg HTTPS_PROXY=$HTTPS_PROXY
+}
+
 # This enables proxy by default every time the shell opens
 # to disable, just run "proxy_off"
 if [ "$IS_HPE_NETWORK" = true ]; then
