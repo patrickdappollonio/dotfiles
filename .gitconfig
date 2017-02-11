@@ -5,10 +5,8 @@
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 
-; Requires enabling GPG signing for Git
-; commits. So they show as verified online.
-; [commit]
-; 	gpgsign = true
+[url "ssh://git@github.hpe.com/"]
+	insteadOf = https://github.hpe.com/
 
 ; Simple aliases to simplify commands
 [alias]
@@ -31,13 +29,11 @@
 	aliases = "!git config -l | grep alias | cut -c 7-"
    pom = push origin master
 
-
-; HPE SPECIFIC - allows to use ssh only
-[url "ssh://git@github.hpe.com/"]
-	insteadOf = https://github.hpe.com/
 [push]
 	default = current
+
 [github]
 	user = patrickdappollonio
+
 [core]
 	excludesfile = /home/patrick/.dotfiles/.global-gitignore
