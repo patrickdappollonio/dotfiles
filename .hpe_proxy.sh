@@ -17,7 +17,7 @@ fi
 # Find if it's on the HPE network
 if [ "$IS_LINUX_OS" = false ] && [ "$(ipconfig | grep -m 1 Suffix | awk '{ print $NF }')" == "americas.hpqcorp.net" ]; then
     IS_HPE_NETWORK=true
-elif [ "$IS_LINUX_OS" = true ] && [ "$(hostname -I | awk -F '.' '{ print $1  }')" == "16" ]; then
+elif [ "$IS_LINUX_OS" = true ] && [ "$(hostname -I | awk -F '.' '{ print $1  }')" == "10" ]; then
     IS_HPE_NETWORK=true
 elif [ "$IS_LINUX_OS" = true ] && [ "$(hostname -I | awk -F '.' '{ print $1  }')" == "172" ]; then
     IS_HPE_NETWORK=true
