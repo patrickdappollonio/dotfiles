@@ -135,6 +135,7 @@ nnoremap <Leader>wv :vnew<cr>
 nnoremap <Leader>w= <C-W>=
 nnoremap <Leader>wa <C-W>+
 nnoremap <Leader>wz <C-W>-
+nnoremap <Leader>s :split<cr>
 
 " Iterate between all open splits
 nmap <Tab> <C-w>w

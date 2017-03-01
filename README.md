@@ -34,6 +34,7 @@ Moving between split windows
 * `\wh` will create a new horizontal window inside vim
 * `\wv` will create a new vertical window inside vim
 * `\w(a|z|=)` will enlarge, shrink and made equal size the vim windows
+* `\s` will create a split window horizontal
 
 Moving in a file:
 * `k` is Up, `j` is Down, `h` is Left, `l` is Right. `w` moves a word forward.
