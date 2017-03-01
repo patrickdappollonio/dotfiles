@@ -29,6 +29,12 @@ Jumping to definitions and in the file:
 * `gf` will go to the file under the cursor
 * `g]` and other commands will jump to a tag definition (a tag can be a function or variable name, or more).
 
+Moving between split windows
+* `CTRL + (j|k|h|l)` will move between different split windows, a la vim HJKL.
+* `\wh` will create a new horizontal window inside vim
+* `\wv` will create a new vertical window inside vim
+* `\w(a|z|=)` will enlarge, shrink and made equal size the vim windows
+
 Moving in a file:
 * `k` is Up, `j` is Down, `h` is Left, `l` is Right. `w` moves a word forward.
 

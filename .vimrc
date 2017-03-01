@@ -123,6 +123,26 @@ nnoremap ; :
 vnoremap < <gv
 vnoremap > >gv
 
+" Split windows in Vim
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Divide windows with leader
+nnoremap <Leader>wh :new<cr>
+nnoremap <Leader>wv :vnew<cr>
+nnoremap <Leader>w= <C-W>=
+nnoremap <Leader>wa <C-W>+
+nnoremap <Leader>wz <C-W>-
+
+" Iterate between all open splits
+nmap <Tab> <C-w>w
+
+" Open new split panes to right and bottom
+set splitbelow
+set splitright
+
 " Set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -415,3 +435,50 @@ nnoremap c "_c
 vnoremap c "_c
 nnoremap C "_C
 vnoremap C "_C
+
+" Vim folding
+if has("folding")
+    set foldenable        " enable folding
+    set foldmethod=syntax " fold based on syntax highlighting
+    set foldlevelstart=99 " start editing with all folds open
+
+    " toggle folds
+    nnoremap <Space> za
+    vnoremap <Space> za
+
+    set foldtext=FoldText()
+    function! FoldText()
+        let l:lpadding = &fdc
+        redir => l:signs
+        execute 'silent sign place buffer='.bufnr('%')
+        redir End
+        let l:lpadding += l:signs =~ 'id=' ? 2 : 0
+
+        if exists("+relativenumber")
+            if (&number)
+                let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
+            elseif (&relativenumber)
+                let l:lpadding += max([&numberwidth, strlen(v:foldstart - line('w0')), strlen(line('w$') - v:foldstart), strlen(v:foldstart)]) + 1
+            endif
+        else
+            if (&number)
+                let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
+            endif
+        endif
+
+        " expand tabs
+        let l:start = substitute(getline(v:foldstart), '\t', repeat(' ', &tabstop), 'g')
+        let l:end = substitute(substitute(getline(v:foldend), '\t', repeat(' ', &tabstop), 'g'), '^\s*', '', 'g')
+
+        let l:info = ' (' . (v:foldend - v:foldstart) . ')'
+        let l:infolen = strlen(substitute(l:info, '.', 'x', 'g'))
+        let l:width = winwidth(0) - l:lpadding - l:infolen
+
+        let l:separator = ' … '
+        let l:separatorlen = strlen(substitute(l:separator, '.', 'x', 'g'))
+        let l:start = strpart(l:start , 0, l:width - strlen(substitute(l:end, '.', 'x', 'g')) - l:separatorlen)
+        let l:text = l:start . ' … ' . l:end
+
+        return l:text . repeat(' ', l:width - strlen(substitute(l:text, ".", "x", "g"))) . l:info
+    endfunction
+endif

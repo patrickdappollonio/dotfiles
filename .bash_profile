@@ -86,3 +86,8 @@ function gg() {
 
 # Source HPE-specific settings
 source ~/.dotfiles/.hpe_proxy.sh
+
+# Source Amazon AWS data
+if [ -f ~/.dotfiles/.awsdetails ]; then
+    source ~/.dotfiles/.awsdetails
+fi
