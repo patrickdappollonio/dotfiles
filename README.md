@@ -78,9 +78,18 @@ Ctrl-O  jump to last (older) cursor position
 Ctrl-I  jump to next cursor position (after Ctrl-O)
 ```
 
-### x11 forwarding for PuTTY & pbcopy (xclip / xsel)
+### Copy and paste to and from tmux buffers
 
-Follow the instructions [here](http://superuser.com/questions/119792/how-to-use-x11-forwarding-with-putty).
+Since tmux has its own buffer where you can store stuff by copying accessing copy-mode with `CTRL-a [` and pasting with `CTRL-a ]` then
+you might want to access it programatically, so `pbc` (taken from `pbcopy`) copy any piped data into the tmux buffer, and `pbp` outputs
+it, so you can do stuff like:
+
+```txt
+$ echo "hello" | pbc
+
+$ pbp > data.txt && cat data.txt
+hello
+```
 
 ### tmux
 

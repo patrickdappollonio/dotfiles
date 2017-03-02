@@ -51,6 +51,8 @@ if [ "$IS_LINUX_OS" = true ]; then
 
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
+    alias pbc="tmux loadb -"
+    alias pbp="tmux saveb -"
 fi
 
 # Open folders
