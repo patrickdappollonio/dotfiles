@@ -78,6 +78,10 @@ Ctrl-O  jump to last (older) cursor position
 Ctrl-I  jump to next cursor position (after Ctrl-O)
 ```
 
+### x11 forwarding for PuTTY & pbcopy (xclip / xsel)
+
+Follow the instructions [here](http://superuser.com/questions/119792/how-to-use-x11-forwarding-with-putty).
+
 ### tmux
 
 * `CTRL-a` is the master key.
