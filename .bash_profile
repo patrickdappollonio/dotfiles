@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Find if it's linux what we are running
 if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     IS_LINUX_OS=true
@@ -83,7 +85,7 @@ function gs() {
 }
 
 # Colorized cat for Linux
-function cat() {
+function ccat() {
     if [ "$IS_LINUX_OS" = true ]; then
         if ! [ -x "$(command -v highlight)" ]; then
             echo -e "highlight command not installed, install it by doing 'apt-get install highlight'"
