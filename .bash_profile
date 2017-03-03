@@ -47,6 +47,7 @@ alias gd='cd $HOME/Development'
 if [ "$IS_LINUX_OS" = true ]; then
     if ! [ -x "$(command -v xclip)" ]; then
         echo -e "xclip is not installed, install it by doing 'apt-get install xclip'"
+        exit 1
     fi
 
     alias pbcopy='xclip -selection clipboard'
@@ -79,6 +80,18 @@ function gs() {
     fi
 
     cd $(find-project $1)
+}
+
+# Colorized cat for Linux
+function cat() {
+    if [ "$IS_LINUX_OS" = true ]; then
+        if ! [ -x "$(command -v highlight)" ]; then
+            echo -e "highlight command not installed, install it by doing 'apt-get install highlight'"
+            exit 1
+        fi
+
+        highlight -O ansi $1
+    fi
 }
 
 # Go get with update and verbose
