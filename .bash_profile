@@ -91,6 +91,8 @@ function cat() {
         fi
 
         highlight -O ansi $1
+    else
+        command cat $1
     fi
 }
 
