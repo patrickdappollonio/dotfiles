@@ -18,6 +18,8 @@
 * `ds"` will delete surrounding double quotes (as in `[d]elete-[s]urrounding-"`). You can change quotes to anything.
 * `cs'"` will change surrounding single quotes to double (as in `[c]hange-[s]urrounding-'-"`). You can change quotes to anything.
 * `ysiw"` will add quotes to the given word (as in `[y]ank-[s]urrounding-[i]nner-[w]ord-"`). You can change quotes to anything.
+* `\r` is a handy way to replace the selected text with confirmation.
+
 
 Jumping to definitions and in the file:
 * `gd` will take you to the local declaration.
