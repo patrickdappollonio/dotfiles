@@ -277,6 +277,9 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
+" Fixing certain file types
+au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+
 " Agressive autocompletion
 if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
