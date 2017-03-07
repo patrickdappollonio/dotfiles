@@ -6,6 +6,9 @@ set nocompatible
 " enable fast tty network
 set ttyfast
 
+" disable word wrapping
+set nowrap
+
 " Appearance
 syntax enable
 colorscheme Chasing_Logic
