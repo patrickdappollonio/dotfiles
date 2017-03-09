@@ -14,8 +14,9 @@ syntax enable
 colorscheme Chasing_Logic
 
 " highlight current line
-set cursorline
-highlight CursorLine cterm=none
+" set cursorline
+" highlight CursorLine cterm=none
+set nocursorline
 
 " Enable filetype plugins
 filetype plugin on
@@ -29,6 +30,11 @@ set ruler
 
 " Enable backspacing properly
 set backspace=indent,eol,start
+
+" To avoid slow lines when lines in a file
+" are too big, disable syntax color for lines
+" longer than 120 characters
+set synmaxcol=120
 
 " Fix displaying last line
 set display+=lastline
