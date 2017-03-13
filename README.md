@@ -19,7 +19,7 @@
 * `cs'"` will change surrounding single quotes to double (as in `[c]hange-[s]urrounding-'-"`). You can change quotes to anything.
 * `ysiw"` will add quotes to the given word (as in `[y]ank-[s]urrounding-[i]nner-[w]ord-"`). You can change quotes to anything.
 * `\r` is a handy way to replace the selected text with confirmation.
-* `\x` and `\X` are ways to mark the current word for replacement. Replace with `.` and jump with `n`. Uppercase x does it backwards.
+* `\x` and `\X` are ways to mark the current word for replacement. Uppercase x does it backwards. Perform replacements with `n` and `.`
 
 Jumping to definitions and in the file:
 * `gd` will take you to the local declaration.
