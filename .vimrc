@@ -534,3 +534,7 @@ endfunction
 
 " Start the find and replace command across the entire file
 vmap <leader>r <Esc>:%s/<c-r>=GetVisual()<cr>//gc<left><left><left>
+
+" Perform replacements with \x and \X
+nnoremap <leader>x *``cgn
+nnoremap <leader>X #``cgN
