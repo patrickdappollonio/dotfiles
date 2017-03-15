@@ -161,7 +161,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'mattn/emmet-vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'scrooloose/nerdcommenter'
@@ -189,7 +188,7 @@ Plugin 'hashivim/vim-terraform'
 Plugin 'hashivim/vim-packer'
 Plugin 'hashivim/vim-vaultproject'
 Plugin 'hashivim/vim-consul'
-Plugin 'stephpy/vim-yaml'
+Plugin 'avakhov/vim-yaml'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'elzr/vim-json'
 Plugin 'sdanielf/vim-stdtabs'
@@ -393,7 +392,6 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_dont_split = 'NERD'
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch'  }
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_prompt_mappings = {
             \ 'AcceptSelection("t")': ['<cr>'],
