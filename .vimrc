@@ -34,7 +34,7 @@ set backspace=indent,eol,start
 " To avoid slow lines when lines in a file
 " are too big, disable syntax color for lines
 " longer than 120 characters
-set synmaxcol=120
+set synmaxcol=300
 
 " Fix displaying last line
 set display+=lastline
@@ -64,13 +64,6 @@ nmap <silent> <leader>/ :nohlsearch<CR>
 
 " Makes search act like search in modern browsers
 set incsearch
-
-" allow to copy-paste to other apps, using the selection with "v", "V" or
-" similar and Ctrl-y to copy to clipboard, and Ctrl-p to paste from it
-nnoremap <C-y> "+y
-vnoremap <C-y> "+y
-nnoremap <C-e> "+gP
-vnoremap <C-e> "+gP
 
 " Make j and k, Up and Down move between visual lines
 nnoremap k gk
@@ -197,6 +190,8 @@ Plugin 'sickill/vim-pasta'
 Plugin 'tpope/vim-surround'
 Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'Valloric/MatchTagAlways'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -232,6 +227,9 @@ let g:indentLine_char = '┆'
 " Enable easytags on save
 let g:easytags_events = ['BufWritePost']
 let g:easytags_async = 1
+
+" Enable closetags
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml"
 
 " Conceal Level for vim-json
 let g:vim_json_syntax_conceal = 0
@@ -401,6 +399,9 @@ let g:ctrlp_prompt_mappings = {
 " use it by pressing CTRL+y+, (control, letter y, comma)
 let g:user_emmet_mode='a'
 
+" :call emmet#expandAbbr(3,"")
+inoremap <C-e> <Esc>:call emmet#expandAbbr(3, "")<cr>i
+
 " Terraform format on save
 let g:terraform_fmt_on_save=1
 
@@ -523,3 +524,8 @@ endfunction
 " Perform replacements with \x and \X
 nnoremap <leader>x *``cgn
 nnoremap <leader>X #``cgN
+
+" Setup matching tag plugin
+let g:mta_use_matchparen_group = 0
+let g:mta_set_default_matchtag_color = 0
+highlight MatchTag ctermfg=black ctermbg=lightgreen guifg=black guibg=lightgreen
