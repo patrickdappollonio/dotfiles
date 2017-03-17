@@ -151,6 +151,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " ---------- START Vundle VIM Plugins
+Plugin 'xolox/vim-misc'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -174,7 +175,6 @@ Plugin 'wavded/vim-stylus'
 Plugin 'ekalinin/dockerfile.vim'
 Plugin 'henrik/vim-indexed-search'
 Plugin 't9md/vim-chef'
-Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'hashivim/vim-terraform'
@@ -192,6 +192,7 @@ Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'Valloric/MatchTagAlways'
+Plugin 'xolox/vim-session'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -525,7 +526,16 @@ endfunction
 nnoremap <leader>x *``cgn
 nnoremap <leader>X #``cgN
 
+" Find visually selected text
+vnoremap <expr> // 'y/\V'.escape(@",'\').'<CR>'
+
 " Setup matching tag plugin
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
 highlight MatchTag ctermfg=black ctermbg=lightgreen guifg=black guibg=lightgreen
+
+" Vim Sessions
+let g:session_autoload = 'yes'
+let g:session_autosave = 'yes'
+let g:session_autosave_to = 'default'
+let g:session_verbose_messages = 0
