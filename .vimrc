@@ -192,7 +192,8 @@ Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'Valloric/MatchTagAlways'
-Plugin 'xolox/vim-session'
+Plugin 'tpope/vim-obsession'
+Plugin 'dhruvasagar/vim-prosession'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -533,9 +534,3 @@ vnoremap <expr> // 'y/\V'.escape(@",'\').'<CR>'
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
 highlight MatchTag ctermfg=black ctermbg=lightgreen guifg=black guibg=lightgreen
-
-" Vim Sessions
-let g:session_autoload = 'yes'
-let g:session_autosave = 'yes'
-let g:session_autosave_to = 'default'
-let g:session_verbose_messages = 0

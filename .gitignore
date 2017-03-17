@@ -4,4 +4,4 @@
 
 # Remove bundles
 .vim/bundle/*
-.vim/sessions/*
+.vim/session/*
