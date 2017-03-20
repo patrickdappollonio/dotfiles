@@ -112,9 +112,8 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Enable line numbers and set them to be dark
+" Enable line numbers
 set number
-highlight LineNr ctermfg=DarkGrey ctermbg=236
 
 " Making it so ; works like : for commands.
 " Saves typing and eliminates :W style
