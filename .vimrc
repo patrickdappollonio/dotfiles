@@ -65,6 +65,16 @@ nmap <silent> <leader>/ :nohlsearch<CR>
 " Makes search act like search in modern browsers
 set incsearch
 
+" Sets invisible characters useful
+if &listchars ==# 'eol:$'
+    set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
+
+" Delete comment character when joining commented lines
+if v:version > 703 || v:version == 703 && has("patch541")
+    set formatoptions+=j
+endif
+
 " Make j and k, Up and Down move between visual lines
 nnoremap k gk
 nnoremap j gj
