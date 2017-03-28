@@ -402,12 +402,35 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_dont_split = 'NERD'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_prompt_mappings = {
             \ 'AcceptSelection("t")': ['<cr>'],
             \ }
+let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$',
+            \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+            \ }
+let g:ctrlp_abbrev = {
+            \ 'gmode': 'i',
+            \ 'abbrevs': [
+            \ {
+            \ 'pattern': ' ',
+            \ 'expanded': '',
+            \ 'mode': 'pfrz',
+            \ },
+            \ ]
+            \ }
+" let g:ctrlp_abbrev = {
+" \ 'gmode': 't',
+" \ 'abbrevs': [
+" \ {
+" \ 'pattern': '\(^@.\+\|\\\@<!:.\+\)\@<! ',
+" \ 'expanded': '_',
+" \ 'mode': 'pfrz',
+" \ },
+" \ ]
+" \ }
 
-" enable Emmet in different modes, line visual or insert
+" Enable Emmet in different modes, line visual or insert
 " use it by pressing CTRL+y+, (control, letter y, comma)
 let g:user_emmet_mode='a'
 
