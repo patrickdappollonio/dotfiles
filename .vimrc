@@ -572,4 +572,6 @@ autocmd BufNewFile,BufRead * if s:isAnsibleHosts() | set ft=ansible_hosts | en
 autocmd BufNewFile,BufRead *.j2 set ft=ansible_template
 
 " Fix tab indentation in yaml files
+autocmd FileType yaml setlocal ts=4 sts=4 sw=4 expandtab
 autocmd Filetype ansible setlocal expandtab
+autocmd BufWritePre *.yaml :retab
