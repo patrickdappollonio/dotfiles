@@ -204,6 +204,7 @@ Plugin 'Valloric/MatchTagAlways'
 Plugin 'tpope/vim-obsession'
 Plugin 'dhruvasagar/vim-prosession'
 Plugin 'pearofducks/ansible-vim'
+Plugin 'mileszs/ack.vim'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -598,3 +599,7 @@ autocmd BufNewFile,BufRead *.j2 set ft=ansible_template
 autocmd FileType yaml setlocal ts=4 sts=4 sw=4 expandtab
 autocmd Filetype ansible setlocal expandtab
 autocmd BufWritePre *.yaml :retab
+
+" Ack setup
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
