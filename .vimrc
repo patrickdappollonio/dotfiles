@@ -203,6 +203,7 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'tpope/vim-obsession'
 Plugin 'dhruvasagar/vim-prosession'
+Plugin 'pearofducks/ansible-vim'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -521,8 +522,7 @@ function! EscapeString (string)
 endfunction
 
 " Replace current word below cursor
-xnoremap <leader>r :<C-u>'{,'}s/<C-r>=GetVisualSelection()<CR>/
-xnoremap <leader>R :<C-u>%s/<C-r>=GetVisualSelection()<CR>/
+xnoremap <leader>r :<C-u>%s/<C-r>=GetVisualSelection()<CR>/
 
 function! GetVisualSelection()
     let old_reg = @v
@@ -543,3 +543,33 @@ vnoremap <expr> // 'y/\V'.escape(@",'\').'<CR>'
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
 highlight MatchTag ctermfg=black ctermbg=lightgreen guifg=black guibg=lightgreen
+
+" More thoroughful detection of ansible
+function! s:isAnsible()
+    let filepath = expand("%:p")
+    let filename = expand("%:t")
+    if filepath =~ '\v/(tasks|roles|handlers|playbooks)/.*\.ya?ml$' | return 1 | en
+    if filepath =~ '\v/(group|host)_vars/' | return 1 | en
+    if filename =~ '\v(playbook|site|main|local)\.ya?ml$' | return 1 | en
+
+    let shebang = getline(1)
+    if shebang =~# '^#!.*/bin/env\s\+ansible-playbook\>' | return 1 | en
+    if shebang =~# '^#!.*/bin/ansible-playbook\>' | return 1 | en
+    if shebang =~# '^---' | return 1 | en
+
+    return 0
+endfunction
+
+" More thoroughful detection of ansible host files
+function! s:isAnsibleHosts()
+    let filepath = expand("%:p")
+    let filename = expand("%:t")
+    if filename =~ '\v(hosts)$' | return 1 | en
+endfunction
+
+autocmd BufNewFile,BufRead * if s:isAnsible() | set ft=ansible | en
+autocmd BufNewFile,BufRead * if s:isAnsibleHosts() | set ft=ansible_hosts | en
+autocmd BufNewFile,BufRead *.j2 set ft=ansible_template
+
+" Fix tab indentation in yaml files
+autocmd Filetype ansible setlocal expandtab

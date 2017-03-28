@@ -124,3 +124,11 @@ function dockerb() {
 if [ "$IS_HPE_NETWORK" = true ]; then
     proxy_on
 fi
+
+# Workaround fix for ansible-galaxy command taking https proxy
+# and assumming is http
+function ansible-galaxy() {
+    export https_proxy=$HTTP_PROXY
+    command ansible-galaxy "$@"
+    export https_proxy=$HTTPS_PROXY
+}
