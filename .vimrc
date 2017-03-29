@@ -204,7 +204,6 @@ Plugin 'Valloric/MatchTagAlways'
 Plugin 'tpope/vim-obsession'
 Plugin 'dhruvasagar/vim-prosession'
 Plugin 'pearofducks/ansible-vim'
-Plugin 'mileszs/ack.vim'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -354,9 +353,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#formatter = 'default'
-let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline#extensions#tabline#fnametruncate = 16
-let g:airline#extensions#tabline#fnamecollapse = 2
+let g:airline#extensions#tabline#fnamecollapse = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 
 " map leader (\) and a number from 1 to 9 to select buffers
@@ -369,6 +368,8 @@ nmap <leader>6 <Plug>AirlineSelectTab6
 nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>= <Plug>AirlineSelectNextTab
 
 " enable Airline symbols
 if !exists('g:airline_symbols')
@@ -579,7 +580,6 @@ function! s:isAnsible()
     let shebang = getline(1)
     if shebang =~# '^#!.*/bin/env\s\+ansible-playbook\>' | return 1 | en
     if shebang =~# '^#!.*/bin/ansible-playbook\>' | return 1 | en
-    if shebang =~# '^---' | return 1 | en
 
     return 0
 endfunction
@@ -599,7 +599,3 @@ autocmd BufNewFile,BufRead *.j2 set ft=ansible_template
 autocmd FileType yaml setlocal ts=4 sts=4 sw=4 expandtab
 autocmd Filetype ansible setlocal expandtab
 autocmd BufWritePre *.yaml :retab
-
-" Ack setup
-cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
