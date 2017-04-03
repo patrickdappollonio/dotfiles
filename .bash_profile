@@ -110,3 +110,7 @@ source ~/.dotfiles/.hpe_proxy.sh
 if [ -f ~/.dotfiles/.awsdetails ]; then
     source ~/.dotfiles/.awsdetails
 fi
+
+if [ -d ~/.appengine/ ]; then
+    export PATH=$PATH:~/.appengine/
+fi
