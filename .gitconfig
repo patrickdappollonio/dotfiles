@@ -36,4 +36,4 @@
     user = patrickdappollonio
 
 [core]
-    excludesfile = /home/patrick/.dotfiles/.global-gitignore
+    excludesfile = ~/.dotfiles/.global-gitignore
