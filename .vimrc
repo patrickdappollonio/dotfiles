@@ -204,6 +204,8 @@ Plugin 'Valloric/MatchTagAlways'
 Plugin 'tpope/vim-obsession'
 Plugin 'dhruvasagar/vim-prosession'
 Plugin 'pearofducks/ansible-vim'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'othree/javascript-libraries-syntax.vim'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -399,6 +401,7 @@ let g:airline_symbols.linenr = ''
 
 
 " CtrlP settings
+nnoremap <Leader>o :CtrlPMRUFiles<CR>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
@@ -408,8 +411,8 @@ let g:ctrlp_prompt_mappings = {
             \ 'AcceptSelection("t")': ['<cr>'],
             \ }
 let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$',
-            \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+            \ 'dir': '\v[\/]\.(git|hg|svn)$',
+            \ 'file': '\v\.(exe|so|dll)$',
             \ }
 let g:ctrlp_abbrev = {
             \ 'gmode': 'i',
@@ -421,16 +424,9 @@ let g:ctrlp_abbrev = {
             \ },
             \ ]
             \ }
-" let g:ctrlp_abbrev = {
-" \ 'gmode': 't',
-" \ 'abbrevs': [
-" \ {
-" \ 'pattern': '\(^@.\+\|\\\@<!:.\+\)\@<! ',
-" \ 'expanded': '_',
-" \ 'mode': 'pfrz',
-" \ },
-" \ ]
-" \ }
+let g:ctrlp_max_files = 200000
+let g:ctrlp_use_caching = 0
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 
 " Enable Emmet in different modes, line visual or insert
 " use it by pressing CTRL+y+, (control, letter y, comma)
