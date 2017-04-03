@@ -595,3 +595,8 @@ autocmd BufNewFile,BufRead *.j2 set ft=ansible_template
 autocmd FileType yaml setlocal ts=4 sts=4 sw=4 expandtab
 autocmd Filetype ansible setlocal expandtab
 autocmd BufWritePre *.yaml :retab
+
+" Move the location to the temporary VIM files
+silent execute '!mkdir "'.$HOME.'/.vim/swapfiles"'
+set backupdir=$HOME/.vim/swapfiles//
+set directory=$HOME/.vim/swapfiles//
