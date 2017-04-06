@@ -48,9 +48,6 @@ function proxy_on(){
         gsettings set org.gnome.system.proxy.http host "$CORP_PROXY_HOST";
         gsettings set org.gnome.system.proxy.http port "$CORP_PROXY_PORT";
     fi
-
-    # env | grep -e _PROXY -e GIT_ | sort
-    echo -e "Proxy-related environment variables set."
 }
 
 # remove proxy settings when off corporate network
@@ -71,8 +68,6 @@ function proxy_off(){
     if [ "$IS_LINUX_OS" = true ] && [ ! -z `which gsettings` ]; then
         gsettings set org.gnome.system.proxy mode "none";
     fi
-
-    echo -e "Proxy-related environment variables removed."
 }
 
 function sudo_env() {
@@ -106,7 +101,6 @@ function sudo_env() {
 }
 
 function sudo() {
-    echo -e "\033[1m Invoking sudo with all current environment variables.\033[0m"
     command sudo -E "$@"
 }
 
