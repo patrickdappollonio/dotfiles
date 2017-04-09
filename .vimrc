@@ -160,8 +160,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " ---------- START Vundle VIM Plugins
-Plugin 'xolox/vim-misc'
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'xolox/vim-misc'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
