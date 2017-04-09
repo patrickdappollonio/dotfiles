@@ -49,7 +49,6 @@ alias gd='cd $HOME/Development'
 if [ "$IS_LINUX_OS" = true ]; then
     if ! [ -x "$(command -v xclip)" ]; then
         echo -e "xclip is not installed, install it by doing 'apt-get install xclip'"
-        exit 1
     fi
 
     alias pbcopy='xclip -selection clipboard'
