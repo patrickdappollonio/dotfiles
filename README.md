@@ -155,6 +155,12 @@ sudo add-apt-repository ppa:jonathonf/vim
 sudo apt-get update && sudo apt-get install vim vim-nox
 ```
 
+### Disable IPv6
+
+```bash
+echo 'Acquire::ForceIPv4 "true";' | sudo tee /etc/apt/apt.conf.d/99force-ipv4
+```
+
 ### Git configuration
 
    * [Create the SSH keys](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
