@@ -597,6 +597,10 @@ autocmd Filetype ansible setlocal expandtab
 autocmd BufWritePre *.yaml :retab
 
 " Move the location to the temporary VIM files
+if !isdirectory($HOME . "/.vim/swapfiles")
+    call mkdir($HOME . "/.vim/swapfiles")
+endif
+
 set dir=$HOME/.vim/swapfiles//
 set backupdir=$HOME/.vim/swapfiles//
 set directory=$HOME/.vim/swapfiles//
