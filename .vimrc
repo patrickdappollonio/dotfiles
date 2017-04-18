@@ -209,6 +209,7 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'rking/ag.vim'
 Plugin 'joukevandermaas/vim-ember-hbs'
+Plugin 'plasticboy/vim-markdown'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -614,3 +615,6 @@ endif
 set dir=$HOME/.vim/swapfiles//
 set backupdir=$HOME/.vim/swapfiles//
 set directory=$HOME/.vim/swapfiles//
+
+" Vim Markdown conceal
+let g:vim_markdown_conceal = 0
