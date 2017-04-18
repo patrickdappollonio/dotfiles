@@ -49,7 +49,6 @@ alias gd='cd $HOME/Development'
 if [ "$IS_LINUX_OS" = true ]; then
     if ! [ -x "$(command -v xclip)" ]; then
         echo -e "xclip is not installed, install it by doing 'apt-get install xclip'"
-        exit 1
     fi
 
     alias pbcopy='xclip -selection clipboard'
@@ -111,11 +110,11 @@ if [ -f ~/.dotfiles/.awsdetails ]; then
     source ~/.dotfiles/.awsdetails
 fi
 
+# Enable Google App Engine if the folder exists
 if [ -d ~/.appengine/ ]; then
     export PATH=$PATH:~/.appengine/
 fi
 
-# NVMjs setup
-# Download from: https://github.com/creationix/nvm
+# Enable NodeJS' NVM if path exists
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
