@@ -181,6 +181,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-endwise'
 Plugin 'wavded/vim-stylus'
+Plugin 'plasticscafe/vim-stylus-autocompile'
 Plugin 'ekalinin/dockerfile.vim'
 Plugin 'henrik/vim-indexed-search'
 Plugin 't9md/vim-chef'
@@ -206,6 +207,8 @@ Plugin 'dhruvasagar/vim-prosession'
 Plugin 'pearofducks/ansible-vim'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'rking/ag.vim'
+Plugin 'joukevandermaas/vim-ember-hbs'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -243,7 +246,7 @@ let g:easytags_events = ['BufWritePost']
 let g:easytags_async = 1
 
 " Enable closetags
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml"
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.hbs"
 
 " Conceal Level for vim-json
 let g:vim_json_syntax_conceal = 0
@@ -300,6 +303,8 @@ autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
 " Fixing certain file types
 au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+au FileType javascript setlocal autoindent expandtab tabstop=4 softtabstop=0 shiftwidth=4 smarttab
+au FileType handlebars setlocal autoindent expandtab tabstop=4 softtabstop=0 shiftwidth=4 smarttab
 
 " Agressive autocompletion
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -593,8 +598,13 @@ autocmd BufNewFile,BufRead *.j2 set ft=ansible_template
 
 " Fix tab indentation in yaml files
 autocmd FileType yaml setlocal ts=4 sts=4 sw=4 expandtab
-autocmd Filetype ansible setlocal expandtab
+autocmd FileType ansible setlocal expandtab
 autocmd BufWritePre *.yaml :retab
+
+" Set format for specific file types
+autocmd BufNewFile,BufRead *.hbs set ft=handlebars
+autocmd BufNewFile,BufRead *.styl set filetype=stylus
+autocmd BufNewFile,BufRead *.stylus set filetype=stylus
 
 " Move the location to the temporary VIM files
 if !isdirectory($HOME . "/.vim/swapfiles")

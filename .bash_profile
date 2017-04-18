@@ -110,6 +110,12 @@ if [ -f ~/.dotfiles/.awsdetails ]; then
     source ~/.dotfiles/.awsdetails
 fi
 
+# Enable Google App Engine if the folder exists
 if [ -d ~/.appengine/ ]; then
     export PATH=$PATH:~/.appengine/
 fi
+
+# Enable NodeJS' NVM if path exists
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+
