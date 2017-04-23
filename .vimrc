@@ -443,6 +443,8 @@ inoremap <C-e> <Esc>:call emmet#expandAbbr(3, "")<cr>i
 
 " Terraform format on save
 let g:terraform_fmt_on_save=1
+au BufRead,BufNewFile *.tf setlocal filetype=terraform tabstop=2 softtabstop=2 shiftwidth=2
+au BufRead,BufNewFile *.tfvars setlocal filetype=terraform tabstop=2 softtabstop=2 shiftwidth=2
 
 " this also allows to toggle line numbers when working via ssh
 function! NumberToggle()
