@@ -1,3 +1,6 @@
+#!/bin/bash
+set -euo pipefail
+
 # Remove previous symlinks
 function destroy_symlinks() {
     rm -rf ~/.bash_profile
