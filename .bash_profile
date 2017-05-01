@@ -30,6 +30,7 @@ alias ...='cd ../..'
 # Golang aliases
 alias goi='go install'
 alias gob='go build'
+alias got="go test \$(go list ./... | grep -v '/vendor/')"
 
 # tmux alias to run 256-color
 alias tmux='tmux -2'
