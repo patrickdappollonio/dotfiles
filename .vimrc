@@ -67,12 +67,12 @@ set incsearch
 
 " Sets invisible characters useful
 if &listchars ==# 'eol:$'
-    set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+	set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 endif
 
 " Delete comment character when joining commented lines
 if v:version > 703 || v:version == 703 && has("patch541")
-    set formatoptions+=j
+	set formatoptions+=j
 endif
 
 " Make j and k, Up and Down move between visual lines
@@ -284,14 +284,14 @@ let g:neocomplete#force_overwrite_completefunc = 1
 
 " Neocomplete keyword pattern
 if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
+	let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " ENTER closes the popup and saves indent
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-    return pumvisible() ? "\<C-y>" : "\<CR>"
+	return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
 
 " Enable omni completion.
@@ -309,7 +309,7 @@ au FileType handlebars setlocal autoindent expandtab tabstop=4 softtabstop=0 shi
 
 " Agressive autocompletion
 if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
+	let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
 " Aggresive autocompletion of the following types
@@ -381,7 +381,7 @@ nmap <leader>= <Plug>AirlineSelectNextTab
 
 " enable Airline symbols
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+	let g:airline_symbols = {}
 endif
 
 " Proper unicode symbols for Airline
@@ -414,22 +414,22 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_dont_split = 'NERD'
 let g:ctrlp_prompt_mappings = {
-            \ 'AcceptSelection("t")': ['<cr>'],
-            \ }
+			\ 'AcceptSelection("t")': ['<cr>'],
+			\ }
 let g:ctrlp_custom_ignore = {
-            \ 'dir': '\v[\/]\.(git|hg|svn)$',
-            \ 'file': '\v\.(exe|so|dll)$',
-            \ }
+			\ 'dir': '\v[\/]\.(git|hg|svn)$',
+			\ 'file': '\v\.(exe|so|dll)$',
+			\ }
 let g:ctrlp_abbrev = {
-            \ 'gmode': 'i',
-            \ 'abbrevs': [
-            \ {
-            \ 'pattern': ' ',
-            \ 'expanded': '',
-            \ 'mode': 'pfrz',
-            \ },
-            \ ]
-            \ }
+			\ 'gmode': 'i',
+			\ 'abbrevs': [
+			\ {
+			\ 'pattern': ' ',
+			\ 'expanded': '',
+			\ 'mode': 'pfrz',
+			\ },
+			\ ]
+			\ }
 let g:ctrlp_max_files = 200000
 let g:ctrlp_use_caching = 0
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
@@ -448,9 +448,9 @@ au BufRead,BufNewFile *.tfvars setlocal filetype=terraform tabstop=2 softtabstop
 
 " this also allows to toggle line numbers when working via ssh
 function! NumberToggle()
-    set number!
-    :GitGutterToggle
-    :IndentLinesToggle
+	set number!
+	:GitGutterToggle
+	:IndentLinesToggle
 endfunc
 nnoremap <C-g> :call NumberToggle()<cr>
 
@@ -458,19 +458,19 @@ nnoremap <C-g> :call NumberToggle()<cr>
 " (if there are multiple windows into the same buffer)
 " or kill the buffer entirely if it's the last window looking into that buffer
 function! CloseWindowOrKillBuffer()
-    let number_of_windows_to_this_buffer = len(filter(range(1, winnr('$')), "winbufnr(v:val) == bufnr('%')"))
+	let number_of_windows_to_this_buffer = len(filter(range(1, winnr('$')), "winbufnr(v:val) == bufnr('%')"))
 
-    " We should never bdelete a nerd tree
-    if matchstr(expand("%"), 'NERD') == 'NERD'
-        wincmd c
-        return
-    endif
+	" We should never bdelete a nerd tree
+	if matchstr(expand("%"), 'NERD') == 'NERD'
+		wincmd c
+		return
+	endif
 
-    if number_of_windows_to_this_buffer > 1
-        wincmd c
-    else
-        bdelete
-    endif
+	if number_of_windows_to_this_buffer > 1
+		wincmd c
+	else
+		bdelete
+	endif
 endfunction
 
 nnoremap <silent> Q :call CloseWindowOrKillBuffer()<CR>
@@ -493,72 +493,72 @@ vnoremap C "_C
 
 " Vim folding
 if has("folding")
-    set foldenable        " enable folding
-    set foldmethod=syntax " fold based on syntax highlighting
-    set foldlevelstart=99 " start editing with all folds open
+	set foldenable        " enable folding
+	set foldmethod=syntax " fold based on syntax highlighting
+	set foldlevelstart=99 " start editing with all folds open
 
-    " toggle folds
-    nnoremap <Space> za
-    vnoremap <Space> za
+	" toggle folds
+	nnoremap <Space> za
+	vnoremap <Space> za
 
-    set foldtext=FoldText()
-    function! FoldText()
-        let l:lpadding = &fdc
-        redir => l:signs
-        execute 'silent sign place buffer='.bufnr('%')
-        redir End
-        let l:lpadding += l:signs =~ 'id=' ? 2 : 0
+	set foldtext=FoldText()
+	function! FoldText()
+		let l:lpadding = &fdc
+		redir => l:signs
+		execute 'silent sign place buffer='.bufnr('%')
+		redir End
+		let l:lpadding += l:signs =~ 'id=' ? 2 : 0
 
-        if exists("+relativenumber")
-            if (&number)
-                let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
-            elseif (&relativenumber)
-                let l:lpadding += max([&numberwidth, strlen(v:foldstart - line('w0')), strlen(line('w$') - v:foldstart), strlen(v:foldstart)]) + 1
-            endif
-        else
-            if (&number)
-                let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
-            endif
-        endif
+		if exists("+relativenumber")
+			if (&number)
+				let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
+			elseif (&relativenumber)
+				let l:lpadding += max([&numberwidth, strlen(v:foldstart - line('w0')), strlen(line('w$') - v:foldstart), strlen(v:foldstart)]) + 1
+			endif
+		else
+			if (&number)
+				let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
+			endif
+		endif
 
-        " expand tabs
-        let l:start = substitute(getline(v:foldstart), '\t', repeat(' ', &tabstop), 'g')
-        let l:end = substitute(substitute(getline(v:foldend), '\t', repeat(' ', &tabstop), 'g'), '^\s*', '', 'g')
+		" expand tabs
+		let l:start = substitute(getline(v:foldstart), '\t', repeat(' ', &tabstop), 'g')
+		let l:end = substitute(substitute(getline(v:foldend), '\t', repeat(' ', &tabstop), 'g'), '^\s*', '', 'g')
 
-        let l:info = ' (' . (v:foldend - v:foldstart) . ')'
-        let l:infolen = strlen(substitute(l:info, '.', 'x', 'g'))
-        let l:width = winwidth(0) - l:lpadding - l:infolen
+		let l:info = ' (' . (v:foldend - v:foldstart) . ')'
+		let l:infolen = strlen(substitute(l:info, '.', 'x', 'g'))
+		let l:width = winwidth(0) - l:lpadding - l:infolen
 
-        let l:separator = ' … '
-        let l:separatorlen = strlen(substitute(l:separator, '.', 'x', 'g'))
-        let l:start = strpart(l:start , 0, l:width - strlen(substitute(l:end, '.', 'x', 'g')) - l:separatorlen)
-        let l:text = l:start . ' … ' . l:end
+		let l:separator = ' … '
+		let l:separatorlen = strlen(substitute(l:separator, '.', 'x', 'g'))
+		let l:start = strpart(l:start , 0, l:width - strlen(substitute(l:end, '.', 'x', 'g')) - l:separatorlen)
+		let l:text = l:start . ' … ' . l:end
 
-        return l:text . repeat(' ', l:width - strlen(substitute(l:text, ".", "x", "g"))) . l:info
-    endfunction
+		return l:text . repeat(' ', l:width - strlen(substitute(l:text, ".", "x", "g"))) . l:info
+	endfunction
 endif
 
 " Escape special characters in a string for exact matching.
 " This is useful to copying strings from the file to the search tool
 " Based on this - http://peterodding.com/code/vim/profile/autoload/xolox/escape.vim
 function! EscapeString (string)
-    let string = a:string
-    " Escape regex characters
-    let string = escape(string, '^$.*\/~[]')
-    " Escape the line endings
-    let string = substitute(string, '\n', '\\n', 'g')
-    return string
+	let string = a:string
+	" Escape regex characters
+	let string = escape(string, '^$.*\/~[]')
+	" Escape the line endings
+	let string = substitute(string, '\n', '\\n', 'g')
+	return string
 endfunction
 
 " Replace current word below cursor
 xnoremap <leader>r :<C-u>%s/<C-r>=GetVisualSelection()<CR>/
 
 function! GetVisualSelection()
-    let old_reg = @v
-    normal! gv"vy
-    let raw_search = @v
-    let @v = old_reg
-    return EscapeString(raw_search)
+	let old_reg = @v
+	normal! gv"vy
+	let raw_search = @v
+	let @v = old_reg
+	return EscapeString(raw_search)
 endfunction
 
 " Perform replacements with \x and \X
@@ -575,24 +575,24 @@ highlight MatchTag ctermfg=black ctermbg=lightgreen guifg=black guibg=lightgreen
 
 " More thoroughful detection of ansible
 function! s:isAnsible()
-    let filepath = expand("%:p")
-    let filename = expand("%:t")
-    if filepath =~ '\v/(tasks|roles|handlers|playbooks)/.*\.ya?ml$' | return 1 | en
-    if filepath =~ '\v/(group|host)_vars/' | return 1 | en
-    if filename =~ '\v(playbook|site|main|local)\.ya?ml$' | return 1 | en
+	let filepath = expand("%:p")
+	let filename = expand("%:t")
+	if filepath =~ '\v/(tasks|roles|handlers|playbooks)/.*\.ya?ml$' | return 1 | en
+	if filepath =~ '\v/(group|host)_vars/' | return 1 | en
+	if filename =~ '\v(playbook|site|main|local)\.ya?ml$' | return 1 | en
 
-    let shebang = getline(1)
-    if shebang =~# '^#!.*/bin/env\s\+ansible-playbook\>' | return 1 | en
-    if shebang =~# '^#!.*/bin/ansible-playbook\>' | return 1 | en
+	let shebang = getline(1)
+	if shebang =~# '^#!.*/bin/env\s\+ansible-playbook\>' | return 1 | en
+	if shebang =~# '^#!.*/bin/ansible-playbook\>' | return 1 | en
 
-    return 0
+	return 0
 endfunction
 
 " More thoroughful detection of ansible host files
 function! s:isAnsibleHosts()
-    let filepath = expand("%:p")
-    let filename = expand("%:t")
-    if filename =~ '\v(hosts)$' | return 1 | en
+	let filepath = expand("%:p")
+	let filename = expand("%:t")
+	if filename =~ '\v(hosts)$' | return 1 | en
 endfunction
 
 autocmd BufNewFile,BufRead * if s:isAnsible() | set ft=ansible | en
@@ -611,7 +611,7 @@ autocmd BufNewFile,BufRead *.stylus set filetype=stylus
 
 " Move the location to the temporary VIM files
 if !isdirectory($HOME . "/.vim/swapfiles")
-    call mkdir($HOME . "/.vim/swapfiles")
+	call mkdir($HOME . "/.vim/swapfiles")
 endif
 
 set dir=$HOME/.vim/swapfiles//
@@ -620,3 +620,32 @@ set directory=$HOME/.vim/swapfiles//
 
 " Vim Markdown conceal
 let g:vim_markdown_conceal = 0
+
+" Return indent (all whitespace at start of a line), converted from
+" tabs to spaces if what = 1, or from spaces to tabs otherwise.
+" When converting to tabs, result has no redundant spaces.
+function! Indenting(indent, what, cols)
+	let spccol = repeat(' ', a:cols)
+	let result = substitute(a:indent, spccol, '\t', 'g')
+	let result = substitute(result, ' \+\ze\t', '', 'g')
+	if a:what == 1
+		let result = substitute(result, '\t', spccol, 'g')
+	endif
+	return result
+endfunction
+
+" Convert whitespace used for indenting (before first non-whitespace).
+" what = 0 (convert spaces to tabs), or 1 (convert tabs to spaces).
+" cols = string with number of columns per tab, or empty to use 'tabstop'.
+" The cursor position is restored, but the cursor will be in a different
+" column when the number of characters in the indent of the line is changed.
+function! IndentConvert(line1, line2, what, cols)
+	let savepos = getpos('.')
+	let cols = empty(a:cols) ? &tabstop : a:cols
+	execute a:line1 . ',' . a:line2 . 's/^\s\+/\=Indenting(submatch(0), a:what, cols)/e'
+	call histdel('search', -1)
+	call setpos('.', savepos)
+endfunction
+command! -nargs=? -range=% Space2Tab call IndentConvert(<line1>,<line2>,0,<q-args>)
+command! -nargs=? -range=% Tab2Space call IndentConvert(<line1>,<line2>,1,<q-args>)
+command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q-args>)
