@@ -65,15 +65,17 @@ nmap <silent> <leader>/ :nohlsearch<CR>
 " Makes search act like search in modern browsers
 set incsearch
 
-" Sets invisible characters useful
-if &listchars ==# 'eol:$'
-	set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-endif
-
 " Delete comment character when joining commented lines
 if v:version > 703 || v:version == 703 && has("patch541")
 	set formatoptions+=j
 endif
+
+" Vim Typo Fixes
+command! WQ wq
+command! Wq wq
+command! Wqa wqa
+command! W w
+command! Q q
 
 " Make j and k, Up and Down move between visual lines
 nnoremap k gk
@@ -108,13 +110,11 @@ set showmatch
 set ignorecase
 
 " Tab management
-set expandtab
+set noexpandtab
 set tabstop=4
 set shiftwidth=4
 set autoindent
 set smartindent
-set cindent
-set cinoptions=(0,u0,U0)
 
 " No annoying sound on errors
 set noerrorbells
@@ -195,7 +195,6 @@ Plugin 'avakhov/vim-yaml'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'elzr/vim-json'
 Plugin 'sdanielf/vim-stdtabs'
-Plugin 'Yggdroot/indentLine'
 Plugin 'sickill/vim-pasta'
 Plugin 'tpope/vim-surround'
 Plugin 'mattn/gist-vim'
