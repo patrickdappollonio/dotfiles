@@ -210,6 +210,7 @@ Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'rking/ag.vim'
 Plugin 'joukevandermaas/vim-ember-hbs'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'matze/vim-move'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -405,6 +406,8 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
+" Vim-move settings
+let g:move_key_modifier = 'C'
 
 " CtrlP settings
 nnoremap <Leader>o :CtrlPMRUFiles<CR>
