@@ -416,10 +416,6 @@ let g:ctrlp_dont_split = 'NERD'
 let g:ctrlp_prompt_mappings = {
 			\ 'AcceptSelection("t")': ['<cr>'],
 			\ }
-let g:ctrlp_custom_ignore = {
-			\ 'dir': '\v[\/]\.(git|hg|svn)$',
-			\ 'file': '\v\.(exe|so|dll)$',
-			\ }
 let g:ctrlp_abbrev = {
 			\ 'gmode': 'i',
 			\ 'abbrevs': [
@@ -431,8 +427,7 @@ let g:ctrlp_abbrev = {
 			\ ]
 			\ }
 let g:ctrlp_max_files = 200000
-let g:ctrlp_use_caching = 0
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|vendor|git)|(\.(swp|ico|git|svn))$'
 
 " Enable Emmet in different modes, line visual or insert
 " use it by pressing CTRL+y+, (control, letter y, comma)
