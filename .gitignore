@@ -5,3 +5,4 @@
 # Remove bundles
 .vim/bundle/*
 .vim/session/*
+.vim/undo/*

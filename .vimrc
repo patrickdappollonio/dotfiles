@@ -614,11 +614,11 @@ set directory=~/.vim/swap//
 
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
-    call system('mkdir ~/.vim/undo')
-    set undodir=~/.vim/undo//
-    set undofile
-    set undolevels=1000
-    set undoreload=10000
+	call system('mkdir ~/.vim/undo')
+	set undodir=~/.vim/undo//
+	set undofile
+	set undolevels=1000
+	set undoreload=10000
 endif
 
 " Vim Markdown conceal
