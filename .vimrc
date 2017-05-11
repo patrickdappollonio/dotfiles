@@ -60,7 +60,7 @@ imap <F7> <ESC>mzgg=G`z<ESC>a
 set pastetoggle=<F2>
 
 " This removes the previous search when pressing / again
-nmap <silent> <leader>/ :nohlsearch<CR>
+nnoremap <silent> <leader>/ :nohlsearch<CR>
 
 " Makes search act like search in modern browsers
 set incsearch
@@ -149,7 +149,7 @@ nnoremap <Leader>wz <C-W>-
 nnoremap <Leader>s :split<cr>
 
 " Iterate between all open splits
-nmap <Tab> <C-w>w
+nnoremap <Tab> <C-w>w
 
 " Open new split panes to right and bottom
 set splitbelow
@@ -263,10 +263,7 @@ let g:go_fmt_command = "goimports"
 " inoremap <C-Space> <C-x><C-o>
 
 " Rename the identifier under the cursor to a new name
-nmap <Leader>e <Plug>(go-rename)
-
-" By default the mapping gd is enabled, which opens the target identifier in current buffer.
-nmap <Leader>dt <Plug>(go-def-tab)
+nnoremap <Leader>e <Plug>(go-rename)
 
 " Gists are private by default
 let g:gist_post_private = 1
@@ -367,17 +364,17 @@ let g:airline#extensions#tabline#fnamecollapse = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 
 " map leader (\) and a number from 1 to 9 to select buffers
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <leader>- <Plug>AirlineSelectPrevTab
-nmap <leader>= <Plug>AirlineSelectNextTab
+nnoremap <leader>1 <Plug>AirlineSelectTab1
+nnoremap <leader>2 <Plug>AirlineSelectTab2
+nnoremap <leader>3 <Plug>AirlineSelectTab3
+nnoremap <leader>4 <Plug>AirlineSelectTab4
+nnoremap <leader>5 <Plug>AirlineSelectTab5
+nnoremap <leader>6 <Plug>AirlineSelectTab6
+nnoremap <leader>7 <Plug>AirlineSelectTab7
+nnoremap <leader>8 <Plug>AirlineSelectTab8
+nnoremap <leader>9 <Plug>AirlineSelectTab9
+nnoremap <leader>- <Plug>AirlineSelectPrevTab
+nnoremap <leader>= <Plug>AirlineSelectNextTab
 
 " enable Airline symbols
 if !exists('g:airline_symbols')
