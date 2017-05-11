@@ -603,14 +603,23 @@ autocmd BufNewFile,BufRead *.hbs set ft=handlebars
 autocmd BufNewFile,BufRead *.styl set filetype=stylus
 autocmd BufNewFile,BufRead *.stylus set filetype=stylus
 
-" Move the location to the temporary VIM files
-if !isdirectory($HOME . "/.vim/swapfiles")
-	call mkdir($HOME . "/.vim/swapfiles")
-endif
+" Save temporary/backup files not in the local directory, but in your ~/.vim
+" directory, to keep them out of git repos.
+" But first mkdir backup, swap, and undo first to make this work
+call system('mkdir ~/.vim')
+call system('mkdir ~/.vim/backup')
+call system('mkdir ~/.vim/swap')
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
 
-set dir=$HOME/.vim/swapfiles//
-set backupdir=$HOME/.vim/swapfiles//
-set directory=$HOME/.vim/swapfiles//
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    call system('mkdir ~/.vim/undo')
+    set undodir=~/.vim/undo//
+    set undofile
+    set undolevels=1000
+    set undoreload=10000
+endif
 
 " Vim Markdown conceal
 let g:vim_markdown_conceal = 0
