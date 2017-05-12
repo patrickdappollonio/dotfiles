@@ -445,7 +445,6 @@ au BufRead,BufNewFile *.tfvars setlocal filetype=terraform tabstop=2 softtabstop
 function! NumberToggle()
 	set number!
 	:GitGutterToggle
-	:IndentLinesToggle
 endfunc
 nnoremap <C-g> :call NumberToggle()<cr>
 
