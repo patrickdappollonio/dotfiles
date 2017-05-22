@@ -78,7 +78,6 @@ fi
 function gs() {
     if ! type "find-project" > /dev/null; then
         echo -e "Install find-project first by doing: go get -u -v github.com/patrickdappollonio/find-project"
-        exit 1
     fi
 
     cd $(find-project $1)
@@ -89,7 +88,6 @@ function ccat() {
     if [ "$IS_LINUX_OS" = true ]; then
         if ! [ -x "$(command -v highlight)" ]; then
             echo -e "highlight command not installed, install it by doing 'apt-get install highlight'"
-            exit 1
         fi
 
         highlight -O ansi $1
