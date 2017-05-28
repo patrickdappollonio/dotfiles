@@ -17,15 +17,12 @@ else
 fi
 
 # Find if it's on the HPE network
-if [ "$IS_LINUX_OS" = false ] && [ "$(ipconfig | grep -m 1 Suffix | awk '{ print $NF }')" == "americas.hpqcorp.net" ]; then
+if [ ! -f ~/.hpe ]; then
+    IS_HPE_NETWORK= false
+elif
     IS_HPE_NETWORK=true
-elif [ "$IS_LINUX_OS" = true ] && [ "$(hostname -I | awk -F '.' '{ print $1  }')" == "10" ]; then
-    IS_HPE_NETWORK=true
-elif [ "$IS_LINUX_OS" = true ] && [ "$(hostname -I | awk -F '.' '{ print $1  }')" == "172" ]; then
-    IS_HPE_NETWORK=true
-else
-    IS_HPE_NETWORK=false
 fi
+
 
 # configure proxy for git while on corporate network
 function proxy_on(){

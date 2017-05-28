@@ -303,6 +303,7 @@ autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 au FileType javascript setlocal autoindent expandtab tabstop=4 softtabstop=0 shiftwidth=4 smarttab
 au FileType handlebars setlocal autoindent expandtab tabstop=4 softtabstop=0 shiftwidth=4 smarttab
+au FileType stylus setlocal autoindent noexpandtab tabstop=2 softtabstop=0 shiftwidth=2 smarttab
 
 " Agressive autocompletion
 if !exists('g:neocomplete#sources#omni#input_patterns')
