@@ -18,8 +18,8 @@ fi
 
 # Find if it's on the HPE network
 if [ ! -f ~/.hpe ]; then
-    IS_HPE_NETWORK= false
-elif
+    IS_HPE_NETWORK=false
+else
     IS_HPE_NETWORK=true
 fi
 
