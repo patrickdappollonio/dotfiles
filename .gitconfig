@@ -12,7 +12,7 @@
     aa = add -A
     co = checkout
     cb = checkout -b
-    st = status
+    st = status -s
     cl = clone
     cm = commit -m
     cma = commit -a -m

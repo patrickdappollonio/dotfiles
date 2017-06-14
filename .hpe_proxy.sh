@@ -5,7 +5,7 @@
 ####################
 
 # Corporate proxy
-CORP_PROXY_HOST="web-proxy.houston.hpecorp.net"
+CORP_PROXY_HOST="web-proxy.corp.hpecorp.net"
 CORP_PROXY_PORT="8080"
 CORP_PROXY="$CORP_PROXY_HOST:$CORP_PROXY_PORT"
 
