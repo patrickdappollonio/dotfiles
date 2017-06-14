@@ -12,12 +12,12 @@
     aa = add -A
     co = checkout
     cb = checkout -b
-    st = status -s
+    st = status
     cl = clone
-    cm = commit -s -m
-    cma = commit -a -s -m
-    ca = commit --amend -s -m
-    amend = commit --amend -s -m
+    cm = commit -m
+    cma = commit -a -m
+    ca = commit --amend -m
+    amend = commit --amend -m
     diff = diff --word-diff
     br = branch
     ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
