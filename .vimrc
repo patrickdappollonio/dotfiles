@@ -426,8 +426,8 @@ let g:ctrlp_abbrev = {
 			\ },
 			\ ]
 			\ }
-let g:ctrlp_max_files = 200000
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|vendor|git)|(\.(swp|ico|git|svn))$'
+let g:ctrlp_max_files = 0
+let g:ctrlp_max_depth = 40
 let g:ctrlp_show_hidden = 1
 
 " Enable Emmet in different modes, line visual or insert

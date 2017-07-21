@@ -1,6 +1,6 @@
 [user]
     name = "Patrick D'appollonio"
-    email = dappollonio@hpe.com
+	email = patrick@dappollonio.us
 
 [url "ssh://git@github.com/"]
     insteadOf = https://github.com/
