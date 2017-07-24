@@ -426,10 +426,8 @@ let g:ctrlp_abbrev = {
 			\ },
 			\ ]
 			\ }
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|tmp\|vendor$',
-  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
-  \ }
+let g:ctrlp_max_files = 0
+let g:ctrlp_max_depth = 40
 let g:ctrlp_show_hidden = 1
 
 " Enable Emmet in different modes, line visual or insert
