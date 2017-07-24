@@ -22,7 +22,7 @@ parse_git_branch() {
 export PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\]@\h \[\e[0m\]\[\e[01;36m\][\W]\$(parse_git_branch)\[\e[0m\]\[\e[00;36m\]:\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
 
 # Diverse aliases for my common tasks
-alias ll='ls -aFhlG --color=auto'
+alias ll='ls -asFhlG --color=auto'
 alias l="ll"
 alias ..='cd ..'
 alias ...='cd ../..'
