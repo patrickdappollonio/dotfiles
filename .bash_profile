@@ -116,9 +116,5 @@ fi
 
 # Enable NodeJS' NVM if path exists
 export NVM_DIR="$HOME/.nvm"
-<<<<<<< HEAD
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-=======
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
->>>>>>> 26185f78aa025ef34afa1ddcd63870bcb7e459db

@@ -426,9 +426,11 @@ let g:ctrlp_abbrev = {
 			\ },
 			\ ]
 			\ }
-let g:ctrlp_max_files = 0
-let g:ctrlp_max_depth = 40
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|vendor\|\.node_modules',
+  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+  \ }
 
 " Enable Emmet in different modes, line visual or insert
 " use it by pressing CTRL+y+, (control, letter y, comma)
