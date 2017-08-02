@@ -2,6 +2,9 @@
 *.swp
 *.swo
 
+# AWS details
+.awsdetails
+
 # Remove bundles
 .vim/bundle/*
 .vim/session/*
