@@ -604,6 +604,7 @@ autocmd BufWritePre *.yaml :retab
 autocmd BufNewFile,BufRead *.hbs set ft=handlebars
 autocmd BufNewFile,BufRead *.styl set filetype=stylus
 autocmd BufNewFile,BufRead *.stylus set filetype=stylus
+autocmd BufNewFile,BufRead *.tmpl set filetype=gohtmltmpl
 
 " Save temporary/backup files not in the local directory, but in your ~/.vim
 " directory, to keep them out of git repos.
