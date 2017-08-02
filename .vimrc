@@ -247,7 +247,7 @@ let g:easytags_events = ['BufWritePost']
 let g:easytags_async = 1
 
 " Enable closetags
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.hbs"
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.hbs,*.tmpl"
 
 " Conceal Level for vim-json
 let g:vim_json_syntax_conceal = 0
