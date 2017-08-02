@@ -5,6 +5,9 @@
 # AWS details
 .awsdetails
 
+# Gist vim
+.gist-vim
+
 # Remove bundles
 .vim/bundle/*
 .vim/session/*
