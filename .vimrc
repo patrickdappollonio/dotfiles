@@ -414,7 +414,7 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_dont_split = 'NERD'
 let g:ctrlp_prompt_mappings = {
-			\ 'AcceptSelection("t")': ['<cr>'],
+			\ 'AcceptSelection("t")': ['<cr>', '<c-t>'],
 			\ }
 let g:ctrlp_abbrev = {
 			\ 'gmode': 'i',
