@@ -68,6 +68,11 @@ function mkcd() {
     mkdir -p $1 && cd $1
 }
 
+# Replace in all files
+function replaceall() {
+    ag -0 -l $1 | xargs -0 sed -ri.bak -e "s/$1/$2/g"
+}
+
 # Set vim as the default editor on Linux
 if [ "$IS_LINUX_OS" = true ]; then
     export VISUAL=vim
