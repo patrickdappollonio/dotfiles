@@ -39,3 +39,5 @@
 
 [core]
     excludesfile = ~/.dotfiles/.global-gitignore
+[merge]
+	renamelimit = 15000
