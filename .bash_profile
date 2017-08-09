@@ -69,7 +69,7 @@ function mkcd() {
 }
 
 # Replace in all files
-function replaceall() {
+function rag() {
     ag -0 -l $1 | xargs -0 sed -ri.bak -e "s/$1/$2/g"
 }
 
