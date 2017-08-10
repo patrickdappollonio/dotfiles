@@ -88,6 +88,11 @@ function gs() {
     cd $(find-project $1)
 }
 
+# Gofat returns sizes of binaries
+function gofat() {
+    eval `go build -work -a 2>&1` && find $WORK -type f -name "*.a" | xargs -I{} du -hxs "{}" | sort -rh | sed -e s:${WORK}/::g
+}
+
 # Colorized cat for Linux
 function ccat() {
     if [ "$IS_LINUX_OS" = true ]; then

@@ -263,7 +263,8 @@ let g:go_fmt_command = "goimports"
 " inoremap <C-Space> <C-x><C-o>
 
 " Rename the identifier under the cursor to a new name
-nnoremap <Leader>e <Plug>(go-rename)
+let g:go_gorename_prefill = 0
+nnoremap <Leader>e :GoRename<cr>
 
 " Gists are private by default
 let g:gist_post_private = 1
