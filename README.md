@@ -156,6 +156,16 @@ sudo add-apt-repository ppa:jonathonf/vim
 sudo apt-get update && sudo apt-get install vim vim-nox
 ```
 
+### Use updated versions of Git
+
+```bash
+# add ppa repository
+sudo add-apt-repository ppa:git-core/ppa
+
+# update and install
+sudo apt-get update && sudo apt-get install git
+```
+
 ### Disable IPv6
 
 ```bash
