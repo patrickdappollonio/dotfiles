@@ -183,6 +183,14 @@ cd /tmp && \
     rm -rf /tmp/go1.8.3.linux-amd64.tar.gz
 ```
 
+Then add the path to `/etc/profile.d/golang.sh` (create if not exists) or your own profile file and add:
+
+```bash
+if [ -d "/usr/local/go" ]; then  
+    export PATH=$PATH:/usr/local/go/bin 
+fi
+```
+
 ### Git configuration
 
    * [Create the SSH keys](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
