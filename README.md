@@ -174,7 +174,7 @@ echo 'Acquire::ForceIPv4 "true";' | sudo tee /etc/apt/apt.conf.d/99force-ipv4
 
 ### Install Go
 
-Download the appropiate version from [golang.org/dl](https://golang.org/dl/) and then run the following commands:
+Download the appropiate version from [golang.org/dl](https://golang.org/dl/) and then run the following commands (since it's trying to write to `/usr/local` you might want to throw a `sudo` here):
 
 ```bash
 cd /tmp && \
