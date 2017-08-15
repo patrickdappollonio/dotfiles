@@ -9,6 +9,7 @@ function destroy_symlinks() {
     rm -rf ~/.vim
     rm -rf ~/.tmux.conf
     rm -rf ~/.minttyrc
+    rm -rf ~/.agignore
 }
 
 # Add new symlinks
@@ -19,6 +20,7 @@ function create_symlinks() {
     ln -s ~/.dotfiles/.vim ~/.vim
     ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
     ln -s ~/.dotfiles/.minttyrc ~/.minttyrc
+    ln -s ~/.dotfiles/.agignore ~/.agignore
 }
 
 # Options for the command
