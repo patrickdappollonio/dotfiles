@@ -33,7 +33,7 @@ alias gob='go build'
 alias got="go test \$(go list ./... | grep -v '/vendor/')"
 
 # Ag alias with ignore
-alias ag='ag --path-to-ignore ~/.agignore'
+alias ag='ag --path-to-agignore ~/.agignore'
 
 # tmux alias to run 256-color
 alias tmux='tmux -2'

@@ -206,10 +206,10 @@ Plugin 'dhruvasagar/vim-prosession'
 Plugin 'pearofducks/ansible-vim'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'rking/ag.vim'
 Plugin 'joukevandermaas/vim-ember-hbs'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'matze/vim-move'
+Plugin 'mileszs/ack.vim'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -237,6 +237,13 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 " Close preview buffer with Leader-z
 nmap <Leader>z :pc!<CR>
 vmap <Leader>z :pc!<CR>
+
+" Ack config to use Ag
+let g:ackprg = 'ag --vimgrep --smart-case --path-to-agignore ~/.agignore'
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
 
 " Indent guides
 let g:indentLine_color_term=238
