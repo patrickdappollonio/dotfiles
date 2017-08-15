@@ -30,7 +30,7 @@ alias ...='cd ../..'
 # Golang aliases
 alias goi='go install'
 alias gob='go build'
-alias got="go test \$(go list ./... | grep -v '/vendor/')"
+alias got="go test ./..."
 
 # Ag alias with ignore
 alias ag='ag --path-to-agignore ~/.agignore'
