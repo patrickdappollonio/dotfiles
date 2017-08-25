@@ -177,7 +177,7 @@ echo 'Acquire::ForceIPv4 "true";' | sudo tee /etc/apt/apt.conf.d/99force-ipv4
 Download the appropiate version from [golang.org/dl](https://golang.org/dl/) and then run the following commands (since it's trying to write to `/usr/local` you might want to throw a `sudo` here):
 
 ```bash
-cd /tmp && \
+cd /tmp && rm -rf /usr/local/go && \
     wget https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz && \
     tar -C /usr/local -xzf go1.8.3.linux-amd64.tar.gz && \
     rm -rf /tmp/go1.8.3.linux-amd64.tar.gz
@@ -186,8 +186,8 @@ cd /tmp && \
 Then add the path to `/etc/profile.d/golang.sh` (create if not exists) or your own profile file and add:
 
 ```bash
-if [ -d "/usr/local/go" ]; then  
-    export PATH=$PATH:/usr/local/go/bin 
+if [ -d "/usr/local/go" ]; then
+    export PATH=$PATH:/usr/local/go/bin
 fi
 ```
 
