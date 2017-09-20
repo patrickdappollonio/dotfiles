@@ -81,6 +81,14 @@ Ctrl-O  jump to last (older) cursor position
 Ctrl-I  jump to next cursor position (after Ctrl-O)
 ```
 
+## Requirements
+
+```bash
+sudo apt-get update && \
+    sudo apt-get upgrade -y && \
+    sudo apt-get install xclip tmux vim-nox -y
+```
+
 ### Copy and paste to and from tmux buffers
 
 Since tmux has its own buffer where you can store stuff by copying accessing copy-mode with `CTRL-a [` and pasting with `CTRL-a ]` then
