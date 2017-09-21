@@ -41,9 +41,9 @@ set scrolloff=3
 " Highlight search results and allow
 " highlighting back and forth with F8 (toggle)
 set hlsearch
-noremap  <F8> :set hls!<CR>
-inoremap <F8> <ESC>:set hls!<CR>a
-vnoremap <F8> <ESC>:set hls!<CR>gv
+noremap  <F8> :<C-u>set hls!<CR>
+inoremap <F8> <ESC>:<C-u>set hls!<CR>a
+vnoremap <F8> <ESC>:<C-u>set hls!<CR>gv
 
 " Reformat the indentation on a file by pressing <F7>
 noremap <F7> mzgg=G`z
@@ -51,9 +51,6 @@ inoremap <F7> <ESC>mzgg=G`z<ESC>a
 
 " Allows to toggle paste with F2
 set pastetoggle=<F2>
-
-" This removes the previous search when pressing / again
-nnoremap <silent> <leader>/ :nohlsearch<CR>
 
 " Makes search act like search in modern browsers
 set incsearch
@@ -81,7 +78,7 @@ vnoremap <Down> gj
 vnoremap <Up> gk
 
 " enable to open and reload vim settings on save
-noremap <leader>vimrc :tabe $MYVIMRC<cr>
+noremap <leader>vimrc :<C-u>tabe $MYVIMRC<cr>
 augroup WriteVimRC
 	autocmd!
 	autocmd bufwritepost .vimrc source $MYVIMRC
@@ -129,12 +126,12 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Divide windows with leader
-nnoremap <Leader>wh :new<cr>
-nnoremap <Leader>wv :vnew<cr>
+nnoremap <Leader>wh :<C-u>new<cr>
+nnoremap <Leader>wv :<C-u>vnew<cr>
 nnoremap <Leader>w= <C-W>=
 nnoremap <Leader>wa <C-W>+
 nnoremap <Leader>wz <C-W>-
-nnoremap <Leader>s :split<cr>
+nnoremap <Leader>s :<C-u>split<cr>
 
 " Iterate between all open splits
 nnoremap <Tab> <C-w>w
@@ -160,7 +157,6 @@ Plugin 'mtth/scratch.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'alvan/vim-closetag'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'fatih/vim-go'
@@ -205,26 +201,26 @@ call vundle#end()
 filetype plugin indent on
 
 " Tabularize with <Leader>a{=,:}
-nnoremap <Leader>a& :Tabularize /&<CR>
-vnoremap <Leader>a& :Tabularize /&<CR>
-nnoremap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
-vnoremap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
-nnoremap <Leader>a=> :Tabularize /=><CR>
-vnoremap <Leader>a=> :Tabularize /=><CR>
-nnoremap <Leader>a: :Tabularize /:<CR>
-vnoremap <Leader>a: :Tabularize /:<CR>
-nnoremap <Leader>a:: :Tabularize /:\zs<CR>
-vnoremap <Leader>a:: :Tabularize /:\zs<CR>
-nnoremap <Leader>a, :Tabularize /,<CR>
-vnoremap <Leader>a, :Tabularize /,<CR>
-nnoremap <Leader>a,, :Tabularize /,\zs<CR>
-vnoremap <Leader>a,, :Tabularize /,\zs<CR>
-nnoremap <Leader>a<Bar> :Tabularize /<Bar><CR>
-vnoremap <Leader>a<Bar> :Tabularize /<Bar><CR>
+nnoremap <Leader>a& :<C-u>Tabularize /&<CR>
+vnoremap <Leader>a& :<C-u>Tabularize /&<CR>
+nnoremap <Leader>a= :<C-u>Tabularize /^[^=]*\zs=<CR>
+vnoremap <Leader>a= :<C-u>Tabularize /^[^=]*\zs=<CR>
+nnoremap <Leader>a=> :<C-u>Tabularize /=><CR>
+vnoremap <Leader>a=> :<C-u>Tabularize /=><CR>
+nnoremap <Leader>a: :<C-u>Tabularize /:<CR>
+vnoremap <Leader>a: :<C-u>Tabularize /:<CR>
+nnoremap <Leader>a:: :<C-u>Tabularize /:\zs<CR>
+vnoremap <Leader>a:: :<C-u>Tabularize /:\zs<CR>
+nnoremap <Leader>a, :<C-u>Tabularize /,<CR>
+vnoremap <Leader>a, :<C-u>Tabularize /,<CR>
+nnoremap <Leader>a,, :<C-u>Tabularize /,\zs<CR>
+vnoremap <Leader>a,, :<C-u>Tabularize /,\zs<CR>
+nnoremap <Leader>a<Bar> :<C-u>Tabularize /<Bar><CR>
+vnoremap <Leader>a<Bar> :<C-u>Tabularize /<Bar><CR>
 
 " Close preview buffer with Leader-z
-nnoremap <Leader>z :pc!<CR>
-vnoremap <Leader>z :pc!<CR>
+nnoremap <Leader>z :<C-u>pc!<CR>
+vnoremap <Leader>z :<C-u>pc!<CR>
 
 " Ack config to use Ag
 let g:ackprg = 'ag --vimgrep --smart-case --path-to-agignore ~/.agignore'
@@ -254,12 +250,26 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_array_whitespace_error = 1
+let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_space_tab_error = 1
 let g:go_fmt_command = "goimports"
-" inoremap <C-Space> <C-x><C-o>
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet']
+let g:go_metalinter_deadline = "5s"
+let g:go_play_open_browser = 0
+augroup VimGo
+	autocmd!
+	autocmd FileType go nnoremap <Leader>t :<C-u>GoAlternate<CR>
+	autocmd FileType go nmap <Leader>i <Plug>(go-info)
+	autocmd FileType go nnoremap <Leader>d :<C-u>GoDeclsDir<CR>
+augroup END
 
 " Rename the identifier under the cursor to a new name
 let g:go_gorename_prefill = 0
-nnoremap <Leader>e :GoRename<cr>
+nnoremap <Leader>e :<C-u>GoRename<cr>
 
 " Gists are private by default
 let g:gist_post_private = 1
@@ -271,9 +281,6 @@ let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#auto_completion_start_length = 3
 let g:neocomplete#max_list = 8
 let g:neocomplete#force_overwrite_completefunc = 1
-
-" Also selects automatically the first option
-" let g:neocomplete#enable_auto_select = 1
 
 " Neocomplete keyword pattern
 if !exists('g:neocomplete#keyword_patterns')
@@ -303,16 +310,12 @@ endif
 
 " Aggresive autocompletion of the following types
 let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
 
-" Buffergator toggle
-noremap <F5> :BuffergatorToggle<CR>
-
 " NERDtree
-noremap <C-n> :NERDTreeToggle<CR>
+noremap <C-n> :<C-u>NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeQuitOnOpen=1
 augroup CloseNerdTreeProperly
@@ -332,7 +335,7 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
 " UndoTree is cool to revert changes! Use it with <Leader>u
-nnoremap <Leader>u :UndotreeToggle<CR>
+nnoremap <Leader>u :<C-u>UndotreeToggle<CR>
 let g:undotree_SetFocusWhenToggle=1
 
 " Better-whitespace remove empty spaces on save
@@ -404,7 +407,7 @@ let g:airline_symbols.linenr = ''
 let g:move_key_modifier = 'C'
 
 " CtrlP settings
-nnoremap <Leader>o :CtrlPMRUFiles<CR>
+nnoremap <Leader>o :<C-u>CtrlPMRUFiles<CR>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
@@ -446,7 +449,7 @@ function! NumberToggle() abort
 	set number!
 	:GitGutterToggle
 endfunc
-nnoremap <C-g> :call NumberToggle()<cr>
+nnoremap <C-g> :<C-u>call NumberToggle()<cr>
 
 " Use Q to intelligently close a window
 " (if there are multiple windows into the same buffer)
@@ -467,7 +470,7 @@ function! CloseWindowOrKillBuffer() abort
 	endif
 endfunction
 
-nnoremap <silent> Q :call CloseWindowOrKillBuffer()<CR>
+nnoremap <silent> Q :<C-u>call CloseWindowOrKillBuffer()<CR>
 
 " These are to cancel the default behavior of d, D, c, C
 " to put the text they delete in the default register.
