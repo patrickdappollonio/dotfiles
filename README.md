@@ -102,6 +102,18 @@ $ pbp > data.txt && cat data.txt
 hello
 ```
 
+### Save PuTTY settings
+
+Save sessions only:
+```
+regedit /e "%USERPROFILE%\Desktop\putty-sessions.reg" HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions
+```
+
+Save all settings:
+```
+regedit /e "%USERPROFILE%\Desktop\putty.reg" HKEY_CURRENT_USER\Software\SimonTatham
+```
+
 ### tmux
 
 * `CTRL-a` is the master key.
