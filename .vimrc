@@ -104,10 +104,7 @@ set magic
 set ignorecase
 
 " Tab management
-set tabstop=4
-set shiftwidth=4
-set autoindent
-set smartindent
+set tabstop=4 shiftwidth=4 autoindent smartindent
 
 " No annoying sound on errors
 set t_vb=
@@ -642,3 +639,6 @@ endfunction
 command! -nargs=? -range=% Space2Tab call IndentConvert(<line1>,<line2>,0,<q-args>)
 command! -nargs=? -range=% Tab2Space call IndentConvert(<line1>,<line2>,1,<q-args>)
 command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q-args>)
+
+" Open help topic in a full new tab
+command! -nargs=1 -complete=help H :tabnew | :set buftype=help | :h <args>
