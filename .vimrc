@@ -282,7 +282,7 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " ENTER closes the popup and saves indent
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
+function! s:my_cr_function() abort
 	return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
 
@@ -432,7 +432,7 @@ au BufRead,BufNewFile *.tf setlocal filetype=terraform tabstop=2 softtabstop=2 s
 au BufRead,BufNewFile *.tfvars setlocal filetype=terraform tabstop=2 softtabstop=2 shiftwidth=2
 
 " this also allows to toggle line numbers when working via ssh
-function! NumberToggle()
+function! NumberToggle() abort
 	set number!
 	:GitGutterToggle
 endfunc
@@ -441,7 +441,7 @@ nnoremap <C-g> :call NumberToggle()<cr>
 " Use Q to intelligently close a window
 " (if there are multiple windows into the same buffer)
 " or kill the buffer entirely if it's the last window looking into that buffer
-function! CloseWindowOrKillBuffer()
+function! CloseWindowOrKillBuffer() abort
 	let number_of_windows_to_this_buffer = len(filter(range(1, winnr('$')), "winbufnr(v:val) == bufnr('%')"))
 
 	" We should never bdelete a nerd tree
@@ -483,7 +483,7 @@ if has("folding")
 	vnoremap <Space> za
 
 	set foldtext=FoldText()
-	function! FoldText()
+	function! FoldText() abort
 		let l:lpadding = &fdc
 		redir => l:signs
 		execute 'silent sign place buffer='.bufnr('%')
@@ -522,7 +522,7 @@ endif
 " Escape special characters in a string for exact matching.
 " This is useful to copying strings from the file to the search tool
 " Based on this - http://peterodding.com/code/vim/profile/autoload/xolox/escape.vim
-function! EscapeString (string)
+function! EscapeString (string) abort
 	let string = a:string
 	" Escape regex characters
 	let string = escape(string, '^$.*\/~[]')
@@ -533,8 +533,7 @@ endfunction
 
 " Replace current word below cursor
 xnoremap <leader>r :<C-u>%s/<C-r>=GetVisualSelection()<CR>/
-
-function! GetVisualSelection()
+function! GetVisualSelection() abort
 	let old_reg = @v
 	normal! gv"vy
 	let raw_search = @v
@@ -552,7 +551,7 @@ let g:mta_set_default_matchtag_color = 0
 highlight MatchTag ctermfg=black ctermbg=lightgreen guifg=black guibg=lightgreen
 
 " More thoroughful detection of ansible
-function! s:isAnsible()
+function! s:isAnsible() abort
 	let filepath = expand("%:p")
 	let filename = expand("%:t")
 	if filepath =~ '\v/(tasks|roles|handlers|playbooks)/.*\.ya?ml$' | return 1 | en
@@ -567,7 +566,7 @@ function! s:isAnsible()
 endfunction
 
 " More thoroughful detection of ansible host files
-function! s:isAnsibleHosts()
+function! s:isAnsibleHosts() abort
 	let filepath = expand("%:p")
 	let filename = expand("%:t")
 	if filename =~ '\v(hosts)$' | return 1 | en
@@ -600,7 +599,7 @@ let g:vim_markdown_conceal = 0
 " Return indent (all whitespace at start of a line), converted from
 " tabs to spaces if what = 1, or from spaces to tabs otherwise.
 " When converting to tabs, result has no redundant spaces.
-function! Indenting(indent, what, cols)
+function! Indenting(indent, what, cols) abort
 	let spccol = repeat(' ', a:cols)
 	let result = substitute(a:indent, spccol, '\t', 'g')
 	let result = substitute(result, ' \+\ze\t', '', 'g')
@@ -615,7 +614,7 @@ endfunction
 " cols = string with number of columns per tab, or empty to use 'tabstop'.
 " The cursor position is restored, but the cursor will be in a different
 " column when the number of characters in the indent of the line is changed.
-function! IndentConvert(line1, line2, what, cols)
+function! IndentConvert(line1, line2, what, cols) abort
 	let savepos = getpos('.')
 	let cols = empty(a:cols) ? &tabstop : a:cols
 	execute a:line1 . ',' . a:line2 . 's/^\s\+/\=Indenting(submatch(0), a:what, cols)/e'
