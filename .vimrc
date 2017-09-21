@@ -82,7 +82,11 @@ vnoremap <Up> gk
 
 " enable to open and reload vim settings on save
 noremap <leader>vimrc :tabe $MYVIMRC<cr>
-autocmd bufwritepost .vimrc source $MYVIMRC
+augroup WriteVimRC
+	autocmd!
+	autocmd bufwritepost .vimrc source $MYVIMRC
+augroup END
+
 
 " CTRL+u won't screw my code
 noremap <c-u> <c-g>u<c-u>
@@ -287,10 +291,13 @@ function! s:my_cr_function() abort
 endfunction
 
 " Fixing certain file types
-autocmd FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
-autocmd FileType javascript setlocal autoindent expandtab tabstop=4 softtabstop=0 shiftwidth=4 smarttab
-autocmd FileType handlebars setlocal autoindent expandtab tabstop=4 softtabstop=0 shiftwidth=4 smarttab
-autocmd FileType stylus setlocal autoindent noexpandtab tabstop=2 softtabstop=0 shiftwidth=2 smarttab
+augroup FixCommonFileTypes
+	autocmd!
+	autocmd FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+	autocmd FileType javascript setlocal autoindent expandtab tabstop=4 softtabstop=0 shiftwidth=4 smarttab
+	autocmd FileType handlebars setlocal autoindent expandtab tabstop=4 softtabstop=0 shiftwidth=4 smarttab
+	autocmd FileType stylus setlocal autoindent noexpandtab tabstop=2 softtabstop=0 shiftwidth=2 smarttab
+augroup END
 
 " Agressive autocompletion
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -311,7 +318,10 @@ noremap <F5> :BuffergatorToggle<CR>
 noremap <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeQuitOnOpen=1
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup CloseNerdTreeProperly
+	autocmd!
+	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
 
 " Make nerdtree looks nice
 let NERDTreeMinimalUI = 1
@@ -329,7 +339,10 @@ nnoremap <Leader>u :UndotreeToggle<CR>
 let g:undotree_SetFocusWhenToggle=1
 
 " Better-whitespace remove empty spaces on save
-autocmd BufWritePre * StripWhitespace
+augroup RemoveWhiteSpacesOnSave
+	autocmd!
+	autocmd BufWritePre * StripWhitespace
+augroup END
 
 " Airline Setup
 set laststatus=2
@@ -572,19 +585,24 @@ function! s:isAnsibleHosts() abort
 	if filename =~ '\v(hosts)$' | return 1 | en
 endfunction
 
-autocmd BufNewFile,BufRead * if s:isAnsible() | set ft=ansible | en
-autocmd BufNewFile,BufRead * if s:isAnsibleHosts() | set ft=ansible_hosts | en
-autocmd BufNewFile,BufRead *.j2 set ft=ansible_template
-
-" Fix tab indentation in yaml files
-autocmd FileType ansible setlocal expandtab
-autocmd BufWritePre *.yaml :retab
+" Autocmd for Ansible code
+augroup AnsibleCode
+	autocmd!
+	autocmd BufNewFile,BufRead * if s:isAnsible() | set ft=ansible | en
+	autocmd BufNewFile,BufRead * if s:isAnsibleHosts() | set ft=ansible_hosts | en
+	autocmd BufNewFile,BufRead *.j2 set ft=ansible_template
+	autocmd FileType ansible setlocal expandtab
+	autocmd BufWritePre *.yaml :retab
+augroup END
 
 " Set format for specific file types
-autocmd BufNewFile,BufRead *.hbs set ft=handlebars
-autocmd BufNewFile,BufRead *.styl set filetype=stylus
-autocmd BufNewFile,BufRead *.stylus set filetype=stylus
-autocmd BufNewFile,BufRead *.tmpl set filetype=gohtmltmpl
+augroup SpecificFileTypes
+	autocmd!
+	autocmd BufNewFile,BufRead *.hbs set ft=handlebars
+	autocmd BufNewFile,BufRead *.styl set filetype=stylus
+	autocmd BufNewFile,BufRead *.stylus set filetype=stylus
+	autocmd BufNewFile,BufRead *.tmpl set filetype=gohtmltmpl
+augroup END
 
 " Save temporary/backup files not in the local directory, but in your ~/.vim
 " directory, to keep them out of git repos.
