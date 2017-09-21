@@ -81,6 +81,14 @@ Ctrl-O  jump to last (older) cursor position
 Ctrl-I  jump to next cursor position (after Ctrl-O)
 ```
 
+## Requirements
+
+```bash
+sudo apt-get update && \
+    sudo apt-get upgrade -y && \
+    sudo apt-get install xclip tmux vim-nox -y
+```
+
 ### Copy and paste to and from tmux buffers
 
 Since tmux has its own buffer where you can store stuff by copying accessing copy-mode with `CTRL-a [` and pasting with `CTRL-a ]` then
@@ -178,9 +186,9 @@ Download the appropiate version from [golang.org/dl](https://golang.org/dl/) and
 
 ```bash
 cd /tmp && rm -rf /usr/local/go && \
-    wget https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz && \
-    tar -C /usr/local -xzf go1.8.3.linux-amd64.tar.gz && \
-    rm -rf /tmp/go1.8.3.linux-amd64.tar.gz
+    wget https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz && \
+    tar -C /usr/local -xzf go1.9.linux-amd64.tar.gz && \
+    rm -rf /tmp/go1.9.linux-amd64.tar.gz
 ```
 
 Then add the path to `/etc/profile.d/golang.sh` (create if not exists) or your own profile file and add:
