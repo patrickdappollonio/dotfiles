@@ -1,8 +1,5 @@
 set t_Co=256
 
-" vi is not vim
-set nocompatible
-
 " enable fast tty network
 set ttyfast
 
@@ -10,17 +7,13 @@ set ttyfast
 set nowrap
 
 " Appearance
-syntax enable
+if !exists("g:syntax_on")
+    syntax enable
+endif
 colorscheme Chasing_Logic
 
-" highlight current line
-" set cursorline
-" highlight CursorLine cterm=none
-set nocursorline
-
 " Enable filetype plugins
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -33,7 +26,7 @@ set backspace=indent,eol,start
 
 " To avoid slow lines when lines in a file
 " are too big, disable syntax color for lines
-" longer than 120 characters
+" too long
 set synmaxcol=300
 
 " Fix displaying last line
@@ -48,13 +41,13 @@ set scrolloff=3
 " Highlight search results and allow
 " highlighting back and forth with F8 (toggle)
 set hlsearch
-map  <F8> :set hls!<CR>
-imap <F8> <ESC>:set hls!<CR>a
-vmap <F8> <ESC>:set hls!<CR>gv
+noremap  <F8> :set hls!<CR>
+inoremap <F8> <ESC>:set hls!<CR>a
+vnoremap <F8> <ESC>:set hls!<CR>gv
 
 " Reformat the indentation on a file by pressing <F7>
-map <F7> mzgg=G`z
-imap <F7> <ESC>mzgg=G`z<ESC>a
+noremap <F7> mzgg=G`z
+inoremap <F7> <ESC>mzgg=G`z<ESC>a
 
 " Allows to toggle paste with F2
 set pastetoggle=<F2>
@@ -88,7 +81,7 @@ vnoremap <Down> gj
 vnoremap <Up> gk
 
 " enable to open and reload vim settings on save
-map <leader>vimrc :tabe $MYVIMRC<cr>
+noremap <leader>vimrc :tabe $MYVIMRC<cr>
 autocmd bufwritepost .vimrc source $MYVIMRC
 
 " CTRL+u won't screw my code
@@ -103,22 +96,16 @@ set t_ut=
 " For regular expressions turn magic on
 set magic
 
-" Show matching brackets when text indicator is over them
-set showmatch
-
 " Perform case-insensitive search
 set ignorecase
 
 " Tab management
-set noexpandtab
 set tabstop=4
 set shiftwidth=4
 set autoindent
 set smartindent
 
 " No annoying sound on errors
-set noerrorbells
-set novisualbell
 set t_vb=
 set tm=500
 
@@ -217,26 +204,26 @@ call vundle#end()
 filetype plugin indent on
 
 " Tabularize with <Leader>a{=,:}
-nmap <Leader>a& :Tabularize /&<CR>
-vmap <Leader>a& :Tabularize /&<CR>
-nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
-vmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
-nmap <Leader>a=> :Tabularize /=><CR>
-vmap <Leader>a=> :Tabularize /=><CR>
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
-nmap <Leader>a:: :Tabularize /:\zs<CR>
-vmap <Leader>a:: :Tabularize /:\zs<CR>
-nmap <Leader>a, :Tabularize /,<CR>
-vmap <Leader>a, :Tabularize /,<CR>
-nmap <Leader>a,, :Tabularize /,\zs<CR>
-vmap <Leader>a,, :Tabularize /,\zs<CR>
-nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+nnoremap <Leader>a& :Tabularize /&<CR>
+vnoremap <Leader>a& :Tabularize /&<CR>
+nnoremap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+vnoremap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+nnoremap <Leader>a=> :Tabularize /=><CR>
+vnoremap <Leader>a=> :Tabularize /=><CR>
+nnoremap <Leader>a: :Tabularize /:<CR>
+vnoremap <Leader>a: :Tabularize /:<CR>
+nnoremap <Leader>a:: :Tabularize /:\zs<CR>
+vnoremap <Leader>a:: :Tabularize /:\zs<CR>
+nnoremap <Leader>a, :Tabularize /,<CR>
+vnoremap <Leader>a, :Tabularize /,<CR>
+nnoremap <Leader>a,, :Tabularize /,\zs<CR>
+vnoremap <Leader>a,, :Tabularize /,\zs<CR>
+nnoremap <Leader>a<Bar> :Tabularize /<Bar><CR>
+vnoremap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
 " Close preview buffer with Leader-z
-nmap <Leader>z :pc!<CR>
-vmap <Leader>z :pc!<CR>
+nnoremap <Leader>z :pc!<CR>
+vnoremap <Leader>z :pc!<CR>
 
 " Ack config to use Ag
 let g:ackprg = 'ag --vimgrep --smart-case --path-to-agignore ~/.agignore'
@@ -299,19 +286,11 @@ function! s:my_cr_function()
 	return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
 
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-
 " Fixing certain file types
-au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
-au FileType javascript setlocal autoindent expandtab tabstop=4 softtabstop=0 shiftwidth=4 smarttab
-au FileType handlebars setlocal autoindent expandtab tabstop=4 softtabstop=0 shiftwidth=4 smarttab
-au FileType stylus setlocal autoindent noexpandtab tabstop=2 softtabstop=0 shiftwidth=2 smarttab
+autocmd FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+autocmd FileType javascript setlocal autoindent expandtab tabstop=4 softtabstop=0 shiftwidth=4 smarttab
+autocmd FileType handlebars setlocal autoindent expandtab tabstop=4 softtabstop=0 shiftwidth=4 smarttab
+autocmd FileType stylus setlocal autoindent noexpandtab tabstop=2 softtabstop=0 shiftwidth=2 smarttab
 
 " Agressive autocompletion
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -326,10 +305,10 @@ let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\
 let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
 
 " Buffergator toggle
-map <F5> :BuffergatorToggle<CR>
+noremap <F5> :BuffergatorToggle<CR>
 
 " NERDtree
-map <C-n> :NERDTreeToggle<CR>
+noremap <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeQuitOnOpen=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -373,17 +352,17 @@ let g:airline#extensions#tabline#fnamecollapse = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 
 " map leader (\) and a number from 1 to 9 to select buffers
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <leader>- <Plug>AirlineSelectPrevTab
-nmap <leader>= <Plug>AirlineSelectNextTab
+nmap <Leader>1 <Plug>AirlineSelectTab1
+nmap <Leader>2 <Plug>AirlineSelectTab2
+nmap <Leader>3 <Plug>AirlineSelectTab3
+nmap <Leader>4 <Plug>AirlineSelectTab4
+nmap <Leader>5 <Plug>AirlineSelectTab5
+nmap <Leader>6 <Plug>AirlineSelectTab6
+nmap <Leader>7 <Plug>AirlineSelectTab7
+nmap <Leader>8 <Plug>AirlineSelectTab8
+nmap <Leader>9 <Plug>AirlineSelectTab9
+nmap <Leader>- <Plug>AirlineSelectPrevTab
+nmap <Leader>= <Plug>AirlineSelectNextTab
 
 " enable Airline symbols
 if !exists('g:airline_symbols')
@@ -480,9 +459,6 @@ endfunction
 
 nnoremap <silent> Q :call CloseWindowOrKillBuffer()<CR>
 
-" Use w!! to write a file as sudo
-cmap w!! w !sudo tee % >/dev/null
-
 " These are to cancel the default behavior of d, D, c, C
 " to put the text they delete in the default register.
 " Note that this means e.g. "ad won't copy the text into
@@ -570,9 +546,6 @@ endfunction
 nnoremap <leader>x *``cgn
 nnoremap <leader>X #``cgN
 
-" Find visually selected text
-vnoremap <expr> // 'y/\V'.escape(@",'\').'<CR>'
-
 " Setup matching tag plugin
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
@@ -617,20 +590,9 @@ autocmd BufNewFile,BufRead *.tmpl set filetype=gohtmltmpl
 " Save temporary/backup files not in the local directory, but in your ~/.vim
 " directory, to keep them out of git repos.
 " But first mkdir backup, swap, and undo first to make this work
-call system('mkdir ~/.vim')
-call system('mkdir ~/.vim/backup')
-call system('mkdir ~/.vim/swap')
+call system('mkdir -p ~/.vim/{backup,swap}')
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
-
-" Keep undo history across sessions by storing it in a file
-if has('persistent_undo')
-	call system('mkdir ~/.vim/undo')
-	set undodir=~/.vim/undo//
-	set undofile
-	set undolevels=1000
-	set undoreload=10000
-endif
 
 " Vim Markdown conceal
 let g:vim_markdown_conceal = 0
