@@ -8,7 +8,7 @@ set nowrap
 
 " Appearance
 if !exists("g:syntax_on")
-    syntax enable
+	syntax enable
 endif
 colorscheme Chasing_Logic
 
@@ -78,7 +78,6 @@ vnoremap <Down> gj
 vnoremap <Up> gk
 
 " enable to open and reload vim settings on save
-noremap <leader>vimrc :<C-u>tabe $MYVIMRC<cr>
 augroup WriteVimRC
 	autocmd!
 	autocmd bufwritepost .vimrc source $MYVIMRC
@@ -94,8 +93,6 @@ set confirm
 
 " clean colors when running inside tmux
 set t_ut=
-" For regular expressions turn magic on
-set magic
 
 " Perform case-insensitive search
 set ignorecase
@@ -242,31 +239,6 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.hbs,*.tmpl"
 
 " Conceal Level for vim-json
 let g:vim_json_syntax_conceal = 0
-
-" Vim-Go
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_array_whitespace_error = 1
-let g:go_highlight_chan_whitespace_error = 1
-let g:go_highlight_space_tab_error = 1
-let g:go_fmt_command = "goimports"
-let g:go_play_open_browser = 0
-augroup VimGo
-	autocmd!
-	autocmd FileType go nnoremap <Leader>t :<C-u>GoAlternate<CR>
-	autocmd FileType go nmap <Leader>i <Plug>(go-info)
-	autocmd FileType go nnoremap <Leader>d :<C-u>GoDeclsDir<CR>
-augroup END
-
-" Rename the identifier under the cursor to a new name
-let g:go_gorename_prefill = 0
-nnoremap <Leader>e :<C-u>GoRename<cr>
 
 " Gists are private by default
 let g:gist_post_private = 1
@@ -425,9 +397,9 @@ let g:ctrlp_abbrev = {
 			\ }
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|vendor\|\.node_modules',
-  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
-  \ }
+			\ 'dir':  '\.git$\|vendor\|\.node_modules',
+			\ 'file': '\.so$\|\.dat$|\.DS_Store$'
+			\ }
 
 " Enable Emmet in different modes, line visual or insert
 " use it by pressing CTRL+y+, (control, letter y, comma)
@@ -642,3 +614,20 @@ command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q
 
 " Open help topic in a full new tab
 command! -nargs=1 -complete=help H :tabnew | :set buftype=help | :h <args>
+
+" Vim-Go
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_array_whitespace_error = 1
+let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_space_tab_error = 1
+let g:go_fmt_command = "goimports"
+let g:go_play_open_browser = 0
+let g:go_gorename_prefill = 0
+
