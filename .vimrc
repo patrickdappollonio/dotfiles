@@ -263,15 +263,6 @@ function! s:my_cr_function() abort
 	return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
 
-" Fixing certain file types
-augroup FixCommonFileTypes
-	autocmd!
-	autocmd FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
-	autocmd FileType javascript setlocal autoindent expandtab tabstop=4 softtabstop=0 shiftwidth=4 smarttab
-	autocmd FileType handlebars setlocal autoindent expandtab tabstop=4 softtabstop=0 shiftwidth=4 smarttab
-	autocmd FileType stylus setlocal autoindent noexpandtab tabstop=2 softtabstop=0 shiftwidth=2 smarttab
-augroup END
-
 " Agressive autocompletion
 if !exists('g:neocomplete#sources#omni#input_patterns')
 	let g:neocomplete#sources#omni#input_patterns = {}
@@ -410,8 +401,8 @@ inoremap <C-e> <Esc>:call emmet#expandAbbr(3, "")<cr>i
 
 " Terraform format on save
 let g:terraform_fmt_on_save=1
-au BufRead,BufNewFile *.tf setlocal filetype=terraform tabstop=2 softtabstop=2 shiftwidth=2
-au BufRead,BufNewFile *.tfvars setlocal filetype=terraform tabstop=2 softtabstop=2 shiftwidth=2
+autocmd BufRead,BufNewFile *.tf setlocal filetype=terraform tabstop=2 softtabstop=2 shiftwidth=2
+autocmd BufRead,BufNewFile *.tfvars setlocal filetype=terraform tabstop=2 softtabstop=2 shiftwidth=2
 
 " this also allows to toggle line numbers when working via ssh
 function! NumberToggle() abort
