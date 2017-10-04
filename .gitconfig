@@ -1,6 +1,6 @@
 [user]
     name = "Patrick D'appollonio"
-    email = dappollonio@hpe.com
+	email = patrick.dappollonio@dreamworks.com
 
 [url "ssh://git@github.com/"]
     insteadOf = https://github.com/
@@ -43,5 +43,8 @@
 
 [core]
     excludesfile = ~/.dotfiles/.global-gitignore
+	pager = less -R
 [merge]
 	renamelimit = 15000
+[color]
+	ui = true
