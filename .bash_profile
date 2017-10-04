@@ -9,12 +9,17 @@ fi
 
 # Env vars
 if [ "$IS_LINUX_OS" = true ]; then
-    export VERSION=$(lsb_release -sc)
-    export CODENAME=$(lsb_release -sr)
+    if ! [ -x "$(command -v lsb_release)" ]; then
+        export VERSION=$(cat /etc/system-release-cpe | awk -F: '{ print $3 }')
+        export CODENAME=$(cat /etc/system-release-cpe | awk -F: '{ print $5 }' | grep -o ^[0-9]*)
+    else
+        export VERSION=$(lsb_release -sc)
+        export CODENAME=$(lsb_release -sr)
+    fi
 fi
 
 # Simple way to print the git branch
-parse_git_branch() {
+function parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
@@ -113,9 +118,6 @@ function ccat() {
 function gg() {
     go get -u -v $1
 }
-
-# Source HPE-specific settings
-source ~/.dotfiles/.hpe_proxy.sh
 
 # Source Amazon AWS data
 if [ -f ~/.dotfiles/.awsdetails ]; then
