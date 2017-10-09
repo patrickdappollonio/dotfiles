@@ -177,7 +177,6 @@ Plugin 'chase/vim-ansible-yaml'
 Plugin 'elzr/vim-json'
 Plugin 'sdanielf/vim-stdtabs'
 Plugin 'sickill/vim-pasta'
-Plugin 'tpope/vim-surround'
 Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'sheerun/vim-polyglot'
@@ -191,6 +190,7 @@ Plugin 'joukevandermaas/vim-ember-hbs'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'matze/vim-move'
 Plugin 'mileszs/ack.vim'
+Plugin 'cespare/vim-toml'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -622,3 +622,8 @@ let g:go_fmt_command = "goimports"
 let g:go_play_open_browser = 0
 let g:go_gorename_prefill = 0
 
+" Detect toml files
+augroup DetectToml
+	autocmd!
+	autocmd BufNewFile,BufRead *.toml set filetype=toml
+augroup END
