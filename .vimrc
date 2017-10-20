@@ -390,7 +390,7 @@ let g:ctrlp_abbrev = {
 			\ }
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = {
-			\ 'dir':  '\.git$\|vendor\|\.node_modules',
+			\ 'dir':  '\.git$\|vendor$\|node_modules$',
 			\ 'file': '\.so$\|\.dat$|\.DS_Store$'
 			\ }
 
