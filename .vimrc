@@ -522,7 +522,7 @@ nnoremap <leader>X #``cgN
 " Setup matching tag plugin
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
-highlight MatchTag ctermfg=black ctermbg=lightgreen guifg=black guibg=lightgreen
+highlight MatchTag ctermfg=black ctermbg=228 guifg=black guibg=lightgreen
 
 " More thoroughful detection of ansible
 function! s:isAnsible() abort
