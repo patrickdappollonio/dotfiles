@@ -144,6 +144,7 @@ call vundle#begin()
 " ---------- START Vundle VIM Plugins
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'xolox/vim-misc'
+Plugin 'sheerun/vim-polyglot'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
@@ -179,7 +180,6 @@ Plugin 'sdanielf/vim-stdtabs'
 Plugin 'sickill/vim-pasta'
 Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
-Plugin 'sheerun/vim-polyglot'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'tpope/vim-obsession'
 Plugin 'dhruvasagar/vim-prosession'
@@ -192,6 +192,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'cespare/vim-toml'
 Plugin 'pangloss/vim-javascript'
 Plugin 'maxmellon/vim-jsx-pretty'
+Plugin 'othree/html5.vim'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -236,7 +237,7 @@ let g:easytags_events = ['BufWritePost']
 let g:easytags_async = 1
 
 " Enable closetags
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.hbs,*.tmpl"
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.hbs,*.tmpl,*.js"
 
 " Conceal Level for vim-json
 let g:vim_json_syntax_conceal = 0
