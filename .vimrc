@@ -184,13 +184,14 @@ Plugin 'Valloric/MatchTagAlways'
 Plugin 'tpope/vim-obsession'
 Plugin 'dhruvasagar/vim-prosession'
 Plugin 'pearofducks/ansible-vim'
-Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'joukevandermaas/vim-ember-hbs'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'matze/vim-move'
 Plugin 'mileszs/ack.vim'
 Plugin 'cespare/vim-toml'
+Plugin 'pangloss/vim-javascript'
+Plugin 'maxmellon/vim-jsx-pretty'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -626,4 +627,10 @@ let g:go_gorename_prefill = 0
 augroup DetectToml
 	autocmd!
 	autocmd BufNewFile,BufRead *.toml set filetype=toml
+augroup END
+
+" Indent Javascript files
+augroup javascript_folding
+	autocmd!
+	autocmd FileType javascript setlocal foldmethod=syntax
 augroup END
