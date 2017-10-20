@@ -49,7 +49,7 @@ vnoremap <F8> <ESC>:<C-u>set hls!<CR>gv
 noremap <F7> mzgg=G`z
 inoremap <F7> <ESC>mzgg=G`z<ESC>a
 
-" Allows to toggle paste with F2
+" Allows to toggle paste with f2
 set pastetoggle=<F2>
 
 " Makes search act like search in modern browsers
@@ -634,3 +634,6 @@ augroup javascript_folding
 	autocmd!
 	autocmd FileType javascript setlocal foldmethod=syntax
 augroup END
+
+" Colorful Javascript
+let g:vim_jsx_pretty_colorful_config = 1
