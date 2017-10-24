@@ -193,6 +193,7 @@ Plugin 'cespare/vim-toml'
 Plugin 'pangloss/vim-javascript'
 Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'othree/html5.vim'
+Plugin 'tpope/vim-haml'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
