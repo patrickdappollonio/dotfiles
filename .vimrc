@@ -41,9 +41,9 @@ set scrolloff=3
 " Highlight search results and allow
 " highlighting back and forth with F8 (toggle)
 set hlsearch
-noremap  <F8> :<C-u>set hls!<CR>
-inoremap <F8> <ESC>:<C-u>set hls!<CR>a
-vnoremap <F8> <ESC>:<C-u>set hls!<CR>gv
+noremap  <F8> :let @/=""<cr>:<backspace>
+inoremap <F8> <ESC>:let @/=""<cr>:<backspace>a
+vnoremap <F8> <ESC>:let @/=""<cr>:<backspace>gv
 
 " Reformat the indentation on a file by pressing <F7>
 noremap <F7> mzgg=G`z
@@ -194,6 +194,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'othree/html5.vim'
 Plugin 'tpope/vim-haml'
+Plugin 'tpope/vim-eunuch'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
