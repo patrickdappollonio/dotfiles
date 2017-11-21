@@ -1,14 +1,20 @@
 #!/bin/bash
 
 # Find if it's linux what we are running
-if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+if [ "$(uname)" == "Darwin" ]; then
+    IS_MAC_OS=true
+    IS_LINUX_OS=false
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     IS_LINUX_OS=true
 else
     IS_LINUX_OS=false
 fi
 
 # Env vars
-if [ "$IS_LINUX_OS" = true ]; then
+if [ "$IS_MAC_OS" = true ]; then
+    export VERSION="MacOS"
+    export CODENAME="Darwin"
+elif [ "$IS_LINUX_OS" = true ]; then
     if ! [ -x "$(command -v lsb_release)" ]; then
         export VERSION=$(cat /etc/system-release-cpe | awk -F: '{ print $3 }')
         export CODENAME=$(cat /etc/system-release-cpe | awk -F: '{ print $5 }' | grep -o ^[0-9]*)
@@ -22,7 +28,7 @@ fi
 export PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\]@\h \[\e[0m\]\[\e[01;36m\][\W]\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')\[\e[0m\]\[\e[00;36m\]:\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
 
 # Diverse aliases for my common tasks
-alias ll='ls -asFhlG --color=auto'
+alias ll='ls -lhaG'
 alias l="ll"
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -40,6 +46,8 @@ alias tmux='tmux -2'
 
 # Golang setup
 if [ "$IS_LINUX_OS" = true ]; then
+    export GOPATH=$HOME/Golang
+elif [ "$IS_MAC_OS" = true ]; then
     export GOPATH=$HOME/Golang
 else
     export GOPATH=/c/Golang
