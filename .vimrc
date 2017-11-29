@@ -224,7 +224,7 @@ nnoremap <Leader>z :<C-u>pc!<CR>
 vnoremap <Leader>z :<C-u>pc!<CR>
 
 " Ack config to use Ag
-let g:ackprg = 'ag --vimgrep --smart-case --path-to-agignore ~/.agignore'
+let g:ackprg = 'ag --vimgrep --smart-case --path-to-ignore ~/.agignore'
 cnoreabbrev ag Ack
 cnoreabbrev aG Ack
 cnoreabbrev Ag Ack
