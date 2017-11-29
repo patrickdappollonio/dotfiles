@@ -399,6 +399,11 @@ let g:ctrlp_custom_ignore = {
 " Enable Emmet in different modes, line visual or insert
 " use it by pressing CTRL+y+, (control, letter y, comma)
 let g:user_emmet_mode='a'
+let g:user_emmet_settings = {
+\  'javascript' : {
+\      'extends' : 'jsx',
+\  },
+\}
 
 " :call emmet#expandAbbr(3,"")
 inoremap <C-e> <Esc>:call emmet#expandAbbr(3, "")<cr>i
@@ -566,6 +571,7 @@ augroup SpecificFileTypes
 	autocmd BufNewFile,BufRead *.styl set filetype=stylus
 	autocmd BufNewFile,BufRead *.stylus set filetype=stylus
 	autocmd BufNewFile,BufRead *.tmpl set filetype=gohtmltmpl
+	autocmd BufNewFile,BufRead dockerfile.template set filetype=dockerfile
 augroup END
 
 " Save temporary/backup files not in the local directory, but in your ~/.vim
