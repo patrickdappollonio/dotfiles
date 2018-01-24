@@ -27,7 +27,7 @@ set backspace=indent,eol,start
 " To avoid slow lines when lines in a file
 " are too big, disable syntax color for lines
 " too long
-set synmaxcol=300
+set synmaxcol=120
 
 " Fix displaying last line
 set display+=lastline
@@ -195,6 +195,7 @@ Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'othree/html5.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-eunuch'
+Plugin 'posva/vim-vue'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -239,7 +240,7 @@ let g:easytags_events = ['BufWritePost']
 let g:easytags_async = 1
 
 " Enable closetags
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.hbs,*.tmpl,*.js"
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.hbs,*.tmpl,*.js,*.vue"
 
 " Conceal Level for vim-json
 let g:vim_json_syntax_conceal = 0
@@ -410,8 +411,19 @@ inoremap <C-e> <Esc>:call emmet#expandAbbr(3, "")<cr>i
 
 " Terraform format on save
 let g:terraform_fmt_on_save=1
-autocmd BufRead,BufNewFile *.tf setlocal filetype=terraform tabstop=2 softtabstop=2 shiftwidth=2
-autocmd BufRead,BufNewFile *.tfvars setlocal filetype=terraform tabstop=2 softtabstop=2 shiftwidth=2
+augroup TerraformConfig
+	autocmd!
+	autocmd BufRead,BufNewFile *.tf setlocal filetype=terraform tabstop=2 softtabstop=2 shiftwidth=2
+	autocmd BufRead,BufNewFile *.tfvars setlocal filetype=terraform tabstop=2 softtabstop=2 shiftwidth=2
+augroup END
+
+" For Javascript
+augroup VueAndJS
+	autocmd!
+	autocmd BufRead,BufNewFile *.js setlocal tabstop=2 softtabstop=2 shiftwidth=2
+	autocmd BufRead,BufNewFile *.vue setlocal filetype=vue tabstop=2 softtabstop=2 shiftwidth=2
+	autocmd FileType vue syntax sync fromstart
+augroup END
 
 " this also allows to toggle line numbers when working via ssh
 function! NumberToggle() abort

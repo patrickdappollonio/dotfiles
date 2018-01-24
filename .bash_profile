@@ -39,7 +39,7 @@ alias gob='go build'
 alias got="go test ./..."
 
 # Ag alias with ignore
-alias ag='ag --path-to-agignore ~/.agignore'
+alias ag='ag --path-to-ignore ~/.agignore'
 
 # tmux alias to run 256-color
 alias tmux='tmux -2'
@@ -67,11 +67,6 @@ if [ "$IS_LINUX_OS" = true ]; then
     alias pbpaste='xclip -selection clipboard -o'
     alias pbc="tmux loadb -"
     alias pbp="tmux saveb -"
-fi
-
-# Open folders
-if [ "$IS_LINUX_OS" = false ]; then
-    alias open="start"
 fi
 
 # MKDir and CD
