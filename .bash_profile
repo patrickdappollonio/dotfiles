@@ -58,18 +58,6 @@ export PATH=$PATH:$GOPATH/bin
 # Other commonly used aliases
 alias gd='cd $HOME/Development'
 
-# Pbcopy and pbpaste
-if [ "$IS_LINUX_OS" = true ]; then
-    if ! [ -x "$(command -v xclip)" ]; then
-        echo -e "xclip is not installed, install it by doing 'apt-get install xclip'"
-    fi
-
-    alias pbcopy='xclip -selection clipboard'
-    alias pbpaste='xclip -selection clipboard -o'
-    alias pbc="tmux loadb -"
-    alias pbp="tmux saveb -"
-fi
-
 # MKDir and CD
 function mkcd() {
     mkdir -p $1 && cd $1
