@@ -370,7 +370,7 @@ if has("mac")
 	let g:airline_symbols.branch = ''
 	let g:airline_symbols.readonly = ''
 	let g:airline_symbols.linenr = ''
-elseif
+else
 	" old vim-powerline symbols
 	let g:airline_left_sep = '⮀'
 	let g:airline_left_alt_sep = '⮁'
