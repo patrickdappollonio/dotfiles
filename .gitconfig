@@ -1,25 +1,25 @@
 [user]
-    name = "Patrick D'appollonio"
+	name = "Patrick D'appollonio"
 	email = patrick@dappollonio.us
 
 [url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
+	insteadOf = https://github.com/
 
 [url "ssh://git@github.hpe.com/"]
-    insteadOf = https://github.hpe.com/
+	insteadOf = https://github.hpe.com/
 
 [alias]
-    aa = add -A
-    co = checkout
-    cb = checkout -b
-    st = status -s
-    cl = clone
-    cm = commit -m
-    cma = commit -a -m
-    ca = commit --amend -m
-    amend = commit --amend -m
-    diff = diff --word-diff
-    br = branch
+	aa = add -A
+	co = checkout
+	cb = checkout -b
+	st = status -s
+	cl = clone
+	cm = commit -m
+	cma = commit -a -m
+	ca = commit --amend -m
+	amend = commit --amend -m
+	diff = diff --word-diff
+	br = branch
 	bd = branch -d
 	bdf = branch -D
 	bc = checkout -b
@@ -27,28 +27,30 @@
 	rmtag = "!f() { git tag -d $1 && git push origin :refs/tags/$1; }; f"
 	rmrtag = "!f() { git push origin :refs/tags/$1; }; f"
 	ctag = "!f() { git tag -a $1 -m "v$1" && git push --tags; }; f"
-    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-    lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-    le = log --oneline --decorate
-    dl = "!git ll -1"
-    aliases = "!git config -l | grep alias | cut -c 7-"
-    track = "!f() { git branch --set-upstream-to=\"$1\"/\"$2\"; }; f"
-    pom = push origin master
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+	le = log --oneline --decorate
+	dl = "!git ll -1"
+	aliases = "!git config -l | grep alias | cut -c 7-"
+	track = "!f() { git branch --set-upstream-to=\"$1\"/\"$2\"; }; f"
+	pom = push origin master
 	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
 	remove-file = "!f() { git filter-branch -f --index-filter \"git rm --cached --ignore-unmatch $1\" --prune-empty --tag-name-filter cat -- --all; }; f"
 	git = !exec git
 
 [push]
-    default = current
+	default = current
 
 [github]
-    user = patrickdappollonio
+	user = patrickdappollonio
 
 [core]
-    excludesfile = ~/.dotfiles/.global-gitignore
+	excludesfile = ~/.dotfiles/.global-gitignore
 	pager = less -R
 [merge]
 	renamelimit = 15000
 [color]
 	ui = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/
