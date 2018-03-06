@@ -198,9 +198,9 @@ Download the appropiate version from [golang.org/dl](https://golang.org/dl/) and
 
 ```bash
 cd /tmp && rm -rf /usr/local/go && \
-    wget https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz && \
-    tar -C /usr/local -xzf go1.9.2.linux-amd64.tar.gz && \
-    rm -rf /tmp/go1.9.2.linux-amd64.tar.gz
+    wget https://storage.googleapis.com/golang/go1.10.linux-amd64.tar.gz && \
+    tar -C /usr/local -xzf go1.10.linux-amd64.tar.gz && \
+    rm -rf /tmp/go1.10.linux-amd64.tar.gz
 ```
 
 Then add the path to `/etc/profile.d/golang.sh` (create if not exists) or your own profile file and add:
