@@ -53,6 +53,7 @@ elif [ "$IS_MAC_OS" = true ]; then
 else
     export GOPATH=/c/Golang
 fi
+
 export PATH=$PATH:$GOPATH/bin
 
 # Other commonly used aliases
