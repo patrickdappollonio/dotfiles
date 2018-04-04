@@ -26,7 +26,7 @@
 	bdr = "!f() { git push \"$1\" --delete \"$2\"; }; f"
 	rmtag = "!f() { git tag -d $1 && git push origin :refs/tags/$1; }; f"
 	rmrtag = "!f() { git push origin :refs/tags/$1; }; f"
-	ctag = "!f() { git tag -a $1 -m "v$1" && git push --tags; }; f"
+	ctag = "!f() { git tag -a $1 -m \"${2:-v$1}\" && git push --tags; }; f"
 	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
 	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
@@ -38,6 +38,8 @@
 	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
 	remove-file = "!f() { git filter-branch -f --index-filter \"git rm --cached --ignore-unmatch $1\" --prune-empty --tag-name-filter cat -- --all; }; f"
 	git = !exec git
+	squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-A new start}\");};f"
+	empty = "!f(){ git commit -m \"${1:-Empty commit}\" --allow-empty; };f"
 
 [push]
 	default = current
