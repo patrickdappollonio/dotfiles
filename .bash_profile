@@ -107,6 +107,11 @@ function gg() {
     go get -u -v $1
 }
 
+# Go get with update, verbose but also allowing insecure sources
+function ggi() {
+    go get -u -v -insecure $1
+}
+
 # Source Amazon AWS data
 if [ -f ~/.dotfiles/.awsdetails ]; then
     source ~/.dotfiles/.awsdetails
