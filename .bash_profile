@@ -56,9 +56,6 @@ fi
 
 export PATH=$PATH:$GOPATH/bin
 
-# Other commonly used aliases
-alias gd='cd $HOME/Development'
-
 # MKDir and CD
 function mkcd() {
     mkdir -p $1 && cd $1
