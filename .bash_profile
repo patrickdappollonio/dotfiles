@@ -28,16 +28,14 @@ fi
 PROMPT_COMMAND=__prompt_command
 __prompt_command() {
     local EXIT="$?"
-    local RCol='\[\e[0m\]'
-    local Red='\[\e[0;31m\]'
-    local Gre='\[\e[0;32m\]'
-
     PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\] \[\e[0m\]\[\e[01;36m\][\W]\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')\[\e[0m\]\[\e[00;36m\]\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
 
     if [ $EXIT != 0 ]; then
-        PS1+="${Red}⚑${RCol} → "
+        # PS1+="\[\e[0;31m\]⚑\[\e[0m\] → "
+        PS1+="\[\e[0;31m\]⚑\[\e[0m\] "
     else
-        PS1+="${Gre}⚑${RCol} → "
+        # PS1+="\[\e[0;32m\]⚑\[\e[0m\] → "
+        PS1+="\[\e[0;32m\]⚑\[\e[0m\] "
     fi
 }
 
