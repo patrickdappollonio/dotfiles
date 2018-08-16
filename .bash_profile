@@ -139,3 +139,6 @@ export NVM_DIR="$HOME/.nvm"
 # if [ -x "$(command -v yarn)" ]; then
 #     export PATH=$PATH:$(yarn global bin)
 # fi
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
