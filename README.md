@@ -211,6 +211,13 @@ if [ -d "/usr/local/go" ]; then
 fi
 ```
 
+### Reading service logs with `journalctl`
+
+```bash
+# Example with cntlm:
+journalctl -f --no-pager -u cntlm.service
+```
+
 ### Git configuration
 
    * [Create the SSH keys](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
