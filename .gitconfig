@@ -19,7 +19,7 @@
 	bdr = "!f() { git push \"$1\" --delete \"$2\"; }; f"
 	rmtag = "!f() { git tag -d $1 && git push origin :refs/tags/$1; }; f"
 	rmrtag = "!f() { git push origin :refs/tags/$1; }; f"
-	ctag = "!f() { git tag -a $1 -m \"${2:-v$1}\" && git push --tags; }; f"
+	ctag = "!f() { git tag -a $1 -m \"${2:-$1}\" && git push --tags; }; f"
 	rctag = "!f() { git rmtag $1 && git ctag $1; }; f"
 	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
@@ -42,6 +42,7 @@
 [core]
 	excludesfile = ~/.dotfiles/.global-gitignore
 	pager = less -R
+	ignorecase = false
 [merge]
 	renamelimit = 15000
 [color]
