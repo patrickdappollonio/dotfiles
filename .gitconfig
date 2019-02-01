@@ -1,13 +1,6 @@
 [user]
 	name = "Patrick D'appollonio"
 	email = patrick@dappollonio.us
-
-[url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
-
-[url "ssh://git@github.hpe.com/"]
-	insteadOf = https://github.hpe.com/
-
 [alias]
 	aa = add -A
 	co = checkout
@@ -44,10 +37,8 @@
 
 [push]
 	default = current
-
 [github]
 	user = patrickdappollonio
-
 [core]
 	excludesfile = ~/.dotfiles/.global-gitignore
 	pager = less -R
@@ -55,5 +46,9 @@
 	renamelimit = 15000
 [color]
 	ui = true
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+[http]
+	proxy = http://localhost:3344/
+[https]
+	proxy = http://localhost:3344/
+; [url "https://github.com/"]
+;	insteadOf = git@github.com:
