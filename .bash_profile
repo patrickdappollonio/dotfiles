@@ -32,10 +32,10 @@ __prompt_command() {
 
     if [ $EXIT != 0 ]; then
         # PS1+="\[\e[0;31m\]⚑\[\e[0m\] → "
-        PS1+="\[\e[0;31m\]⚑\[\e[0m\] "
+        PS1+="\[\e[0;31m\]●\[\e[0m\] "
     else
         # PS1+="\[\e[0;32m\]⚑\[\e[0m\] → "
-        PS1+="\[\e[0;32m\]⚑\[\e[0m\] "
+        PS1+="\[\e[0;32m\]○\[\e[0m\] "
     fi
 }
 
@@ -142,3 +142,4 @@ export NVM_DIR="$HOME/.nvm"
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
+export PATH="$PATH:$HOME/.local/bin"

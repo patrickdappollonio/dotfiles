@@ -224,13 +224,6 @@ vnoremap <Leader>a<Bar> :<C-u>Tabularize /<Bar><CR>
 nnoremap <Leader>z :<C-u>pc!<CR>
 vnoremap <Leader>z :<C-u>pc!<CR>
 
-" Ack config to use Ag
-let g:ackprg = 'ag --vimgrep --smart-case --path-to-ignore ~/.agignore'
-cnoreabbrev ag Ack
-cnoreabbrev aG Ack
-cnoreabbrev Ag Ack
-cnoreabbrev AG Ack
-
 " Indent guides
 let g:indentLine_color_term=238
 let g:indentLine_char = '┆'

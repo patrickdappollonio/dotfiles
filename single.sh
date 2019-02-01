@@ -25,4 +25,4 @@ elif [ "$IS_LINUX_OS" = true ]; then
 fi
 
 # Run the actual command
-which tmux >/dev/null 2>&1 && { tmux attach || tmux new -s $VERSION-${CODENAME//./};  }
+which tmux >/dev/null 2>&1 && { tmux -2 attach || tmux -2 new -s $VERSION-${CODENAME//./};  }
