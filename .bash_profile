@@ -120,9 +120,9 @@ function ggi() {
     go get -u -v -insecure $1
 }
 
-# Source Amazon AWS data
-if [ -f ~/.dotfiles/.awsdetails ]; then
-    source ~/.dotfiles/.awsdetails
+# Source environment settings if found
+if [ -f ~/.config/environment ]; then
+    source ~/.config/environment
 fi
 
 # Enable Google App Engine if the folder exists
