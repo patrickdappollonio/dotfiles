@@ -27,7 +27,7 @@ set backspace=indent,eol,start
 " To avoid slow lines when lines in a file
 " are too big, disable syntax color for lines
 " too long
-set synmaxcol=120
+set synmaxcol=200
 
 " Fix displaying last line
 set display+=lastline
@@ -343,9 +343,9 @@ endif
 
 " Proper unicode symbols for Airline
 let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
+let g:airline_left_sep = ''
 let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
+let g:airline_right_sep = ''
 let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.linenr = '␤'
 let g:airline_symbols.linenr = '¶'

@@ -50,9 +50,6 @@ alias goi='go install'
 alias gob='go build'
 alias got="go test ./..."
 
-# Ag alias with ignore
-alias ag='ag --path-to-ignore ~/.agignore'
-
 # tmux alias to run 256-color
 alias tmux='tmux -2'
 
@@ -65,16 +62,12 @@ else
     export GOPATH=/c/Golang
 fi
 
+# Add Go's binary files to the system path
 export PATH=$PATH:$GOPATH/bin
 
 # MKDir and CD
 function mkcd() {
     mkdir -p $1 && cd $1
-}
-
-# Replace in all files
-function rag() {
-    ag -0 -l $1 | xargs -0 sed -ri.bak -e "s/$1/$2/g"
 }
 
 # Set vim as the default editor on Linux
@@ -95,19 +88,6 @@ function gs() {
 # Gofat returns sizes of binaries
 function gofat() {
     eval `go build -work -a 2>&1` && find $WORK -type f -name "*.a" | xargs -I{} du -hxs "{}" | sort -rh | sed -e s:${WORK}/::g
-}
-
-# Colorized cat for Linux
-function ccat() {
-    if [ "$IS_LINUX_OS" = true ]; then
-        if ! [ -x "$(command -v highlight)" ]; then
-            echo -e "highlight command not installed, install it by doing 'apt-get install highlight'"
-        fi
-
-        highlight -O ansi $1
-    else
-        command cat $1
-    fi
 }
 
 # Go get with update and verbose
@@ -135,6 +115,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
+# Add some extra paths to the path
 export PATH="$PATH:/usr/local/sbin:$HOME/.local/bin"
