@@ -73,7 +73,7 @@ else
 fi
 
 # Add Go's binary files to the system path
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin:/usr/local/sbin:$HOME/.local/bin
 
 # MKDir and CD
 function mkcd() {
@@ -110,6 +110,17 @@ function ggi() {
     go get -u -v -insecure $1
 }
 
+# Change kubernetes namespace
+function change-ns() {
+    namespace=$1
+    if [ -z $namespace ]; then
+        echo "Please provide the namespace name: \"change-ns ns-name\""
+        return 1
+    fi
+
+    kubectl config set-context $(kubectl config current-context) --namespace $namespace
+}
+
 # Source environment settings if found
 if [ -f ~/.config/environment ]; then
     source ~/.config/environment
@@ -124,6 +135,3 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-
-# Add some extra paths to the path
-export PATH="$PATH:/usr/local/sbin:$HOME/.local/bin"
