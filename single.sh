@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Disable Ctrl+S and Ctrl+Q
+stty -ixon
+
 # Find if it's linux what we are running
 if [ "$(uname)" == "Darwin" ]; then
     IS_MAC_OS=true
