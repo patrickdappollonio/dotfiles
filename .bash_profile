@@ -191,4 +191,6 @@ function kubectl() {
 }
 
 # Shorthand for kubectl
-function kc() { kubectl "${@}" }
+function kc() {
+    kubectl "${@}"
+}
