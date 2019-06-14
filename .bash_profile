@@ -30,11 +30,14 @@ __prompt_command() {
     local EXIT="$?"
     PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\] \[\e[0m\]\[\e[01;36m\][\W]\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')\[\e[0m\]\[\e[00;36m\]\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
 
+    if [ ! -z "$KUBECONFIG" ]; then
+        local kkf=$(basename $KUBECONFIG)
+        PS1+="\[\e[97;44m\] $(echo ${kkf//.kubeconfig/}) \[\e[0m\] "
+    fi
+
     if [ $EXIT != 0 ]; then
-        # PS1+="\[\e[0;31m\]⚑\[\e[0m\] → "
         PS1+="\[\e[0;31m\]●\[\e[0m\] "
     else
-        # PS1+="\[\e[0;32m\]⚑\[\e[0m\] → "
         PS1+="\[\e[0;32m\]○\[\e[0m\] "
     fi
 }
@@ -110,17 +113,6 @@ function ggi() {
     go get -u -v -insecure $1
 }
 
-# Change kubernetes namespace
-function change-ns() {
-    namespace=$1
-    if [ -z $namespace ]; then
-        echo "Please provide the namespace name: \"change-ns ns-name\""
-        return 1
-    fi
-
-    kubectl config set-context $(kubectl config current-context) --namespace $namespace
-}
-
 # Source environment settings if found
 if [ -f ~/.config/environment ]; then
     source ~/.config/environment
@@ -135,3 +127,70 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+############################################################################
+#                        KUBERNETES CONFIGURATIONS
+############################################################################
+
+# Set kubeconfig empty by default
+export KUBECONFIG=""
+
+# Automatically set kubeconfig env var
+function change-k8() {
+    local kks=$(ls ~/.kube/*.kubeconfig 2> /dev/null || true)
+    echo "kubectl: select a kubeconfig file"
+
+    # set the prompt used by select, replacing "#?"
+    PS3="Use number to select a file or 'stop' to cancel: "
+
+    # allow the user to choose a file
+    select filename in $kks; do
+        # leave the loop if the user says 'stop'
+        if [[ "$REPLY" == stop ]]; then break; fi
+
+        # complain if no file was selected, and loop to ask again
+        if [[ "$filename" == "" ]]; then
+            echo "'$REPLY' is not a valid number"
+            continue
+        fi
+
+        # now we can use the selected file
+        echo "kubectl config set to: $filename"
+        export KUBECONFIG=$filename
+
+        # it'll ask for another unless we leave the loop
+        break
+    done
+}
+
+# Change kubernetes namespace
+function change-ns() {
+    local namespace=$1
+    if [ -z $namespace ]; then
+        echo "Please provide the namespace name: \"change-ns ns-name\""
+        return 1
+    fi
+
+    kubectl config set-context $(kubectl config current-context) --namespace $namespace
+}
+
+# Patch kubectl
+function kubectl() {
+    if [ -z "$KUBECONFIG" ]; then
+        echo "kubectl: need a \$KUBECONFIG: use \"change-k8\" to set one."
+        return 1
+    fi
+
+    if [ ! -f "$KUBECONFIG" ]; then
+        echo "kubectl: file in \$KUBECONFIG does not exist: $KUBECONFIG"
+        export KUBECONFIG=""
+        return 1
+    fi
+
+    command kubectl "${@}"
+}
+
+# Shorthand for kubectl
+function kc() {
+    kubectl "${@}"
+}
