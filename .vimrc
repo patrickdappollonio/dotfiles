@@ -151,28 +151,19 @@ Plugin 'mattn/emmet-vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'mtth/scratch.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'alvan/vim-closetag'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'fatih/vim-go'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'godlygeek/tabular'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-endwise'
 Plugin 'wavded/vim-stylus'
 Plugin 'plasticscafe/vim-stylus-autocompile'
 Plugin 'ekalinin/dockerfile.vim'
 Plugin 'henrik/vim-indexed-search'
-Plugin 't9md/vim-chef'
-" Plugin 'xolox/vim-easytags'
-" Plugin 'ryanoasis/vim-devicons'
 Plugin 'hashivim/vim-terraform'
-Plugin 'hashivim/vim-packer'
-Plugin 'hashivim/vim-vaultproject'
-Plugin 'hashivim/vim-consul'
 Plugin 'avakhov/vim-yaml'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'elzr/vim-json'
@@ -181,44 +172,19 @@ Plugin 'sickill/vim-pasta'
 Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'Valloric/MatchTagAlways'
-Plugin 'tpope/vim-obsession'
-Plugin 'dhruvasagar/vim-prosession'
-Plugin 'pearofducks/ansible-vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'joukevandermaas/vim-ember-hbs'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'matze/vim-move'
-Plugin 'mileszs/ack.vim'
 Plugin 'cespare/vim-toml'
 Plugin 'pangloss/vim-javascript'
 Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'othree/html5.vim'
 Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-eunuch'
 Plugin 'posva/vim-vue'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
 call vundle#end()
 filetype plugin indent on
-
-" Tabularize with <Leader>a{=,:}
-nnoremap <Leader>a& :<C-u>Tabularize /&<CR>
-vnoremap <Leader>a& :<C-u>Tabularize /&<CR>
-nnoremap <Leader>a= :<C-u>Tabularize /^[^=]*\zs=<CR>
-vnoremap <Leader>a= :<C-u>Tabularize /^[^=]*\zs=<CR>
-nnoremap <Leader>a=> :<C-u>Tabularize /=><CR>
-vnoremap <Leader>a=> :<C-u>Tabularize /=><CR>
-nnoremap <Leader>a: :<C-u>Tabularize /:<CR>
-vnoremap <Leader>a: :<C-u>Tabularize /:<CR>
-nnoremap <Leader>a:: :<C-u>Tabularize /:\zs<CR>
-vnoremap <Leader>a:: :<C-u>Tabularize /:\zs<CR>
-nnoremap <Leader>a, :<C-u>Tabularize /,<CR>
-vnoremap <Leader>a, :<C-u>Tabularize /,<CR>
-nnoremap <Leader>a,, :<C-u>Tabularize /,\zs<CR>
-vnoremap <Leader>a,, :<C-u>Tabularize /,\zs<CR>
-nnoremap <Leader>a<Bar> :<C-u>Tabularize /<Bar><CR>
-vnoremap <Leader>a<Bar> :<C-u>Tabularize /<Bar><CR>
 
 " Close preview buffer with Leader-z
 nnoremap <Leader>z :<C-u>pc!<CR>
