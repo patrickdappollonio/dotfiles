@@ -27,7 +27,7 @@ set backspace=indent,eol,start
 " To avoid slow lines when lines in a file
 " are too big, disable syntax color for lines
 " too long
-set synmaxcol=120
+set synmaxcol=200
 
 " Fix displaying last line
 set display+=lastline
@@ -174,6 +174,7 @@ Plugin 'mattn/webapi-vim'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'matze/vim-move'
 Plugin 'cespare/vim-toml'
 Plugin 'pangloss/vim-javascript'
 Plugin 'maxmellon/vim-jsx-pretty'
@@ -189,13 +190,6 @@ filetype plugin indent on
 " Close preview buffer with Leader-z
 nnoremap <Leader>z :<C-u>pc!<CR>
 vnoremap <Leader>z :<C-u>pc!<CR>
-
-" Ack config to use Ag
-let g:ackprg = 'ag --vimgrep --smart-case --path-to-ignore ~/.agignore'
-cnoreabbrev ag Ack
-cnoreabbrev aG Ack
-cnoreabbrev Ag Ack
-cnoreabbrev AG Ack
 
 " Indent guides
 let g:indentLine_color_term=238
@@ -316,9 +310,9 @@ endif
 
 " Proper unicode symbols for Airline
 let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
+let g:airline_left_sep = ''
 let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
+let g:airline_right_sep = ''
 let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.linenr = '␤'
 let g:airline_symbols.linenr = '¶'

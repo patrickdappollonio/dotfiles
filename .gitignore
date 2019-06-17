@@ -12,3 +12,4 @@
 .vim/bundle/*
 .vim/session/*
 .vim/undo/*
+.vim/.netrwhist

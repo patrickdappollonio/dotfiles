@@ -197,10 +197,8 @@ echo 'Acquire::ForceIPv4 "true";' | sudo tee /etc/apt/apt.conf.d/99force-ipv4
 Download the appropiate version from [golang.org/dl](https://golang.org/dl/) and then run the following commands (since it's trying to write to `/usr/local` you might want to throw a `sudo` here):
 
 ```bash
-cd /tmp && rm -rf /usr/local/go && \
-    wget https://storage.googleapis.com/golang/go1.10.linux-amd64.tar.gz && \
-    tar -C /usr/local -xzf go1.10.linux-amd64.tar.gz && \
-    rm -rf /tmp/go1.10.linux-amd64.tar.gz
+wget -O /tmp/golang.tar.gz $(curl -s https://golang.org/dl/ | grep "linux-amd64.tar.gz" | sed -n 1p | sed -E 's/.*"([^"]+)".*/\1/') && \
+    rm -rf /usr/local/go && tar -C /usr/local -xzf /tmp/golang.tar.gz && rm -rf /tmp/golang.tar.gz
 ```
 
 Then add the path to `/etc/profile.d/golang.sh` (create if not exists) or your own profile file and add:
@@ -209,6 +207,13 @@ Then add the path to `/etc/profile.d/golang.sh` (create if not exists) or your o
 if [ -d "/usr/local/go" ]; then
     export PATH=$PATH:/usr/local/go/bin
 fi
+```
+
+### Reading service logs with `journalctl`
+
+```bash
+# Example with cntlm:
+journalctl -f --no-pager -u cntlm.service
 ```
 
 ### Git configuration
