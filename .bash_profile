@@ -75,6 +75,12 @@ else
     export GOPATH=/c/Golang
 fi
 
+# Emulate pbcopy pbpaste
+if [ "$IS_LINUX_OS" = true ]; then
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
+fi
+
 # Add Go's binary files to the system path
 export PATH=$PATH:$GOPATH/bin:/usr/local/sbin:$HOME/.local/bin
 

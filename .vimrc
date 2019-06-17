@@ -45,6 +45,18 @@ noremap  <F8> :let @/=""<cr>:<backspace>
 inoremap <F8> <ESC>:let @/=""<cr>:<backspace>a
 vnoremap <F8> <ESC>:let @/=""<cr>:<backspace>gv
 
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+
 " Reformat the indentation on a file by pressing <F7>
 noremap <F7> mzgg=G`z
 inoremap <F7> <ESC>mzgg=G`z<ESC>a
@@ -640,6 +652,9 @@ let g:go_highlight_space_tab_error = 1
 let g:go_fmt_command = "goimports"
 let g:go_play_open_browser = 0
 let g:go_gorename_prefill = 0
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
+
 
 " Detect toml files
 augroup DetectToml
