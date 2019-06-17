@@ -47,9 +47,5 @@
 	renamelimit = 15000
 [color]
 	ui = true
-[http]
-	proxy = http://localhost:3344/
-[https]
-	proxy = http://localhost:3344/
 ; [url "https://github.com/"]
 ;	insteadOf = git@github.com:
