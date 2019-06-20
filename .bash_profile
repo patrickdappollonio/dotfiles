@@ -26,6 +26,7 @@ fi
 
 # Add PS1 and improve history
 shopt -s histappend
+export HISTCONTROL=ignoredups:erasedups
 PROMPT_COMMAND=__prompt_command
 __prompt_command() {
     history -a && history -c && history -r
