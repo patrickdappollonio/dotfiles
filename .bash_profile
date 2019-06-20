@@ -200,3 +200,13 @@ function kubectl() {
 function kc() {
     kubectl "${@}"
 }
+
+# Create a temporary directory and cd into it
+function td() {
+    local dir=`mktemp -d 2>/dev/null || mktemp -d -t 'tempdir'`
+    cd ${dir}
+}
+
+function tempdir() {
+    td
+}
