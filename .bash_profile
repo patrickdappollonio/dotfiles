@@ -210,3 +210,28 @@ function td() {
 function tempdir() {
     td
 }
+
+function cleantd() {
+    local tdlocation
+    tdlocation=$(dirname $(mktemp -d -u))
+    rm -rf "$tdlocation/tmp.*"
+}
+
+# Retry a command until it succeeded
+function retry {
+    local n=1
+    local max="${1:-5}"
+    local delay=5
+    while true; do
+        "${@:2}" && break || {
+            if [[ $n -lt $max ]]; then
+                ((n++))
+                echo "Command failed. Sleeping for $delay seconds then executing retry $n out of $max..."
+                sleep $delay;
+            else
+                fail "The command has failed after $n attempts." >&2
+                return 1
+            fi
+        }
+    done
+}
