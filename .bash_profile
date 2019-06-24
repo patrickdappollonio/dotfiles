@@ -25,11 +25,8 @@ elif [ "$IS_LINUX_OS" = true ]; then
 fi
 
 # Add PS1 and improve history
-shopt -s histappend
-export HISTCONTROL=ignoredups:erasedups
 PROMPT_COMMAND=__prompt_command
 __prompt_command() {
-    history -a && history -c && history -r
     local EXIT="$?"
     PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\] \[\e[0m\]\[\e[01;36m\][\W]\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')\[\e[0m\]\[\e[00;36m\]\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
 
