@@ -6,20 +6,17 @@
 * `\cc` will comment the source code
 * `/` to search, `F8` to toggle highlight of found words
 * `V` (uppercase) selects a line, up, down to add or remove lines, then `d` cuts, `y` copy and `p` paste after cursor.
-* `F5` to show a list of buffers with numbers, and use them to change between them
 * `\(1-9)` allows to switch between buffers with numbers as well.
 * `CTRL-g` toggle line numbers and git gutter
 * In visual mode, `CTRL-b` is pageUp, `CTRL-f` is pageDown
 * In any mode, write an emmet HTML markup, then press `CTRL-y-,` to get full completion
 * In any mode, press `F7` to fix indentation problems
 * `\u` shows an undo-history. Useful to move back and forth between changes
-* `\a:` or `\a=` will sort variable declaration "a la Golang"
 * `\z` closes a buffer preview windows (such as the ones created by vim-go)
 * `ds"` will delete surrounding double quotes (as in `[d]elete-[s]urrounding-"`). You can change quotes to anything.
 * `cs'"` will change surrounding single quotes to double (as in `[c]hange-[s]urrounding-'-"`). You can change quotes to anything.
 * `ysiw"` will add quotes to the given word (as in `[y]ank-[s]urrounding-[i]nner-[w]ord-"`). You can change quotes to anything.
 * `\r` is a handy way to replace the selected text with confirmation.
-* `\x` and `\X` are ways to mark the current word for replacement. Uppercase x does it backwards. Perform replacements with `n` and `.`
 * `CTRL-j` and `CTRL-k` will move the current line or selected text up and down
 
 Jumping to definitions and in the file:
@@ -33,60 +30,18 @@ Jumping to definitions and in the file:
 * `g]` and other commands will jump to a tag definition (a tag can be a function or variable name, or more).
 
 Moving between split windows
-* `CTRL + (j|k|h|l)` will move between different split windows, a la vim HJKL.
 * `\wh` will create a new horizontal window inside vim
 * `\wv` will create a new vertical window inside vim
-* `\w(a|z|=)` will enlarge, shrink and made equal size the vim windows
 * `\s` will create a split window horizontal
-
-Moving in a file:
-* `k` is Up, `j` is Down, `h` is Left, `l` is Right. `w` moves a word forward.
-
-From vim wiki:
-
-```
-h       move one character left
-j       move one row down
-k       move one row up
-l       move one character right
-w       move to beginning of next word
-b       move to previous beginning of word
-e       move to end of word
-W       move to beginning of next word after a whitespace
-B       move to beginning of previous word before a whitespace
-E       move to end of word before a whitespace
-
-0       move to beginning of line
-$       move to end of line
-_       move to first non-blank character of the line
-g_      move to last non-blank character of the line
-
-gg      move to first line
-G       move to last line
-nG      move to n'th line of file (n is a number; 12G moves to line 12)
-
-H       move to top of screen
-M       move to middle of screen
-L       move to bottom of screen
-
-z.      scroll the line with the cursor to the center of the screen
-zt      scroll the line with the cursor to the top
-zb      scroll the line with the cursor to the bottom
-
-Ctrl-D  move half-page down
-Ctrl-U  move half-page up
-Ctrl-B  page up
-Ctrl-F  page down
-Ctrl-O  jump to last (older) cursor position
-Ctrl-I  jump to next cursor position (after Ctrl-O)
-```
-
 ## Requirements
 
 ```bash
 sudo apt-get update && \
     sudo apt-get upgrade -y && \
     sudo apt-get install xclip tmux vim-nox -y
+    
+# in old environments you might need a newer version of tmux
+sudo add-apt-repository ppa:jamesw05/tmux
 ```
 
 ### Copy and paste to and from tmux buffers
