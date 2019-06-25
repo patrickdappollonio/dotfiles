@@ -27,5 +27,11 @@ elif [ "$IS_LINUX_OS" = true ]; then
     fi
 fi
 
+# Check if tmux is installed
+if ! [ -x "$(command -v tmux)" ]; then
+    echo "Tmux needs to be installed in order for this to run!"
+    exit 0
+fi
+
 # Run the actual command
 which tmux >/dev/null 2>&1 && { tmux -2 attach || tmux -2 new -s $VERSION-${CODENAME//./};  }
