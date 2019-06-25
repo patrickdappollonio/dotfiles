@@ -35,4 +35,4 @@ if ! [ -x "$(command -v tmux)" ]; then
 fi
 
 # Run the actual command
-which tmux >/dev/null 2>&1 && { tmux -2 attach || tmux -2 new -s $VERSION-${CODENAME//./};  }
+which tmux >/dev/null 2>&1 && { tmux -u -2 attach || tmux -u -2 new -s $VERSION-${CODENAME//./};  }
