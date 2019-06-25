@@ -30,6 +30,7 @@ fi
 # Check if tmux is installed
 if ! [ -x "$(command -v tmux)" ]; then
     echo "Tmux needs to be installed in order for this to run!"
+    read -p "Press enter to continue"
     exit 0
 fi
 
