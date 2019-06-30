@@ -171,6 +171,15 @@ fi
 journalctl -f --no-pager -u cntlm.service
 ```
 
+### Modes for SSH config files
+
+```
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+chmod 400 ~/.ssh/id_rsa
+chmod 600 ~/.ssh/id_rsa.pub
+```
+
 ### Git configuration
 
    * [Create the SSH keys](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
