@@ -138,9 +138,6 @@ export NVM_DIR="$HOME/.nvm"
 #                        KUBERNETES CONFIGURATIONS
 ############################################################################
 
-# Set kubeconfig empty by default
-export KUBECONFIG=""
-
 # Automatically set kubeconfig env var
 function change-k8() {
     local kks=$(ls ~/.kube/*.kubeconfig 2> /dev/null || true)

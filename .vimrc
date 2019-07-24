@@ -192,6 +192,7 @@ Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'othree/html5.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'posva/vim-vue'
+Plugin 'mhinz/vim-grepper'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -645,3 +646,6 @@ augroup END
 
 " Colorful Javascript
 let g:vim_jsx_pretty_colorful_config = 1
+
+" Vim-grepper settings
+nnoremap <silent> <leader>g :Grepper<CR>
