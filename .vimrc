@@ -647,3 +647,6 @@ augroup END
 
 " Colorful Javascript
 let g:vim_jsx_pretty_colorful_config = 1
+
+" Vim-grepper settings
+nnoremap <silent> <leader>g :Grepper<CR>
