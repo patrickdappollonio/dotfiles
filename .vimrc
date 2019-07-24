@@ -186,7 +186,6 @@ Plugin 'mattn/webapi-vim'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'matze/vim-move'
 Plugin 'cespare/vim-toml'
 Plugin 'pangloss/vim-javascript'
 Plugin 'maxmellon/vim-jsx-pretty'
@@ -628,9 +627,9 @@ let g:go_highlight_space_tab_error = 1
 let g:go_fmt_command = "goimports"
 let g:go_play_open_browser = 0
 let g:go_gorename_prefill = 0
-let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
-
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 
 " Detect toml files
 augroup DetectToml
