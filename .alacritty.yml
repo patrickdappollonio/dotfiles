@@ -1,9 +1,0 @@
-font:
-  size: 8
-
-shell:
-  program: /bin/bash
-  args:
-    - -c
-    - bash ~/.dotfiles/single.sh
-
