@@ -1,38 +1,40 @@
 #!/bin/bash
 
 # Find if it's linux what we are running
-if [ "$(uname)" == "Darwin" ]; then
+if [ "$(uname -s)" == "Darwin" ]; then
     IS_MAC_OS=true
     IS_LINUX_OS=false
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+elif [ "$(uname -s)" == "Linux" ]; then
+    IS_MAC_OS=false
     IS_LINUX_OS=true
 else
+    IS_MAC_OS=false
     IS_LINUX_OS=false
 fi
 
-# Env vars
+# Set environment variables depending on what operating
+# system we're running
 if [ "$IS_MAC_OS" = true ]; then
     export VERSION="MacOS"
     export CODENAME="Darwin"
-elif [ "$IS_LINUX_OS" = true ]; then
-    if ! [ -x "$(command -v lsb_release)" ]; then
-        export VERSION=$(cat /etc/system-release-cpe | awk -F: '{ print $3 }')
-        export CODENAME=$(cat /etc/system-release-cpe | awk -F: '{ print $5 }' | grep -o ^[0-9]*)
-    else
-        export VERSION=$(lsb_release -sc)
-        export CODENAME=$(lsb_release -sr)
-    fi
+fi
+if [ "$IS_LINUX_OS" = true ]; then
+    # shellcheck disable=SC1091
+    source /etc/os-release
+    export VERSION=$ID
+    export CODENAME=${VERSION_ID//./}
 fi
 
 # Add PS1 and improve history
 PROMPT_COMMAND=__prompt_command
 __prompt_command() {
-    local EXIT="$?"
+    local EXIT
+    EXIT="$?"
     PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\] \[\e[0m\]\[\e[01;36m\][\W]\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')\[\e[0m\]\[\e[00;36m\]\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
 
     if [ ! -z "$KUBECONFIG" ]; then
-        local kkf=$(basename $KUBECONFIG)
-        PS1+="\[\e[97;44m\] $(echo ${kkf//.kubeconfig/}) \[\e[0m\] "
+        kkf=$(basename "$KUBECONFIG")
+        PS1+="\[\e[97;44m\] ${kkf//.kubeconfig/} \[\e[0m\] "
     fi
 
     if [ $EXIT != 0 ]; then
@@ -52,7 +54,10 @@ alias ...='cd ../..'
 alias goi='go install'
 alias gob='go build'
 alias got="go test ./..."
+alias gg="go get -u -v"
+alias ggi="go get -u -v -insecure"
 
+# Enable Go modules in an specific folder
 function gomod() {
     if [ "${GO111MODULE}" == "on" ]; then
         echo "Disabling Go modules"
@@ -66,27 +71,18 @@ function gomod() {
 # tmux alias to run 256-color
 alias tmux='tmux -2'
 
-# Golang setup
-if [ "$IS_LINUX_OS" = true ]; then
+# Configure Go's $GOPATH directory depending on
+# the user's operating system
+if [ "$IS_LINUX_OS" = true ] || [ "$IS_MAC_OS" = true ]; then
     export GOPATH=$HOME/Golang
-elif [ "$IS_MAC_OS" = true ]; then
-    export GOPATH=$HOME/Golang
-else
-    export GOPATH=/c/Golang
-fi
-
-# Emulate pbcopy pbpaste
-if [ "$IS_LINUX_OS" = true ]; then
-    alias pbcopy='xclip -selection clipboard'
-    alias pbpaste='xclip -selection clipboard -o'
 fi
 
 # Add Go's binary files to the system path
-export PATH=$PATH:$GOPATH/bin:/usr/local/sbin:$HOME/.local/bin
+export PATH=$PATH:$GOPATH/bin
 
 # MKDir and CD
 function mkcd() {
-    mkdir -p $1 && cd $1
+    mkdir -p "$1" && cd "$1" || return
 }
 
 # Set vim as the default editor on Linux
@@ -101,26 +97,12 @@ function gs() {
         echo -e "Install find-project first by doing: go get -u -v github.com/patrickdappollonio/find-project"
     fi
 
-    cd $(find-project $1)
-}
-
-# Gofat returns sizes of binaries
-function gofat() {
-    eval `go build -work -a 2>&1` && find $WORK -type f -name "*.a" | xargs -I{} du -hxs "{}" | sort -rh | sed -e s:${WORK}/::g
-}
-
-# Go get with update and verbose
-function gg() {
-    go get -u -v $1
-}
-
-# Go get with update, verbose but also allowing insecure sources
-function ggi() {
-    go get -u -v -insecure $1
+    cd "$(find-project "$1")" || return
 }
 
 # Source environment settings if found
 if [ -f ~/.config/environment ]; then
+    # shellcheck disable=SC1090
     source ~/.config/environment
 fi
 
@@ -131,7 +113,9 @@ fi
 
 # Enable NodeJS' NVM if path exists
 export NVM_DIR="$HOME/.nvm"
+# shellcheck disable=SC1090
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+# shellcheck disable=SC1090
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
 ############################################################################
@@ -140,7 +124,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Automatically set kubeconfig env var
 function change-k8() {
-    local kks=$(ls ~/.kube/*.kubeconfig 2> /dev/null || true)
+    kks=$(ls ~/.kube/*.kubeconfig 2> /dev/null || true)
     echo "kubectl: select a kubeconfig file"
 
     # set the prompt used by select, replacing "#?"
@@ -169,12 +153,12 @@ function change-k8() {
 # Change kubernetes namespace
 function change-ns() {
     local namespace=$1
-    if [ -z $namespace ]; then
+    if [ -z "$namespace" ]; then
         echo "Please provide the namespace name: \"change-ns ns-name\""
         return 1
     fi
 
-    kubectl config set-context $(kubectl config current-context) --namespace $namespace
+    kubectl config set-context "$(kubectl config current-context)" --namespace "$namespace"
 }
 
 # Patch kubectl
@@ -194,41 +178,16 @@ function kubectl() {
 }
 
 # Shorthand for kubectl
-function kc() {
-    kubectl "${@}"
-}
+alias kc="kubectl"
 
 # Create a temporary directory and cd into it
 function td() {
-    local dir=`mktemp -d 2>/dev/null || mktemp -d -t 'tempdir'`
-    cd ${dir}
-}
-
-function tempdir() {
-    td
+    dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'tempdir')
+    cd "${dir}" || return
 }
 
 function cleantd() {
     local tdlocation
-    tdlocation=$(dirname $(mktemp -d -u))
+    tdlocation=$(dirname "$(mktemp -d -u)")
     rm -rf "$tdlocation/tmp.*"
-}
-
-# Retry a command until it succeeded
-function retry {
-    local n=1
-    local max="${1:-5}"
-    local delay=5
-    while true; do
-        "${@:2}" && break || {
-            if [[ $n -lt $max ]]; then
-                ((n++))
-                echo "Command failed. Sleeping for $delay seconds then executing retry $n out of $max..."
-                sleep $delay;
-            else
-                fail "The command has failed after $n attempts." >&2
-                return 1
-            fi
-        }
-    done
 }
