@@ -32,6 +32,10 @@ set synmaxcol=200
 " Fix displaying last line
 set display+=lastline
 
+" Auto word wrap to 80 characters
+set textwidth=80
+set formatoptions+=t
+
 " When searching try to be smart about cases
 set smartcase
 
@@ -193,6 +197,7 @@ Plugin 'othree/html5.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'posva/vim-vue'
 Plugin 'mhinz/vim-grepper'
+Plugin 'itspriddle/vim-shellcheck'
 " ---------- END Vundle VIM Plugins
 
 " All of your Plugins must be added before the following line
@@ -416,6 +421,9 @@ function! NumberToggle() abort
 	:GitGutterToggle
 endfunc
 nnoremap <C-g> :<C-u>call NumberToggle()<cr>
+
+" Gitgutter fix
+let g:gitgutter_sign_allow_clobber = 1
 
 " Use Q to intelligently close a window
 " (if there are multiple windows into the same buffer)
@@ -649,3 +657,9 @@ let g:vim_jsx_pretty_colorful_config = 1
 
 " Vim-grepper settings
 nnoremap <silent> <leader>g :Grepper<CR>
+
+" Shellcheck autocheck
+augroup ValidateBashScripts
+	autocmd!
+	autocmd BufWritePre * ShellCheck!
+augroup END
