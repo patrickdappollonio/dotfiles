@@ -45,7 +45,7 @@ __prompt_command() {
 }
 
 # Diverse aliases for my common tasks
-alias ll='ls -lhaG --color=auto'
+alias ll='ls -lhaG'
 alias l="ll"
 alias ..='cd ..'
 alias ...='cd ../..'
