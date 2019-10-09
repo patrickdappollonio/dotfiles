@@ -45,8 +45,8 @@ __prompt_command() {
 }
 
 # Diverse aliases for my common tasks
-alias ll='ls -lhaG --color=auto'
 alias l='ll'
+alias ll='ls -lhaG'
 alias ..='cd ..'
 alias ...='cd ../..'
 
@@ -54,8 +54,8 @@ alias ...='cd ../..'
 alias goi='go install'
 alias gob='go build'
 alias got='go test ./...'
-alias gg='go get -u -v'
-alias ggi='go get -u -v -insecure'
+alias gg='go get -u'
+alias ggi='go get -u -insecure'
 
 # Infra aliases
 alias k='kubectl'
