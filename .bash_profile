@@ -57,10 +57,6 @@ alias got='go test ./...'
 alias gg='go get -u'
 alias ggi='go get -u -insecure'
 
-# Infra aliases
-alias k='kubectl'
-alias tf='terraform'
-
 # Enable Go modules in an specific folder
 function gomod() {
     if [ "${GO111MODULE}" == "on" ]; then
@@ -187,7 +183,11 @@ function kubectl() {
 }
 
 # Shorthand for kubectl
-alias kc="kubectl"
+alias kc='kubectl'
+alias kns='change-ns'
+alias ks='change-k8'
+alias k='kubectl'
+alias tf='terraform'
 
 # Create a temporary directory and cd into it
 function td() {
