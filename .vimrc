@@ -661,5 +661,5 @@ nnoremap <silent> <leader>g :Grepper<CR>
 " Shellcheck autocheck
 augroup ValidateBashScripts
 	autocmd!
-	autocmd filetype bash,sh BufWritePre * ShellCheck!
+	autocmd FileType bash,sh autocmd BufWritePre * ShellCheck!
 augroup END

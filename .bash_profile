@@ -46,16 +46,20 @@ __prompt_command() {
 
 # Diverse aliases for my common tasks
 alias ll='ls -lhaG --color=auto'
-alias l="ll"
+alias l='ll'
 alias ..='cd ..'
 alias ...='cd ../..'
 
 # Golang aliases
 alias goi='go install'
 alias gob='go build'
-alias got="go test ./..."
-alias gg="go get -u -v"
-alias ggi="go get -u -v -insecure"
+alias got='go test ./...'
+alias gg='go get -u -v'
+alias ggi='go get -u -v -insecure'
+
+# Infra aliases
+alias k='kubectl'
+alias tf='terraform'
 
 # Enable Go modules in an specific folder
 function gomod() {
@@ -109,6 +113,11 @@ fi
 # Enable Google App Engine if the folder exists
 if [ -d ~/.appengine/ ]; then
     export PATH=$PATH:~/.appengine/
+fi
+
+# Enable local support for locally installed tools
+if [ -d ~/.local/bin/ ]; then
+    export PATH=$PATH:~/.local/bin/
 fi
 
 # Enable NodeJS' NVM if path exists
