@@ -28,8 +28,7 @@ fi
 # Add PS1 and improve history
 PROMPT_COMMAND=__prompt_command
 __prompt_command() {
-    local EXIT
-    EXIT="$?"
+    code="$?"
     PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\] \[\e[0m\]\[\e[01;36m\][\W]\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')\[\e[0m\]\[\e[00;36m\]\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
 
     if [ ! -z "$KUBECONFIG" ]; then
@@ -37,7 +36,7 @@ __prompt_command() {
         PS1+="\[\e[97;44m\] ${kkf//.kubeconfig/} \[\e[0m\] "
     fi
 
-    if [ $EXIT != 0 ]; then
+    if [ $code != 0 ]; then
         PS1+="\[\e[0;31m\]●\[\e[0m\] "
     else
         PS1+="\[\e[0;32m\]○\[\e[0m\] "
@@ -169,8 +168,7 @@ function change-ns() {
 # Patch kubectl
 function kubectl() {
     if [ -z "$KUBECONFIG" ]; then
-        echo "kubectl: need a \$KUBECONFIG: use \"change-k8\" to set one."
-        return 1
+        change-k8
     fi
 
     if [ ! -f "$KUBECONFIG" ]; then
@@ -186,6 +184,7 @@ function kubectl() {
 alias kc='kubectl'
 alias kns='change-ns'
 alias ks='change-k8'
+alias k8='change-k8'
 alias k='kubectl'
 alias tf='terraform'
 
