@@ -33,8 +33,8 @@ set synmaxcol=200
 set display+=lastline
 
 " Auto word wrap to 80 characters
-set textwidth=80
-set formatoptions+=t
+" set textwidth=80
+" set formatoptions+=t
 
 " When searching try to be smart about cases
 set smartcase

@@ -180,6 +180,9 @@ function kubectl() {
     command kubectl "${@}"
 }
 
+# shellcheck source=/dev/null
+source  <(command kubectl completion bash)
+
 # Shorthand for kubectl
 alias kc='kubectl'
 alias kns='change-ns'
@@ -187,6 +190,9 @@ alias ks='change-k8'
 alias k8='change-k8'
 alias k='kubectl'
 alias tf='terraform'
+
+complete -F __start_kubectl k
+complete -F __start_kubectl kc
 
 # Create a temporary directory and cd into it
 function td() {
@@ -198,4 +204,23 @@ function cleantd() {
     local tdlocation
     tdlocation=$(dirname "$(mktemp -d -u)")
     rm -rf "$tdlocation/tmp.*"
+}
+
+################################################################
+
+_repeatcount=0
+
+function repeat() {
+    trap _sigint SIGINT
+    clear
+    while true; do
+        _repeatcount="$((_repeatcount+1))"
+        eval "$@"
+        sleep 1
+        clear
+    done
+}
+
+function _sigint() {
+    echo "Exiting on demand. Executed $_repeatcount times."
 }
