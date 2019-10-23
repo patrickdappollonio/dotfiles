@@ -17,6 +17,7 @@ fi
 if [ "$IS_MAC_OS" = true ]; then
     export VERSION="MacOS"
     export CODENAME="Darwin"
+    export BASH_SILENCE_DEPRECATION_WARNING=1
 fi
 if [ "$IS_LINUX_OS" = true ]; then
     # shellcheck disable=SC1091
