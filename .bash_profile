@@ -34,7 +34,7 @@ __prompt_command() {
 
     if [ ! -z "$KUBECONFIG" ]; then
         kkf=$(basename "$KUBECONFIG")
-        PS1+="\[\e[97;44m\] ${kkf//.kubeconfig/} \[\e[0m\] "
+        PS1+="\[\e[97;44m\] ${kkf//.yml/} \[\e[0m\] "
     fi
 
     if [ $code != 0 ]; then
@@ -129,7 +129,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Automatically set kubeconfig env var
 function change-k8() {
-    kks=$(ls ~/.kube/*.kubeconfig 2> /dev/null || true)
+    kks=$(ls ~/.kube/*.yml 2> /dev/null || true)
     echo "kubectl: select a kubeconfig file"
 
     # set the prompt used by select, replacing "#?"
