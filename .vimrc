@@ -160,6 +160,7 @@ call vundle#begin()
 " ---------- START Vundle VIM Plugins
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'xolox/vim-misc'
+Plugin 'fatih/vim-go'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -172,7 +173,6 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'alvan/vim-closetag'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'fatih/vim-go'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-endwise'
 Plugin 'wavded/vim-stylus'
@@ -633,7 +633,7 @@ let g:go_highlight_generate_tags = 1
 let g:go_highlight_array_whitespace_error = 1
 let g:go_highlight_chan_whitespace_error = 1
 let g:go_highlight_space_tab_error = 1
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "gofumpt" " mvdan.cc/gofumpt
 let g:go_play_open_browser = 0
 let g:go_gorename_prefill = 0
 let g:go_auto_sameids = 1
