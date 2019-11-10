@@ -30,11 +30,11 @@ fi
 PROMPT_COMMAND=__prompt_command
 __prompt_command() {
     code="$?"
-    PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\] \[\e[0m\]\[\e[01;36m\][\W]\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')\[\e[0m\]\[\e[00;36m\]\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
+    PS1="\[\e[00;33m\]\u@\h\[\e[0m\]\[\e[00;37m\] \[\e[0m\]\[\e[01;36m\][\W]\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')\[\e[0m\]\[\e[00;36m\]\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
 
     if [ ! -z "$KUBECONFIG" ]; then
         kkf=$(basename "$KUBECONFIG")
-        PS1+="\[\e[97;44m\] ${kkf//.kubeconfig/} \[\e[0m\] "
+        PS1+="\[\e[97;44m\] ${kkf//.yml/} \[\e[0m\] "
     fi
 
     if [ $code != 0 ]; then
@@ -130,7 +130,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Automatically set kubeconfig env var
 function change-k8() {
-    kks=$(ls ~/.kube/*.kubeconfig 2> /dev/null || true)
+    kks=$(ls ~/.kube/*.yml 2> /dev/null || true)
     echo "kubectl: select a kubeconfig file"
 
     # set the prompt used by select, replacing "#?"
@@ -182,6 +182,9 @@ function kubectl() {
     command kubectl "${@}"
 }
 
+# shellcheck source=/dev/null
+source  <(command kubectl completion bash)
+
 # Shorthand for kubectl
 alias kc='kubectl'
 alias kns='change-ns'
@@ -189,6 +192,9 @@ alias ks='change-k8'
 alias k8='change-k8'
 alias k='kubectl'
 alias tf='terraform'
+
+complete -F __start_kubectl k
+complete -F __start_kubectl kc
 
 # Create a temporary directory and cd into it
 function td() {
@@ -200,4 +206,23 @@ function cleantd() {
     local tdlocation
     tdlocation=$(dirname "$(mktemp -d -u)")
     rm -rf "$tdlocation/tmp.*"
+}
+
+################################################################
+
+_repeatcount=0
+
+function repeat() {
+    trap _sigint SIGINT
+    clear
+    while true; do
+        _repeatcount="$((_repeatcount+1))"
+        eval "$@"
+        sleep 1
+        clear
+    done
+}
+
+function _sigint() {
+    echo "Exiting on demand. Executed $_repeatcount times."
 }
