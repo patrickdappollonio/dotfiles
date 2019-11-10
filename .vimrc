@@ -12,6 +12,10 @@ if !exists("g:syntax_on")
 endif
 colorscheme Chasing_Logic
 
+" Fix background transparency
+hi Normal guibg=NONE ctermbg=NONE
+hi LineNr guibg=NONE ctermbg=NONE
+
 " Enable filetype plugins
 filetype plugin indent on
 

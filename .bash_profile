@@ -45,8 +45,9 @@ __prompt_command() {
 }
 
 # Diverse aliases for my common tasks
+[ "$IS_LINUX_OS" == "true" ] && alias ll='ls -lhaG --color=auto'
+[ "$IS_MAC_OS" == "true" ] && alias ll='ls -lhaG'
 alias l='ll'
-alias ll='ls -lhaG'
 alias ..='cd ..'
 alias ...='cd ../..'
 
