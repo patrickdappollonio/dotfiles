@@ -36,10 +36,6 @@ set synmaxcol=200
 " Fix displaying last line
 set display+=lastline
 
-" Auto word wrap to 80 characters
-" set textwidth=80
-" set formatoptions+=t
-
 " When searching try to be smart about cases
 set smartcase
 
@@ -103,6 +99,10 @@ augroup WriteVimRC
 	autocmd bufwritepost .vimrc source $MYVIMRC
 augroup END
 
+augroup ConfigMarkdown
+	autocmd!
+	autocmd FileType markdown setlocal textwidth=80
+augroup END
 
 " CTRL+u won't screw my code
 noremap <c-u> <c-g>u<c-u>
@@ -637,7 +637,7 @@ let g:go_highlight_generate_tags = 1
 let g:go_highlight_array_whitespace_error = 1
 let g:go_highlight_chan_whitespace_error = 1
 let g:go_highlight_space_tab_error = 1
-let g:go_fmt_command = "gofumpt" " mvdan.cc/gofumpt
+let g:go_fmt_command = "gofumports" " mvdan.cc/gofumpt/gofumports
 let g:go_play_open_browser = 0
 let g:go_gorename_prefill = 0
 let g:go_auto_sameids = 1
