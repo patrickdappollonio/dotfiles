@@ -183,7 +183,9 @@ function kubectl() {
 }
 
 # shellcheck source=/dev/null
-source  <(command kubectl completion bash)
+if [ -x "$(command -v kubectl)" ]; then
+    source <(command kubectl completion bash)
+fi
 
 # Shorthand for kubectl
 alias kc='kubectl'
