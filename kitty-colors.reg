@@ -1,0 +1,26 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\9bis.com\KiTTY\Sessions\My%20session%20name]
+"Colour0"="207,207,194"
+"Colour1"="207,207,194"
+"Colour10"="33,128,88"
+"Colour11"="39,174,96"
+"Colour12"="253,188,75"
+"Colour13"="253,188,75"
+"Colour14"="41,128,185"
+"Colour15"="0,153,255"
+"Colour16"="142,68,173"
+"Colour17"="175,129,255"
+"Colour18"="39,174,174"
+"Colour19"="49,221,221"
+"Colour2"="35,38,41"
+"Colour20"="172,173,161"
+"Colour21"="207,208,194"
+"Colour3"="35,38,41"
+"Colour4"="207,207,194"
+"Colour5"="207,207,194"
+"Colour6"="42,46,50"
+"Colour7"="49,54,59"
+"Colour8"="192,57,43"
+"Colour9"="244,79,79"
+
