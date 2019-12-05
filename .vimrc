@@ -42,12 +42,32 @@ set smartcase
 " Allow to see lines below/above when navigating a file
 set scrolloff=3
 
+" Reformat the indentation on a file by pressing <F7>
+noremap <F7> mzgg=G`z
+inoremap <F7> <ESC>mzgg=G`z<ESC>a
+
 " Highlight search results and allow
 " highlighting back and forth with F8 (toggle)
 set hlsearch
 noremap  <F8> :let @/=""<cr>:<backspace>
 inoremap <F8> <ESC>:let @/=""<cr>:<backspace>a
 vnoremap <F8> <ESC>:let @/=""<cr>:<backspace>gv
+
+" Add support for spell checking
+set spelllang=en_us
+noremap  <F9> :setlocal spell!<cr>:<backspace>
+inoremap <F9> <ESC>:setlocal spell!<cr>:<backspace>a
+vnoremap <F9> <ESC>:setlocal spell!<cr>:<backspace>gv
+
+" Add word under cursor to spell checker
+noremap  <F10> zg
+inoremap <F10> <ESC>zg<ESC>a
+vnoremap <F10> <ESC>zg:<backspace>gv
+
+" Add word under cursor to be marked as bad spell checker
+noremap  <F11> zw
+inoremap <F11> <ESC>zw<ESC>a
+vnoremap <F11> <ESC>zw:<backspace>gv
 
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
@@ -60,10 +80,6 @@ vnoremap <silent> # :<C-U>
   \gvy?<C-R><C-R>=substitute(
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
-
-" Reformat the indentation on a file by pressing <F7>
-noremap <F7> mzgg=G`z
-inoremap <F7> <ESC>mzgg=G`z<ESC>a
 
 " Allows to toggle paste with f2
 set pastetoggle=<F2>
