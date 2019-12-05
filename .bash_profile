@@ -212,19 +212,11 @@ function cleantd() {
 
 ################################################################
 
-_repeatcount=0
-
 function repeat() {
-    trap _sigint SIGINT
     clear
     while true; do
-        _repeatcount="$((_repeatcount+1))"
         eval "$@"
         sleep 1
-        clear
     done
 }
 
-function _sigint() {
-    echo "Exiting on demand. Executed $_repeatcount times."
-}

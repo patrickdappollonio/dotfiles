@@ -4,6 +4,7 @@ set -euo pipefail
 # Remove previous symlinks
 function destroy_symlinks() {
     rm -rf ~/.bash_profile
+    rm -rf ~/.inputrc
     rm -rf ~/.gitconfig
     rm -rf ~/.vimrc
     rm -rf ~/.vim
@@ -13,6 +14,7 @@ function destroy_symlinks() {
 # Add new symlinks
 function create_symlinks() {
     ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
+    ln -s ~/.dotfiles/.inputrc ~/.inputrc
     ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
     ln -s ~/.dotfiles/.vimrc ~/.vimrc
     ln -s ~/.dotfiles/.vim ~/.vim
