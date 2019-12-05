@@ -107,6 +107,12 @@ if [ -f ~/.config/environment ]; then
     source ~/.config/environment
 fi
 
+# Source .inputrc
+if [ -f ~/.inputrc ]; then
+    # shellcheck disable=SC1090
+    bind -f ~/.inputrc
+fi
+
 # Enable Google App Engine if the folder exists
 if [ -d ~/.appengine/ ]; then
     export PATH=$PATH:~/.appengine/
