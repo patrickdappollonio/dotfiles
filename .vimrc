@@ -118,6 +118,7 @@ augroup END
 augroup ConfigMarkdown
 	autocmd!
 	autocmd FileType markdown setlocal textwidth=80
+	autocmd FileType markdown setlocal spell
 augroup END
 
 " CTRL+u won't screw my code

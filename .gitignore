@@ -13,3 +13,4 @@
 .vim/session/*
 .vim/undo/*
 .vim/.netrwhist
+.vim/**/*.spl
