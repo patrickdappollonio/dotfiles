@@ -226,3 +226,6 @@ function repeat() {
     done
 }
 
+function headers() {
+    curl -sD - -o /dev/null "$@"
+}
