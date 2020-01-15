@@ -118,6 +118,11 @@ if [ -d ~/.appengine/ ]; then
     export PATH=$PATH:~/.appengine/
 fi
 
+# Enable "~/.local/bin" foldere
+if [ -d ~/.local/bin ]; then
+    export PATH=$PATH:~/.local/bin
+fi
+
 # Enable local support for locally installed tools
 if [ -d ~/.local/bin/ ]; then
     export PATH=$PATH:~/.local/bin/
