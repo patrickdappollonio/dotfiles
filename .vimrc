@@ -627,6 +627,7 @@ let g:go_gorename_prefill = 0
 let g:go_auto_sameids = 1
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+nnoremap <silent> <leader>r :GoCoverageToggle<CR>
 
 " Detect toml files
 augroup DetectToml
