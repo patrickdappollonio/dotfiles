@@ -201,8 +201,7 @@ Plugin 'plasticscafe/vim-stylus-autocompile'
 Plugin 'ekalinin/dockerfile.vim'
 Plugin 'henrik/vim-indexed-search'
 Plugin 'hashivim/vim-terraform'
-Plugin 'avakhov/vim-yaml'
-Plugin 'chase/vim-ansible-yaml'
+Plugin 'stephpy/vim-yaml'
 Plugin 'elzr/vim-json'
 Plugin 'sdanielf/vim-stdtabs'
 Plugin 'sickill/vim-pasta'
@@ -557,38 +556,6 @@ nnoremap <leader>X #``cgN
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
 highlight MatchTag ctermfg=black ctermbg=228 guifg=black guibg=lightgreen
-
-" More thoroughful detection of ansible
-function! s:isAnsible() abort
-	let filepath = expand("%:p")
-	let filename = expand("%:t")
-	if filepath =~ '\v/(tasks|roles|handlers|playbooks)/.*\.ya?ml$' | return 1 | en
-	if filepath =~ '\v/(group|host)_vars/' | return 1 | en
-	if filename =~ '\v(playbook|site|main|local)\.ya?ml$' | return 1 | en
-
-	let shebang = getline(1)
-	if shebang =~# '^#!.*/bin/env\s\+ansible-playbook\>' | return 1 | en
-	if shebang =~# '^#!.*/bin/ansible-playbook\>' | return 1 | en
-
-	return 0
-endfunction
-
-" More thoroughful detection of ansible host files
-function! s:isAnsibleHosts() abort
-	let filepath = expand("%:p")
-	let filename = expand("%:t")
-	if filename =~ '\v(hosts)$' | return 1 | en
-endfunction
-
-" Autocmd for Ansible code
-augroup AnsibleCode
-	autocmd!
-	autocmd BufNewFile,BufRead * if s:isAnsible() | set ft=ansible | en
-	autocmd BufNewFile,BufRead * if s:isAnsibleHosts() | set ft=ansible_hosts | en
-	autocmd BufNewFile,BufRead *.j2 set ft=ansible_template
-	autocmd FileType ansible setlocal expandtab
-	autocmd BufWritePre *.yaml :retab
-augroup END
 
 " Set format for specific file types
 augroup SpecificFileTypes
