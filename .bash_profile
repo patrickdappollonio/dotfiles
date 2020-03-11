@@ -54,7 +54,7 @@ alias ...='cd ../..'
 # Golang aliases
 alias goi='go install'
 alias gob='go build'
-alias got='go test ./...'
+alias got='go test ./... -count=1'
 alias gg='go get -u'
 alias ggi='go get -u -insecure'
 
