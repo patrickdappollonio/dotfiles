@@ -16,6 +16,11 @@ window:
       style: "Bold Italic"
     size: 10
 
+selection:
+  save_to_clipboard: true
+
+dynamic_title: true
+
 shell:
   program: /bin/bash
   args:
