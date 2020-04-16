@@ -34,6 +34,7 @@
 	git = !exec git
 	squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-A new start}\");};f"
 	empty = "!f(){ git commit -m \"${1:-Empty commit}\" --allow-empty; };f"
+	conflicts = diff --name-only --diff-filter=U
 
 [push]
 	default = current
@@ -45,7 +46,15 @@
 	ignorecase = false
 [merge]
 	renamelimit = 15000
+	tool = vimdiff
+	conflictstyle = diff3
 [color]
 	ui = true
 [credential]
 	helper = cache --timeout 7200
+[mergetool "diffconflicts"]
+	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
+	trustExitCode = true
+[mergetool]
+	keepBackup = false
+	prompt = false

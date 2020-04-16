@@ -1,5 +1,8 @@
 set t_Co=256
 
+" allow quit via single keypress (Q)
+map X :qa<CR>
+
 " enable fast tty network
 set ttyfast
 
