@@ -35,6 +35,7 @@
 	squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-A new start}\");};f"
 	empty = "!f(){ git commit -m \"${1:-Empty commit}\" --allow-empty; };f"
 	conflicts = diff --name-only --diff-filter=U
+	histdelete = "git filter-branch --index-filter \"git rm --cached -f -r --ignore-unmatch $1\" --tag-name-filter cat -- --all"
 
 [push]
 	default = current
