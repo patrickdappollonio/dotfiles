@@ -555,6 +555,11 @@ endfunction
 nnoremap <leader>x *``cgn
 nnoremap <leader>X #``cgN
 
+" Format JSON
+nnoremap <leader>j :%!python3 -m json.tool<CR>
+inoremap <leader>j <ESC>:%!python3 -m json.tool<CR>
+vnoremap <leader>j <ESC>:%!python3 -m json.tool<CR>
+
 " Setup matching tag plugin
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
