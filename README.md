@@ -153,7 +153,7 @@ Download the appropiate version from [golang.org/dl](https://golang.org/dl/) and
 
 ```bash
 curl -s https://golang.org/dl/ | grep "linux-amd64.tar.gz" | sed -n 1p | sed -E 's/.*"([^"]+)".*/\1/' | \
-    xargs -I{} curl {} -o /tmp/golang.tar.gz && \
+    xargs -I{} curl -L https://golang.org{} -o /tmp/golang.tar.gz && \
     rm -rf /usr/local/go && tar -C /usr/local -xzf /tmp/golang.tar.gz && \
     rm -rf /tmp/golang.tar.gz
 ```
