@@ -32,7 +32,7 @@ __prompt_command() {
     code="$?"
     PS1="\[\e[00;33m\]\u@\h\[\e[0m\]\[\e[00;37m\] \[\e[0m\]\[\e[01;36m\][\W]\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')\[\e[0m\]\[\e[00;36m\]\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
 
-    if [ ! -z "$KUBECONFIG" ]; then
+    if [ -n "$KUBECONFIG" ]; then
         kkf=$(basename "$KUBECONFIG")
         PS1+="\[\e[97;44m\] ${kkf//.yml/} \[\e[0m\] "
     fi
