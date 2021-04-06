@@ -136,8 +136,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
 # Fix WSL2 Interop of VSCode
-code() {
+wtf() {
     export WSL_INTEROP=$(find /run/WSL/ -type s -print -quit)
+}
+
+code() {
+    wtf
     command code "$@"
 }
 
@@ -217,14 +221,17 @@ complete -F __start_kubectl kc
 
 # Create a temporary directory and cd into it
 function td() {
-    dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'tempdir')
-    cd "${dir}" || return
+    rand=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)
+    dir="${GOPATH}/src/github.com/patrickdappollonio/temp-${rand}"
+    mkdir -p "$dir" && cd "$dir" || return
 }
 
 function cleantd() {
-    local tdlocation
-    tdlocation=$(dirname "$(mktemp -d -u)")
-    rm -rf "$tdlocation/tmp.*"
+    folders=$(find "${GOPATH}/src/github.com/patrickdappollonio/" -maxdepth 1 -name "temp-*" -type d -not -path '*/\.*')
+    for f in $folders; do
+        echo "Removing temp folder $f"
+        rm -rf "$f"
+    done
 }
 
 ################################################################
