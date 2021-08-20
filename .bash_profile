@@ -135,16 +135,6 @@ export NVM_DIR="$HOME/.nvm"
 # shellcheck disable=SC1090
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
-# Fix WSL2 Interop of VSCode
-wtf() {
-    export WSL_INTEROP=$(find /run/WSL/ -type s -print -quit)
-}
-
-code() {
-    wtf
-    command code "$@"
-}
-
 ############################################################################
 #                        KUBERNETES CONFIGURATIONS
 ############################################################################
