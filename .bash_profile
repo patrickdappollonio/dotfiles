@@ -118,11 +118,6 @@ if [ -d ~/.appengine/ ]; then
     export PATH=$PATH:~/.appengine/
 fi
 
-# Enable "~/.local/bin" foldere
-if [ -d ~/.local/bin ]; then
-    export PATH=$PATH:~/.local/bin
-fi
-
 # Enable local support for locally installed tools
 if [ -d ~/.local/bin/ ]; then
     export PATH=$PATH:~/.local/bin/
@@ -134,16 +129,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 # shellcheck disable=SC1090
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-
-# Fix WSL2 Interop of VSCode
-wtf() {
-    export WSL_INTEROP=$(find /run/WSL/ -type s -print -quit)
-}
-
-code() {
-    wtf
-    command code "$@"
-}
 
 ############################################################################
 #                        KUBERNETES CONFIGURATIONS
@@ -190,6 +175,10 @@ function change-ns() {
 
 # Patch kubectl
 function kubectl() {
+    if [ -f "$HOME/.kube/config" ]; then
+        export KUBECONFIG="$HOME/.kube/config"
+    fi
+
     if [ -z "$KUBECONFIG" ]; then
         change-k8
     fi
@@ -208,24 +197,17 @@ if [ -x "$(command -v kubectl)" ]; then
     source <(command kubectl completion bash)
 fi
 
-# Shorthand for kubectl
-alias kc='kubectl'
-alias kns='change-ns'
-alias ks='change-k8'
-alias k8='change-k8'
-alias k='kubectl'
+# Shorthand for terraform
 alias tf='terraform'
-
-complete -F __start_kubectl k
-complete -F __start_kubectl kc
 
 # Create a temporary directory and cd into it
 function td() {
-    rand=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)
+    rand=$(tr -dc 'a-z0-9' < /dev/urandom | fold -w 8 | head -n 1)
     dir="${GOPATH}/src/github.com/patrickdappollonio/temp-${rand}"
     mkdir -p "$dir" && cd "$dir" || return
 }
 
+# Delete all temp folders
 function cleantd() {
     folders=$(find "${GOPATH}/src/github.com/patrickdappollonio/" -maxdepth 1 -name "temp-*" -type d -not -path '*/\.*')
     for f in $folders; do
@@ -234,16 +216,5 @@ function cleantd() {
     done
 }
 
-################################################################
-
-function repeat() {
-    clear
-    while true; do
-        eval "$@"
-        sleep 1
-    done
-}
-
-function headers() {
-    curl -sD - -o /dev/null "$@"
-}
+# Swap to neovim, since I keep forgetting to do so
+alias vim=nvim

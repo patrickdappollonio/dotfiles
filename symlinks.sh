@@ -10,6 +10,7 @@ function destroy_symlinks() {
     rm -rf ~/.vim
     rm -rf ~/.tmux.conf
     rm -rf ~/.alacritty.yml
+    rm -rf ~/.config/nvim
 }
 
 # Add new symlinks
@@ -21,6 +22,7 @@ function create_symlinks() {
     ln -s ~/.dotfiles/.vim ~/.vim
     ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
     ln -s ~/.dotfiles/alacritty.yml ~/.alacritty.yml
+    ln -s ~/.dotfiles/nvim ~/.config/nvim
 }
 
 # Options for the command
