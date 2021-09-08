@@ -146,7 +146,6 @@ Plug 'preservim/nerdtree'																	" NERDTree, a tree explorer for Vim
 Plug 'preservim/nerdcommenter'																" Easy commenting of lines and blocks
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}		" Install Conquer of Complete, to use Language Servers
 Plug 'airblade/vim-gitgutter'																" Show Git file changes in the gutter
-Plug 'Yggdroot/indentLine'																	" Indentation lines for Vim
 Plug 'sdanielf/vim-stdtabs'																	" Configure tabstop tabwidth and others for some standard languages
 
 " Language-specific plugins
@@ -160,7 +159,8 @@ Plug 'leafOfTree/vim-vue-plugin'			" Handle Vue resources
 Plug 'itspriddle/vim-shellcheck' 			" Shellcheck for Bash scripts
 
 " Other plugins that must be loaded last
-Plug 'ryanoasis/vim-devicons'				" Dev icons for multiple plugins
+Plug 'ryanoasis/vim-devicons'					" Dev icons for multiple plugins
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'	" Dev icon colors for Neovim
 
 " Wrap-up vundle plugins
 call plug#end()
@@ -240,10 +240,6 @@ let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 0
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
-
-" Yggdroot/indentLine
-let g:indentLine_char = '│'
-let g:indentLine_color_term = '237'
 
 " fatih/vim-go
 let g:go_gopls_enabled = 0
