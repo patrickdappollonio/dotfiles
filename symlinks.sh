@@ -6,8 +6,6 @@ function destroy_symlinks() {
     rm -rf ~/.bash_profile
     rm -rf ~/.inputrc
     rm -rf ~/.gitconfig
-    rm -rf ~/.vimrc
-    rm -rf ~/.vim
     rm -rf ~/.tmux.conf
     rm -rf ~/.alacritty.yml
     rm -rf ~/.config/nvim
@@ -18,8 +16,6 @@ function create_symlinks() {
     ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
     ln -s ~/.dotfiles/.inputrc ~/.inputrc
     ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
-    ln -s ~/.dotfiles/.vimrc ~/.vimrc
-    ln -s ~/.dotfiles/.vim ~/.vim
     ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
     ln -s ~/.dotfiles/alacritty.yml ~/.alacritty.yml
     ln -s ~/.dotfiles/nvim ~/.config/nvim
