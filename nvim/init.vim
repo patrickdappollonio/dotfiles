@@ -159,6 +159,9 @@ Plug 'stephpy/vim-yaml'						" Handle YAML resources
 Plug 'leafOfTree/vim-vue-plugin'			" Handle Vue resources
 Plug 'itspriddle/vim-shellcheck' 			" Shellcheck for Bash scripts
 
+" Other plugins that must be loaded last
+Plug 'ryanoasis/vim-devicons'				" Dev icons for multiple plugins
+
 " Wrap-up vundle plugins
 call plug#end()
 
