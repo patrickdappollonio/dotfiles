@@ -78,8 +78,9 @@ if [ "$IS_LINUX_OS" = true ] || [ "$IS_MAC_OS" = true ]; then
     export GOPATH=$HOME/Golang
 fi
 
-# Add Go's binary files to the system path
+# Add some of our paths to the Path 
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$HOME/.dotfiles/bin
 
 # MKDir and CD
 function mkcd() {

@@ -132,8 +132,7 @@ vnoremap C "_C
 " ===========================================================
 
 " Set the runtime path to include Vundle and initialize.
-" All plugins will be installed in ~/.config/neovim-bundle
-set rtp+=~/.config/nvim/plug.vim
+" All plugins will be installed in ~/.config/nvim-plug
 call plug#begin('~/.config/nvim-plug')
 
 " Generic plugins for any language, makes Vim life easier
