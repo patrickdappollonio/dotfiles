@@ -203,7 +203,7 @@ alias tf='terraform'
 
 # Create a temporary directory and cd into it
 function td() {
-    rand=$(tr -dc 'a-z0-9' < /dev/urandom | fold -w 8 | head -n 1)
+    rand=$(LC_CTYPE=C tr -dc "[:alpha:]" < /dev/urandom | fold -w 8 | head -n 1)
     dir="${GOPATH}/src/github.com/patrickdappollonio/temp-${rand}"
     mkdir -p "$dir" && cd "$dir" || return
 }
