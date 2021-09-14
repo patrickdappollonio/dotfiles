@@ -157,6 +157,9 @@ Plug 'stephpy/vim-yaml'						" Handle YAML resources
 Plug 'leafOfTree/vim-vue-plugin'			" Handle Vue resources
 Plug 'itspriddle/vim-shellcheck' 			" Shellcheck for Bash scripts
 
+" Other very specific plugins
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } 		" Markdown preview in a browser
+
 " Other plugins that must be loaded last
 Plug 'ryanoasis/vim-devicons'					" Dev icons for multiple plugins
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'	" Dev icon colors for Neovim
@@ -268,3 +271,7 @@ let g:closetag_filetypes = 'html,xhtml,phtml,vue'
 
 " itspriddle/vim-shellcheck
 autocmd FileType bash,sh autocmd BufWritePre * ShellCheck!
+
+" iamcco/markdown-preview.nvim
+let g:mkdp_echo_preview_url = 1
+let g:mkdp_open_to_the_world = 1
