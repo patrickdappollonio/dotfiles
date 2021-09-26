@@ -9,5 +9,9 @@
 	},
 	"yaml.schemas": {
 		"kubernetes": "/*.yaml"
+	},
+	"diagnostic-languageserver.filetypes": {
+		"sh": "shellcheck",
+		"bash": "shellcheck"
 	}
 }

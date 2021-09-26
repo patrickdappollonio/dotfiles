@@ -78,7 +78,7 @@ if [ "$IS_LINUX_OS" = true ] || [ "$IS_MAC_OS" = true ]; then
     export GOPATH=$HOME/Golang
 fi
 
-# Add some of our paths to the Path 
+# Add some of our paths to the Path
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/.dotfiles/bin
 
@@ -196,6 +196,8 @@ function kubectl() {
 # shellcheck source=/dev/null
 if [ -x "$(command -v kubectl)" ]; then
     source <(command kubectl completion bash)
+    alias k=kubectl
+    complete -F __start_kubectl k
 fi
 
 # Shorthand for terraform

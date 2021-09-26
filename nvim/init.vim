@@ -155,7 +155,6 @@ Plug 'ekalinin/dockerfile.vim'				" Handle Dockerfiles
 Plug 'hashivim/vim-terraform'				" Handle Terraform resources
 Plug 'stephpy/vim-yaml'						" Handle YAML resources
 Plug 'leafOfTree/vim-vue-plugin'			" Handle Vue resources
-Plug 'itspriddle/vim-shellcheck' 			" Shellcheck for Bash scripts
 
 " Other very specific plugins
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } 		" Markdown preview in a browser
@@ -181,7 +180,6 @@ filetype plugin indent on
 function! ToggleVisuals() abort
 	set number!
 	:GitGutterToggle
-	:IndentLinesToggle
 endfunc
 nnoremap <C-g> :<C-u>call ToggleVisuals()<cr>
 
@@ -264,13 +262,10 @@ let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 
 " neoclide/coc.nvim
-let g:coc_global_extensions = ['coc-go', 'coc-tsserver', 'coc-json', 'coc-sh', 'coc-html', 'coc-markdownlint', 'coc-docker', 'coc-yaml']
+let g:coc_global_extensions = ['coc-go', 'coc-tsserver', 'coc-json', 'coc-sh', 'coc-html', 'coc-markdownlint', 'coc-docker', 'coc-yaml', 'coc-diagnostic']
 
 " alvan/vim-closetag
 let g:closetag_filetypes = 'html,xhtml,phtml,vue'
-
-" itspriddle/vim-shellcheck
-autocmd FileType bash,sh autocmd BufWritePre * ShellCheck!
 
 " iamcco/markdown-preview.nvim
 let g:mkdp_echo_preview_url = 1
