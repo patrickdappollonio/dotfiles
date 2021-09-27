@@ -90,13 +90,20 @@ nnoremap <Leader>z :<C-u>pc!<CR>
 vnoremap <Leader>z :<C-u>pc!<CR>
 
 " Enable updating Neovim settings on save
-autocmd bufwritepost init.vim source $MYVIMRC
+augroup UpdateVimOnSave
+	autocmd!
+	autocmd bufwritepost init.vim source $MYVIMRC
+augroup END
 
-" Properly indent certain files
-autocmd FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType tf,tfvars setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType js setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType vue setlocal ts=2 sts=2 sw=2 expandtab
+" Properly indent and configure certain files
+augroup IndentConfigs
+	autocmd!
+	autocmd FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType tf,tfvars setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType js setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType vue setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType markdown setlocal wrap linebreak nolist
+augroup END
 
 " Quick function to use Q to intelligently close buffers or windows if shown.
 " This function reads if the current place is a buffer split or a full window
@@ -155,6 +162,7 @@ Plug 'ekalinin/dockerfile.vim'				" Handle Dockerfiles
 Plug 'hashivim/vim-terraform'				" Handle Terraform resources
 Plug 'stephpy/vim-yaml'						" Handle YAML resources
 Plug 'leafOfTree/vim-vue-plugin'			" Handle Vue resources
+Plug 'sheerun/vim-polyglot'					" Support for a plethora of Languages
 
 " Other very specific plugins
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } 		" Markdown preview in a browser
@@ -197,7 +205,10 @@ let g:ctrlp_dont_split = 'NERD'
 
 " mattn/emmet-vim
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+augroup EmmetInstall
+	autocmd!
+	autocmd FileType html,css EmmetInstall
+augroup END
 inoremap <C-e> <Esc>:call emmet#expandAbbr(3, "")<cr>i
 
 " vim-airline/vim-airline
@@ -233,7 +244,11 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 40
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+augroup NerdtreeDetect
+	autocmd!
+	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
 
 " preservim/nerdcommenter
 let g:NERDSpaceDelims = 1
@@ -265,7 +280,7 @@ let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 let g:coc_global_extensions = ['coc-go', 'coc-tsserver', 'coc-json', 'coc-sh', 'coc-html', 'coc-markdownlint', 'coc-docker', 'coc-yaml', 'coc-diagnostic']
 
 " alvan/vim-closetag
-let g:closetag_filetypes = 'html,xhtml,phtml,vue'
+let g:closetag_filetypes = 'html,xhtml,phtml,vue,handlebars,gohtmltmpl'
 
 " iamcco/markdown-preview.nvim
 let g:mkdp_echo_preview_url = 1

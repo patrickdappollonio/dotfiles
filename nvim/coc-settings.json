@@ -13,5 +13,8 @@
 	"diagnostic-languageserver.filetypes": {
 		"sh": "shellcheck",
 		"bash": "shellcheck"
+	},
+	"markdownlint.config": {
+		"line_length": false
 	}
 }
