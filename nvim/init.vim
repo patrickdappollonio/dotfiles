@@ -153,6 +153,7 @@ Plug 'preservim/nerdcommenter'																" Easy commenting of lines and blo
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}		" Install Conquer of Complete, to use Language Servers
 Plug 'airblade/vim-gitgutter'																" Show Git file changes in the gutter
 Plug 'sdanielf/vim-stdtabs'																	" Configure tabstop tabwidth and others for some standard languages
+Plug 'github/copilot.vim'																	" Install Copilot
 
 " Language-specific plugins
 Plug 'fatih/vim-go'                        	" Go development plugin with support for Language Server
