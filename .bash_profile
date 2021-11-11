@@ -89,8 +89,8 @@ function mkcd() {
 }
 
 # Set vim as the default editor on Linux
-if [ "$IS_LINUX_OS" = true ]; then
-    export VISUAL=vim
+if [ "$IS_LINUX_OS" = true ] || [ "$IS_MAC_OS" = true ]; then
+    export VISUAL=nvim
     export EDITOR="$VISUAL"
 fi
 
