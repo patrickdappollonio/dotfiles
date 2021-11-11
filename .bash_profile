@@ -125,6 +125,11 @@ if [ -d ~/.local/bin/ ]; then
     export PATH=$PATH:~/.local/bin/
 fi
 
+# Enable locally installed "krew" plugins
+if [ -d ~/.krew/ ]; then
+    export PATH=$PATH:~/.krew/
+fi
+
 # Enable NodeJS' NVM if path exists
 export NVM_DIR="$HOME/.nvm"
 # shellcheck disable=SC1090
