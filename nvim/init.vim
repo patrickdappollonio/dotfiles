@@ -162,6 +162,7 @@ Plug 'alvan/vim-closetag'					" Adds a close tag automatically upon completion
 Plug 'ekalinin/dockerfile.vim'				" Handle Dockerfiles
 Plug 'hashivim/vim-terraform'				" Handle Terraform resources
 Plug 'stephpy/vim-yaml'						" Handle YAML resources
+Plug 'Einenlum/yaml-revealer'				" Adds a breadcrumb navigation to YAML files
 Plug 'leafOfTree/vim-vue-plugin'			" Handle Vue resources
 Plug 'sheerun/vim-polyglot'					" Support for a plethora of Languages
 
