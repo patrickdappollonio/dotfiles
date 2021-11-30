@@ -37,10 +37,17 @@ __prompt_command() {
         PS1+="\[\e[97;44m\] ${kkf//.yml/} \[\e[0m\] "
     fi
 
+    PS1+="\n"
+
+    local icon="$"
+    if [ "$USER" == "root" ]; then
+        icon="#"
+    fi
+
     if [ $code != 0 ]; then
-        PS1+="\[\e[0;31m\]●\[\e[0m\] "
+        PS1+="\[\e[0;31m\]$icon\[\e[0m\] "
     else
-        PS1+="\[\e[0;32m\]○\[\e[0m\] "
+        PS1+="\[\e[0;32m\]$icon\[\e[0m\] "
     fi
 }
 
