@@ -218,7 +218,7 @@ alias tf='terraform'
 
 # Create a temporary directory and cd into it
 function td() {
-    rand=$(LC_CTYPE=C tr -dc "[:alpha:]" < /dev/urandom | fold -w 8 | head -n 1)
+    rand=$(echo $RANDOM | md5sum | head -c 8)
     dir="${GOPATH}/src/github.com/patrickdappollonio/temp-${rand}"
     mkdir -p "$dir" && cd "$dir" || return
 }
@@ -234,3 +234,18 @@ function cleantd() {
 
 # Swap to neovim, since I keep forgetting to do so
 alias vim=nvim
+
+# Fix WSL interop on a long-lived tmux session
+function wsl_interop() {
+    for socket in /run/WSL/*; do
+       if ss -elx | grep -q "$socket"; then
+          export WSL_INTEROP=$socket
+       else
+          rm $socket
+       fi
+    done
+
+    if [[ -z $WSL_INTEROP ]]; then
+       echo -e "\033[31mNo working WSL_INTEROP socket found !\033[0m"
+    fi
+}
