@@ -209,8 +209,6 @@ function kubectl() {
 # shellcheck source=/dev/null
 if [ -x "$(command -v kubectl)" ]; then
     source <(command kubectl completion bash)
-    alias k=kubectl
-    complete -F __start_kubectl k
 fi
 
 # Shorthand for terraform
@@ -248,4 +246,13 @@ function wsl_interop() {
     if [[ -z $WSL_INTEROP ]]; then
        echo -e "\033[31mNo working WSL_INTEROP socket found !\033[0m"
     fi
+}
+
+# Add a fix for WSL interop in VSCode from the terminal
+function code() {
+    if [[ "$IS_MAC_OS" = false && "$IS_LINUX_OS" = false ]]; then
+        wsl_interop
+    fi
+
+    command code "${@}"
 }
