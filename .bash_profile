@@ -61,7 +61,7 @@ alias ...='cd ../..'
 # Golang aliases
 alias goi='go install'
 alias gob='go build'
-alias got='go test ./... -count=1'
+alias got='go test -json -count=1 ./... | tparse -all'
 alias gg='go get -u'
 alias ggi='go get -u -insecure'
 
@@ -256,3 +256,8 @@ function code() {
 
     command code "${@}"
 }
+
+# Add Rust cargo env vars if found
+if [ -f "$HOME/.cargo/env" ]; then
+    source "$HOME/.cargo/env"
+fi
