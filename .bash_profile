@@ -250,7 +250,7 @@ function wsl_interop() {
 
 # Add a fix for WSL interop in VSCode from the terminal
 function code() {
-    if [[ "$IS_MAC_OS" = false && "$IS_LINUX_OS" = false ]]; then
+    if [[ "$IS_MAC_OS" = false || "$IS_LINUX_OS" = false ]]; then
         wsl_interop
     fi
 
