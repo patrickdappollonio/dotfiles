@@ -89,6 +89,7 @@ fi
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/.dotfiles/bin
 export PATH=$HOME/.krew/bin:$PATH
+export PATH=/opt/homebrew/bin:$PATH
 
 # MKDir and CD
 function mkcd() {
