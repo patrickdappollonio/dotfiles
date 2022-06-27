@@ -258,6 +258,12 @@ function code() {
     command code "${@}"
 }
 
+# Enable the ssh agent for the sessions under
+# this script
+if [ -x "$(command -v ssh-agent)" ]; then
+    { eval "$(ssh-agent -s)"; ssh-add; } &>/dev/null
+fi
+
 # Add Rust cargo env vars if found
 if [ -f "$HOME/.cargo/env" ]; then
     source "$HOME/.cargo/env"
