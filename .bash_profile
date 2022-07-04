@@ -1,16 +1,9 @@
 #!/bin/bash
 
 # Find if it's linux what we are running
-if [ "$(uname -s)" == "Darwin" ]; then
-    IS_MAC_OS=true
-    IS_LINUX_OS=false
-elif [ "$(uname -s)" == "Linux" ]; then
-    IS_MAC_OS=false
-    IS_LINUX_OS=true
-else
-    IS_MAC_OS=false
-    IS_LINUX_OS=false
-fi
+[ "$(uname -s)" == "Darwin" ] && IS_MAC_OS=true
+[ "$(uname -s)" == "Linux" ] && IS_LINUX_OS=true
+[[ "$(uname -r)" =~ "WSL" ]] && IS_WSL=true
 
 # Set environment variables depending on what operating
 # system we're running
@@ -61,9 +54,15 @@ alias ...='cd ../..'
 # Golang aliases
 alias goi='go install'
 alias gob='go build'
-alias got='go test -json -count=1 ./... | tparse -all'
+alias got='go test -v -count=1 ./...'
 alias gg='go get -u'
 alias ggi='go get -u -insecure'
+
+# Find if tparse is installed, and if so
+# rewrite the alias for go test
+if [ -x "$(command -v tparse)" ]; then
+    alias got='go test -json -count=1 ./... | tparse -all'
+fi
 
 # Enable Go modules in an specific folder
 function gomod() {
@@ -232,7 +231,9 @@ function cleantd() {
 }
 
 # Swap to neovim, since I keep forgetting to do so
-alias vim=nvim
+if [ -x "$(command -v nvim)" ]; then
+    alias vim=nvim
+fi
 
 # Fix WSL interop on a long-lived tmux session
 function wsl_interop() {
@@ -251,10 +252,7 @@ function wsl_interop() {
 
 # Add a fix for WSL interop in VSCode from the terminal
 function code() {
-    if [ "$IS_MAC_OS" = false ] && [ "$IS_LINUX_OS" = false ]; then
-        wsl_interop
-    fi
-
+    [ "$IS_WSL" == true ] && wsl_interop
     command code "${@}"
 }
 
