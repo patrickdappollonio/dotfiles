@@ -54,14 +54,14 @@ alias ...='cd ../..'
 # Golang aliases
 alias goi='go install'
 alias gob='go build'
-alias got='go test -v -count=1 ./...'
+alias got='go test -cover -v -count=1 ./...'
 alias gg='go get -u'
 alias ggi='go get -u -insecure'
 
 # Find if tparse is installed, and if so
 # rewrite the alias for go test
 if [ -x "$(command -v tparse)" ]; then
-    alias got='go test -json -count=1 ./... | tparse -all'
+    alias got='go test -json -cover -count=1 ./... | tparse -all'
 fi
 
 # Enable Go modules in an specific folder
