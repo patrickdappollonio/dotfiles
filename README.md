@@ -152,7 +152,7 @@ echo 'Acquire::ForceIPv4 "true";' | sudo tee /etc/apt/apt.conf.d/99force-ipv4
 Download the appropiate version from [golang.org/dl](https://golang.org/dl/) and then run the following commands (since it's trying to write to `/usr/local` you might want to throw a `sudo` here):
 
 ```bash
-curl -s https://golang.org/dl/ | grep "linux-amd64.tar.gz" | sed -n 1p | sed -E 's/.*"([^"]+)".*/\1/' | \
+curl -sL https://golang.org/dl/ | grep "linux-amd64.tar.gz" | sed -n 1p | sed -E 's/.*"([^"]+)".*/\1/' | \
     xargs -I{} curl -L https://golang.org{} -o /tmp/golang.tar.gz && \
     rm -rf /usr/local/go && tar -C /usr/local -xzf /tmp/golang.tar.gz && \
     rm -rf /tmp/golang.tar.gz
