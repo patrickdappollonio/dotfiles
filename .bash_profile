@@ -132,9 +132,14 @@ if [ -d ~/.local/bin/ ]; then
     export PATH=$PATH:~/.local/bin/
 fi
 
+# Enable support for Yarn (NodeJS) binaries
+if [ -d ~/.yarn/bin/ ]; then
+    export PATH=$PATH:~/.yarn/bin/
+fi
+
 # Enable locally installed "krew" plugins
-if [ -d ~/.krew/ ]; then
-    export PATH=$PATH:~/.krew/
+if [ -d ~/.krew/bin/ ]; then
+    export PATH=$PATH:~/.krew/bin/
 fi
 
 # Enable NodeJS' NVM if path exists
