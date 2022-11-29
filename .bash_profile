@@ -110,6 +110,15 @@ function gs() {
     cd "$(find-project "$1")" || return
 }
 
+# Alias cat to bat if it's installed
+function cat() {
+    if [ -x "$(command -v bat)" ]; then
+        bat "$@" --style=numbers,changes,grid --paging=never
+    else
+        command cat "$@"
+    fi
+}
+
 # Source environment settings if found
 if [ -f ~/.config/environment ]; then
     # shellcheck disable=SC1090
