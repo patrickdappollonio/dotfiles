@@ -1,7 +1,7 @@
 [user]
 	name = "Patrick D'appollonio"
 	email = 930925+patrickdappollonio@users.noreply.github.com
-	signingkey = /home/patrick/.ssh/commit_signing_key
+	signingkey = ~/.ssh/commit_signing_key
 [alias]
 	aa = add -A
 	co = checkout
