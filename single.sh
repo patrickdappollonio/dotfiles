@@ -4,7 +4,7 @@
 stty -ixon
 
 # Set the current working directory
-cd $HOME
+cd ~/
 
 # Find if it's linux what we are running
 if [ "$(uname)" == "Darwin" ]; then
