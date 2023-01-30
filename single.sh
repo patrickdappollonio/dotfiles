@@ -1,7 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Disable Ctrl+S and Ctrl+Q
 stty -ixon
+
+# Set the current working directory
+cd $HOME
 
 # Find if it's linux what we are running
 if [ "$(uname)" == "Darwin" ]; then
