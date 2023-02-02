@@ -187,8 +187,9 @@ chmod 600 ~/.ssh/id_rsa.pub
    * [Create the SSH keys](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
    * [Signing commits](https://help.github.com/articles/generating-a-new-gpg-key/)
 
-### Creating PEM keys
+### Creating keys
 
 ```
-ssh-keygen -m PEM -t rsa -b 4096 -C "hello@example.com" -f key -q -N ""
+ssh-keygen -t ed25519 -C "930925+patrickdappollonio@users.noreply.github.com"
+ssh-keygen -t ed25519 -C "930925+patrickdappollonio@users.noreply.github.com" -f ~/.ssh/commit_signing_key
 ```
