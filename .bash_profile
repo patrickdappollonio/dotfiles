@@ -255,7 +255,7 @@ function wsl_interop() {
        if ss -elx | grep -q "$socket"; then
           export WSL_INTEROP=$socket
        else
-          rm $socket
+          rm "$socket" 2> /dev/null
        fi
     done
 

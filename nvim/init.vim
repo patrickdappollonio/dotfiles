@@ -165,6 +165,7 @@ Plug 'stephpy/vim-yaml'						" Handle YAML resources
 Plug 'Einenlum/yaml-revealer'				" Adds a breadcrumb navigation to YAML files
 Plug 'leafOfTree/vim-vue-plugin'			" Handle Vue resources
 Plug 'sheerun/vim-polyglot'					" Support for a plethora of Languages
+Plug 'itspriddle/vim-shellcheck'			" Support for shellcheck
 
 " Other very specific plugins
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } 		" Markdown preview in a browser
