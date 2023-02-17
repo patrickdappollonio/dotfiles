@@ -70,3 +70,5 @@
 	format = ssh
 [commit]
 	gpgsign = true
+[tag]
+	sort = -version:refname
