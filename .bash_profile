@@ -278,5 +278,6 @@ fi
 
 # Add Rust cargo env vars if found
 if [ -f "$HOME/.cargo/env" ]; then
-    source "$HOME/.cargo/env"
+    # shellcheck disable=SC1091
+    . "$HOME/.cargo/env"
 fi
