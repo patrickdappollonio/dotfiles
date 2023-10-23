@@ -155,6 +155,10 @@ Plug 'airblade/vim-gitgutter'																" Show Git file changes in the gutt
 Plug 'sdanielf/vim-stdtabs'																	" Configure tabstop tabwidth and others for some standard languages
 Plug 'github/copilot.vim'																	" Install Copilot
 
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'neovim/nvim-lspconfig'
+Plug 'ray-x/go.nvim'
+
 " Language-specific plugins
 Plug 'fatih/vim-go'                        	" Go development plugin with support for Language Server
 Plug 'mattn/emmet-vim' 						" Emmet autocompletion on Vim (with CTRL+e, as configured below)
