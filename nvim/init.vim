@@ -20,10 +20,6 @@ set showtabline=2				" Also show tablines (currently opened tabs at the top)
 set backspace=indent,eol,start 	" Makes backspace to behave the same way other editors do
 set confirm						" Confirm on exit
 
-" Autocomplete settings for MUComplete
-set completeopt-=preview
-set completeopt+=longest,menuone,noselect
-
 " App-wide tabulation settings
 set tabstop=4 shiftwidth=4 autoindent smartindent
 
@@ -157,6 +153,8 @@ Plug 'github/copilot.vim'																	" Install Copilot
 
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
 Plug 'ray-x/go.nvim'
 
 " Language-specific plugins
@@ -224,6 +222,27 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
+" GoTo code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Add (Neo)Vim's native statusline support
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 " Toggle line numbers, git gutter and indent lines
 function! ToggleVisuals() abort
 	set number!
@@ -235,6 +254,9 @@ nnoremap <C-g> :<C-u>call ToggleVisuals()<cr>
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
 let g:strip_whitespace_confirm=0
+
+" nvim-telecope/telescope.nvim
+nnoremap <C-f> :<C-u>Telescope live_grep prompt_prefix=🔍 <CR>
 
 " kien/ctrlp.vim
 let g:ctrlp_map = '<C-p>'
@@ -315,6 +337,7 @@ let g:go_auto_sameids = 0
 let g:go_fmt_command = "gofumpt" " mvdan.cc/gofumpt
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_def_mapping_enabled = 0 " disable go-def mapping for vim-go, keep it in coc plugin
 
 " neoclide/coc.nvim
 let g:coc_global_extensions = ['coc-go', 'coc-tsserver', 'coc-json', 'coc-sh', 'coc-html', 'coc-markdownlint', 'coc-docker', 'coc-yaml', 'coc-diagnostic']
@@ -325,3 +348,4 @@ let g:closetag_filetypes = 'html,xhtml,phtml,vue,handlebars,gohtmltmpl'
 " iamcco/markdown-preview.nvim
 let g:mkdp_echo_preview_url = 1
 let g:mkdp_open_to_the_world = 1
+
