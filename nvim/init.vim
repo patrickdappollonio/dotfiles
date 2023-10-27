@@ -302,7 +302,7 @@ nmap <Leader>= <Plug>AirlineSelectNextTab
 " preservim/nerdtree
 noremap <C-n> :<C-u>NERDTreeToggle<CR>
 let NERDTreeShowHidden = 1
-let NERDTreeQuitOnOpen = 1
+let NERDTreeQuitOnOpen = 0
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 40
