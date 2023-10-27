@@ -150,7 +150,7 @@ Plug 'jiangmiao/auto-pairs'																	" Auto close pairs: when adding an o
 Plug 'kien/ctrlp.vim'																		" Make vim behave a bit more like VSCode or Sublime Text
 Plug 'preservim/nerdtree'																	" NERDTree, a tree explorer for Vim
 Plug 'preservim/nerdcommenter'																" Easy commenting of lines and blocks
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}		" Install Conquer of Complete, to use Language Servers
+Plug 'neoclide/coc.nvim', {'branch': 'release'}												" Intellisense for Vim
 Plug 'airblade/vim-gitgutter'																" Show Git file changes in the gutter
 Plug 'sdanielf/vim-stdtabs'																	" Configure tabstop tabwidth and others for some standard languages
 Plug 'github/copilot.vim'																	" Install Copilot
@@ -171,9 +171,6 @@ Plug 'leafOfTree/vim-vue-plugin'			" Handle Vue resources
 Plug 'sheerun/vim-polyglot'					" Support for a plethora of Languages
 Plug 'itspriddle/vim-shellcheck'			" Support for shellcheck
 
-" Other very specific plugins
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } 		" Markdown preview in a browser
-
 " Other plugins that must be loaded last
 Plug 'ryanoasis/vim-devicons'					" Dev icons for multiple plugins
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'	" Dev icon colors for Neovim
@@ -190,6 +187,42 @@ filetype plugin indent on
 " ===========================================================
 "                  PLUGIN-RELATED SETTINGS
 " ===========================================================
+
+" Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
+" delays and poor user experience
+set updatetime=300
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " Toggle line numbers, git gutter and indent lines
 function! ToggleVisuals() abort
