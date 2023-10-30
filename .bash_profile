@@ -54,15 +54,9 @@ alias ...='cd ../..'
 # Golang aliases
 alias goi='go install'
 alias gob='go build'
-alias got='go test -cover -v -count=1 ./...'
+alias got='go test -json -cover -count=1 ./... | tparse -all'
 alias gg='go get -u'
 alias ggi='go get -u -insecure'
-
-# Find if tparse is installed, and if so
-# rewrite the alias for go test
-if [ -x "$(command -v tparse)" ]; then
-    alias got='go test -json -cover -count=1 ./... | tparse -all'
-fi
 
 # Enable Go modules in an specific folder
 function gomod() {
@@ -270,10 +264,19 @@ function code() {
     command code "${@}"
 }
 
-# Enable the ssh agent for the sessions under
-# this script
+
 if [ -x "$(command -v ssh-agent)" ]; then
-    { eval "$(ssh-agent -s)"; ssh-add; } &>/dev/null
+    # Enable the ssh agent for the sessions under
+    # this script
+    # set SSH_AUTH_SOCK env var to a fixed value
+    export SSH_AUTH_SOCK=~/.ssh/ssh-agent.sock
+
+    # test whether $SSH_AUTH_SOCK is valid
+    ssh-add -l 2>/dev/null >/dev/null
+
+    # if not valid, then start ssh-agent using $SSH_AUTH_SOCK
+    [ $? -ge 2 ] && ssh-agent -a "$SSH_AUTH_SOCK" -s >/dev/null
+    ssh-add &>/dev/null
 fi
 
 # Add Rust cargo env vars if found
