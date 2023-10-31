@@ -348,7 +348,23 @@ let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 let g:go_def_mapping_enabled = 0 " disable go-def mapping for vim-go, keep it in coc plugin
 
 " neoclide/coc.nvim
-let g:coc_global_extensions = ['coc-go', 'coc-tsserver', 'coc-json', 'coc-sh', 'coc-html', 'coc-markdownlint', 'coc-docker', 'coc-yaml', 'coc-diagnostic']
+let g:coc_global_extensions = [
+	\'coc-go',
+	\'coc-tsserver',
+	\'coc-json',
+	\'coc-sh',
+	\'coc-html',
+	\'coc-markdownlint',
+	\'coc-docker',
+	\'coc-yaml',
+	\'coc-lua',
+	\'coc-nav',
+	\'coc-diagnostic',
+	\'coc-python',
+	\'coc-explorer',
+	\'coc-svelte',
+	\'coc-vetur'
+	\]
 
 " alvan/vim-closetag
 let g:closetag_filetypes = 'html,xhtml,phtml,vue,handlebars,gohtmltmpl'
