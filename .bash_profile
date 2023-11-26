@@ -264,23 +264,16 @@ function code() {
     command code "${@}"
 }
 
-
-if [ -x "$(command -v ssh-agent)" ]; then
-    # Enable the ssh agent for the sessions under
-    # this script
-    # set SSH_AUTH_SOCK env var to a fixed value
-    export SSH_AUTH_SOCK=~/.ssh/ssh-agent.sock
-
-    # test whether $SSH_AUTH_SOCK is valid
-    ssh-add -l 2>/dev/null >/dev/null
-
-    # if not valid, then start ssh-agent using $SSH_AUTH_SOCK
-    [ $? -ge 2 ] && ssh-agent -a "$SSH_AUTH_SOCK" -s >/dev/null
-    ssh-add &>/dev/null
-fi
-
 # Add Rust cargo env vars if found
 if [ -f "$HOME/.cargo/env" ]; then
     # shellcheck disable=SC1091
     . "$HOME/.cargo/env"
 fi
+
+# Configure SSH agent
+if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+    eval "$(ssh-agent)"
+    ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+fi
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+ssh-add -l > /dev/null || ssh-add

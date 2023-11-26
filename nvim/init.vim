@@ -358,7 +358,6 @@ let g:coc_global_extensions = [
 	\'coc-docker',
 	\'coc-yaml',
 	\'coc-lua',
-	\'coc-nav',
 	\'coc-diagnostic',
 	\'coc-python',
 	\'coc-explorer',
