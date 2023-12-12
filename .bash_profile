@@ -57,6 +57,7 @@ alias gob='go build'
 alias got='go test -json -cover -count=1 ./... | tparse -all'
 alias gg='go get -u'
 alias ggi='go get -u -insecure'
+alias gobs='CGO_ENABLED=0 go build -a -tags netgo -trimpath -ldflags "-s -w -extldflags '\''-static'\''" .'
 
 # Enable Go modules in an specific folder
 function gomod() {
@@ -197,7 +198,8 @@ function change-ns() {
 
 # Patch kubectl
 function kubectl() {
-    if [ -f "$HOME/.kube/config" ]; then
+    # check if we have a kubeconfig file AND the kubeconfig env var is not set
+    if [ -z "$KUBECONFIG" ] && [ -f "$HOME/.kube/config" ]; then
         export KUBECONFIG="$HOME/.kube/config"
     fi
 
