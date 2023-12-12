@@ -59,17 +59,6 @@ alias gg='go get -u'
 alias ggi='go get -u -insecure'
 alias gobs='CGO_ENABLED=0 go build -a -tags netgo -trimpath -ldflags "-s -w -extldflags '\''-static'\''" .'
 
-# Enable Go modules in an specific folder
-function gomod() {
-    if [ "${GO111MODULE}" == "on" ]; then
-        echo "Disabling Go modules"
-        unset GO111MODULE
-    else
-        echo "Enabling Go modules"
-        export GO111MODULE=on
-    fi
-}
-
 # tmux alias to run 256-color
 alias tmux='tmux -2'
 
