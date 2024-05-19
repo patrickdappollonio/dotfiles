@@ -34,6 +34,9 @@ elif [ "$IS_LINUX_OS" = true ]; then
     fi
 fi
 
+# Source bash_profile
+source "$HOME/.bash_profile"
+
 # Check if tmux is installed
 if ! [ -x "$(command -v tmux)" ]; then
     echo "Tmux needs to be installed in order for this to run!"

@@ -7,7 +7,7 @@ function destroy_symlinks() {
     rm -rf ~/.inputrc
     rm -rf ~/.gitconfig
     rm -rf ~/.tmux.conf
-    rm -rf ~/.alacritty.yml
+    rm -rf ~/.alacritty.toml
     rm -rf ~/.config/nvim
 }
 
@@ -17,7 +17,7 @@ function create_symlinks() {
     ln -s ~/.dotfiles/.inputrc ~/.inputrc
     ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
     ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
-    ln -s ~/.dotfiles/alacritty.yml ~/.alacritty.yml
+    ln -s ~/.dotfiles/.alacritty.toml ~/.alacritty.toml
     ln -s ~/.dotfiles/nvim ~/.config/nvim
 }
 

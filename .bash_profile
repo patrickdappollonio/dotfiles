@@ -125,6 +125,11 @@ if [ -d ~/.local/bin/ ]; then
     export PATH=$PATH:~/.local/bin/
 fi
 
+# Add alacritty to path if found
+if [ -d /Applications/Alacritty.app/Contents/MacOS/ ]; then
+    export PATH=$PATH:/Applications/Alacritty.app/Contents/MacOS/
+fi
+
 # Enable support for Yarn (NodeJS) binaries
 if [ -d ~/.yarn/bin/ ]; then
     export PATH=$PATH:~/.yarn/bin/
