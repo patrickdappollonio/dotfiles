@@ -266,6 +266,12 @@ if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
+# Configure colima if it exists
+if [ -f "$HOME/.colima/default/docker.sock" ]; then
+    export DOCKER_SOCK="unix://$HOME/.colima/default/docker.sock"
+    export DOCKER_DEFAULT_PLATFORM=linux/amd64
+fi
+
 # Configure SSH agent
 if [ ! -S ~/.ssh/ssh_auth_sock ]; then
     eval "$(ssh-agent)"

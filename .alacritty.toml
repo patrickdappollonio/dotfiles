@@ -43,7 +43,7 @@ white = '#63686d'
 save_to_clipboard = true
 
 [shell]
-args = ["-c", "~/.dotfiles/single.sh"]
+args = ["--login", "-c", "~/.dotfiles/single.sh"]
 program = "/bin/bash"
 
 [window]
