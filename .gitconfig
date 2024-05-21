@@ -72,3 +72,9 @@
 	gpgsign = true
 [tag]
 	sort = -version:refname
+
+[includeIf "gitdir:~/Golang/src/github.com/netlify/"]
+	path = "~/Golang/src/github.com/netlify/.gitconfig"
+
+[includeIf "gitdir:~/Golang/src/github.com/polygon-io/"]
+	path = "~/Golang/src/github.com/polygon-io/.gitconfig"
