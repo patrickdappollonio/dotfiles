@@ -74,6 +74,7 @@ export PATH=$PATH:$HOME/.cargo/bin/
 export PATH=$PATH:$HOME/.dotfiles/bin
 export PATH=$HOME/.krew/bin:$PATH
 export PATH=/opt/homebrew/bin:$PATH
+export HOMEBREW_NO_ENV_HINTS="true"
 
 # MKDir and CD
 function mkcd() {
