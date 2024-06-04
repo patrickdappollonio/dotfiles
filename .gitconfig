@@ -40,6 +40,7 @@
 
 [push]
 	default = current
+	autoSetupRemote = true
 [github]
 	user = patrickdappollonio
 [core]
