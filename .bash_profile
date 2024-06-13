@@ -96,6 +96,15 @@ function gs() {
     cd "$(find-project "$1")" || return
 }
 
+# Download projects by cloning them, requires `gc-rust`: github.com/patrickdappollonio/gc-rust
+function gc() {
+    if ! type "gc-rust" > /dev/null; then
+        echo -e "Install gc-rust first from github.com/patrickdappollonio/gc-rust"
+    fi
+
+    cd "$(gc-rust "$1")" || return
+}
+
 # Alias cat to bat if it's installed
 function cat() {
     if [ -x "$(command -v bat)" ]; then
