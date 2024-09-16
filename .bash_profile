@@ -102,7 +102,7 @@ function gc() {
         echo -e "Install gc-rust first from github.com/patrickdappollonio/gc-rust"
     fi
 
-    cd "$(gc-rust "$1")" || return
+    cd "$(gc-rust "$@")" || return
 }
 
 # Alias cat to bat if it's installed
@@ -122,8 +122,10 @@ fi
 
 # Source .inputrc
 if [ -f ~/.inputrc ]; then
-    # shellcheck disable=SC1090
-    bind -f ~/.inputrc
+    if [[ $- == *i* ]]; then
+        # shellcheck disable=SC1090
+        bind -f ~/.inputrc
+    fi
 fi
 
 # Enable Google App Engine if the folder exists
