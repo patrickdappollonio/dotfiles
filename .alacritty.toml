@@ -50,7 +50,7 @@ program = "/bin/bash"
 startup_mode = "Windowed"
 
 [font]
-size = 16
+size = 15
 
 [font.bold]
 family = "MonoLisa Nerd Font Mono"
