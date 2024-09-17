@@ -21,5 +21,6 @@
 	},
 	"markdownlint.config": {
 		"line_length": false
-	}
+  },
+  "svelte.enable-ts-plugin": false
 }
