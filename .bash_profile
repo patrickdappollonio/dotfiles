@@ -55,6 +55,7 @@ alias ...='cd ../..'
 alias goi='go install'
 alias gob='go build'
 alias got='go test -json -cover -count=1 ./... | tparse -all'
+alias gots='go test -short -json -cover -count=1 ./... | tparse -all'
 alias gg='go get -u'
 alias ggi='go get -u -insecure'
 alias gobs='CGO_ENABLED=0 go build -a -tags netgo -trimpath -ldflags "-s -w -extldflags '\''-static'\''" .'
@@ -102,7 +103,7 @@ function gc() {
         echo -e "Install gc-rust first from github.com/patrickdappollonio/gc-rust"
     fi
 
-    cd "$(gc-rust "$1")" || return
+    cd "$(gc-rust "$@")" || return
 }
 
 # Alias cat to bat if it's installed
