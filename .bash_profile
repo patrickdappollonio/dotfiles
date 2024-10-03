@@ -123,8 +123,10 @@ fi
 
 # Source .inputrc
 if [ -f ~/.inputrc ]; then
-    # shellcheck disable=SC1090
-    bind -f ~/.inputrc
+    if [[ $- == *i* ]]; then
+        # shellcheck disable=SC1090
+        bind -f ~/.inputrc
+    fi
 fi
 
 # Enable Google App Engine if the folder exists
