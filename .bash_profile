@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Find if it's linux what we are running
-[ "$(uname -s)" == "Darwin" ] && IS_MAC_OS=true
-[ "$(uname -s)" == "Linux" ] && IS_LINUX_OS=true
-[[ "$(uname -r)" =~ "WSL" ]] && IS_WSL=true
+# Find if it's macOS, Linux, or WSL that we are running
+[ "$(uname -s)" = "Darwin" ] && IS_MAC_OS=true
+[ "$(uname -s)" = "Linux" ] && IS_LINUX_OS=true
+grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null && IS_WSL=true
 
 # Set environment variables depending on what operating
 # system we're running
@@ -12,6 +12,7 @@ if [ "$IS_MAC_OS" = true ]; then
     export CODENAME="Darwin"
     export BASH_SILENCE_DEPRECATION_WARNING=1
 fi
+
 if [ "$IS_LINUX_OS" = true ]; then
     # shellcheck disable=SC1091
     source /etc/os-release
@@ -27,7 +28,7 @@ __prompt_command() {
 
     if [ -n "$KUBECONFIG" ]; then
         kkf=$(basename "$KUBECONFIG")
-        PS1+="\[\e[97;44m\] ${kkf//.yml/} \[\e[0m\] "
+        PS1+="\[\e[97;44m\] \[\e[97m\]${kkf//.yml/} \[\e[0m\] \[\e[0m\] "
     fi
 
     PS1+="\n"
@@ -45,8 +46,14 @@ __prompt_command() {
 }
 
 # Diverse aliases for my common tasks
-[ "$IS_LINUX_OS" == "true" ] && alias ll='ls -lhaG --color=auto'
-[ "$IS_MAC_OS" == "true" ] && alias ll='ls -lhaG'
+if [ "$IS_LINUX_OS" = true ]; then
+    alias ll='ls -lha --color=auto'
+fi
+
+if [ "$IS_MAC_OS" = true ]; then
+    alias ll='ls -lhaG'
+fi
+
 alias l='ll'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -59,38 +66,72 @@ alias gg='go get -u'
 alias ggi='go get -u -insecure'
 alias gobs='CGO_ENABLED=0 go build -a -tags netgo -trimpath -ldflags "-s -w -extldflags '\''-static'\''" .'
 
-# tmux alias to run 256-color
-alias tmux='tmux -2'
+# Disable Homebrew's environment hints
+export HOMEBREW_NO_ENV_HINTS="true"
 
-# Configure Go's $GOPATH directory depending on
-# the user's operating system
-if [ "$IS_LINUX_OS" = true ] || [ "$IS_MAC_OS" = true ]; then
-    export GOPATH=$HOME/Golang
+# Configure Go's $GOPATH directory
+if [ -z "$GOPATH" ]; then
+    export GOPATH="$HOME/Golang"
 fi
 
-# Add some of our paths to the Path
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$HOME/.cargo/bin/
-export PATH=$PATH:$HOME/.dotfiles/bin
-export PATH=$HOME/.krew/bin:$PATH
-export PATH=/opt/homebrew/bin:$PATH
-export HOMEBREW_NO_ENV_HINTS="true"
+# Array of paths to add to PATH
+declare -a paths_to_add=(
+    "$GOPATH/bin" # Go binaries
+    "$HOME/.cargo/bin" # Rust binaries
+    "$HOME/.dotfiles/bin" # Custom binaries
+    "/opt/homebrew/bin" # Homebrew binaries
+    "$HOME/.krew/bin" # Krew binaries
+    "$HOME/.local/bin" # Local binaries
+    "$HOME/.yarn/bin" # Yarn binaries
+    "/Applications/Alacritty.app/Contents/MacOS" # Alacritty
+)
+
+# Add existing directories to PATH, avoiding duplicates
+for dir in "${paths_to_add[@]}"; do
+    if [ -d "$dir" ] && [[ ":$PATH:" != *":$dir:"* ]]; then
+        export PATH="$PATH:$dir"
+    fi
+done
+
+# Set NVM_DIR and create array of files to source
+export NVM_DIR="$HOME/.nvm"
+
+# Array of files to source if they exist
+declare -a files_to_source=(
+    "$HOME/.config/environment" # Custom environment variables
+    "$HOME/.cargo/env" # Rust environment variables
+    "$NVM_DIR/nvm.sh" # NVM environment variables
+    "$NVM_DIR/bash_completion" # NVM bash completions
+)
+
+# Source files if they exist
+for file in "${files_to_source[@]}"; do
+    if [ -f "$file" ]; then
+        # shellcheck disable=SC1090
+        source "$file"
+    fi
+done
 
 # MKDir and CD
 function mkcd() {
     mkdir -p "$1" && cd "$1" || return
 }
 
-# Set vim as the default editor on Linux
-if [ "$IS_LINUX_OS" = true ] || [ "$IS_MAC_OS" = true ]; then
-    export VISUAL=nvim
+# Set Neovim as the default editor on Linux and macOS
+if command -v nvim &> /dev/null; then
+    export VISUAL="nvim"
+    export EDITOR="$VISUAL"
+    alias vim='nvim'
+else
+    export VISUAL="vim"
     export EDITOR="$VISUAL"
 fi
 
-# Golang switch, requires `find-project`: github.com/patrickdappollonio/find-project
+# Golang project switch, requires `find-project`: github.com/patrickdappollonio/find-project
 function gs() {
-    if ! type "find-project" > /dev/null; then
-        echo -e "Install find-project first by doing: go get -u -v github.com/patrickdappollonio/find-project"
+    if ! command -v find-project &> /dev/null; then
+        echo "Install find-project first by running: go install github.com/patrickdappollonio/find-project@latest"
+        return 1
     fi
 
     cd "$(find-project "$1")" || return
@@ -98,67 +139,18 @@ function gs() {
 
 # Download projects by cloning them, requires `gc-rust`: github.com/patrickdappollonio/gc-rust
 function gc() {
-    if ! type "gc-rust" > /dev/null; then
-        echo -e "Install gc-rust first from github.com/patrickdappollonio/gc-rust"
+    if ! command -v gc-rust &> /dev/null; then
+        echo "Install gc-rust first from github.com/patrickdappollonio/gc-rust"
+        return 1
     fi
 
     cd "$(gc-rust "$@")" || return
 }
 
 # Alias cat to bat if it's installed
-function cat() {
-    if [ -x "$(command -v bat)" ]; then
-        bat "$@" --style=numbers,changes,grid --paging=never
-    else
-        command cat "$@"
-    fi
-}
-
-# Source environment settings if found
-if [ -f ~/.config/environment ]; then
-    # shellcheck disable=SC1090
-    source ~/.config/environment
+if command -v bat &> /dev/null; then
+    alias cat='bat --style=numbers,changes,grid --paging=never'
 fi
-
-# Source .inputrc
-if [ -f ~/.inputrc ]; then
-    if [[ $- == *i* ]]; then
-        # shellcheck disable=SC1090
-        bind -f ~/.inputrc
-    fi
-fi
-
-# Enable Google App Engine if the folder exists
-if [ -d ~/.appengine/ ]; then
-    export PATH=$PATH:~/.appengine/
-fi
-
-# Enable local support for locally installed tools
-if [ -d ~/.local/bin/ ]; then
-    export PATH=$PATH:~/.local/bin/
-fi
-
-# Add alacritty to path if found
-if [ -d /Applications/Alacritty.app/Contents/MacOS/ ]; then
-    export PATH=$PATH:/Applications/Alacritty.app/Contents/MacOS/
-fi
-
-# Enable support for Yarn (NodeJS) binaries
-if [ -d ~/.yarn/bin/ ]; then
-    export PATH=$PATH:~/.yarn/bin/
-fi
-
-# Enable locally installed "krew" plugins
-if [ -d ~/.krew/bin/ ]; then
-    export PATH=$PATH:~/.krew/bin/
-fi
-
-# Enable NodeJS' NVM if path exists
-export NVM_DIR="$HOME/.nvm"
-# shellcheck disable=SC1090
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-# shellcheck disable=SC1090
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
 ############################################################################
 #                        KUBERNETES CONFIGURATIONS
@@ -166,41 +158,31 @@ export NVM_DIR="$HOME/.nvm"
 
 # Automatically set kubeconfig env var
 function change-k8() {
-    kks=$(ls ~/.kube/*.yml 2> /dev/null || true)
+    mapfile -t kks < <(find ~/.kube -maxdepth 1 -type f -name '*.yml' -printf '%f\n')
+    if [ "${#kks[@]}" -eq 0 ]; then
+        echo "No kubeconfig files found in ~/.kube/"
+        return 1
+    fi
+
     echo "kubectl: select a kubeconfig file"
 
-    # set the prompt used by select, replacing "#?"
     PS3="Use number to select a file or 'stop' to cancel: "
 
-    # allow the user to choose a file
-    select filename in $kks; do
-        # leave the loop if the user says 'stop'
-        if [[ "$REPLY" == stop ]]; then break; fi
+    select filename in "${kks[@]}"; do
+        if [[ "$REPLY" == "stop" ]]; then
+            break
+        fi
 
-        # complain if no file was selected, and loop to ask again
-        if [[ "$filename" == "" ]]; then
+        if [[ -z "$filename" ]]; then
             echo "'$REPLY' is not a valid number"
             continue
         fi
 
-        # now we can use the selected file
         echo "kubectl config set to: $filename"
-        export KUBECONFIG=$filename
+        export KUBECONFIG="$HOME/.kube/$filename"
 
-        # it'll ask for another unless we leave the loop
         break
     done
-}
-
-# Change kubernetes namespace
-function change-ns() {
-    local namespace=$1
-    if [ -z "$namespace" ]; then
-        echo "Please provide the namespace name: \"change-ns ns-name\""
-        return 1
-    fi
-
-    kubectl config set-context "$(kubectl config current-context)" --namespace "$namespace"
 }
 
 # Patch kubectl
@@ -223,9 +205,10 @@ function kubectl() {
     command kubectl "${@}"
 }
 
-# shellcheck source=/dev/null
-if [ -x "$(command -v kubectl)" ]; then
-    source <(command kubectl completion bash)
+# Enable kubectl autocompletion if kubectl is installed
+if command -v kubectl &> /dev/null; then
+    # shellcheck disable=SC1090
+    source <(kubectl completion bash)
 fi
 
 # Shorthand for terraform
@@ -233,18 +216,13 @@ alias tf='terraform'
 
 # Create a temporary directory and cd into it
 function td() {
-    rand=$(echo $RANDOM | md5sum | head -c 8)
-    dir="${GOPATH}/src/github.com/patrickdappollonio/temp-${rand}"
+    dir=$(mktemp -d "${GOPATH}/src/github.com/patrickdappollonio/temp-XXXXXX")
     mkdir -p "$dir" && cd "$dir" || return
 }
 
 # Delete all temp folders
 function cleantd() {
-    folders=$(find "${GOPATH}/src/github.com/patrickdappollonio/" -maxdepth 1 -name "temp-*" -type d -not -path '*/\.*')
-    for f in $folders; do
-        echo "Removing temp folder $f"
-        rm -rf "$f"
-    done
+    find "${GOPATH}/src/github.com/patrickdappollonio/" -maxdepth 1 -name "temp-*" -type d -not -path '*/\.*' -exec rm -rf {} +
 }
 
 # Swap to neovim, since I keep forgetting to do so
@@ -255,40 +233,52 @@ fi
 # Fix WSL interop on a long-lived tmux session
 function wsl_interop() {
     for socket in /run/WSL/*; do
-       if ss -elx | grep -q "$socket"; then
-          export WSL_INTEROP=$socket
-       else
-          rm "$socket" 2> /dev/null
-       fi
+        if ss -elx | grep -q "$socket"; then
+            export WSL_INTEROP=$socket
+        else
+            rm "$socket" 2> /dev/null
+        fi
     done
 
     if [[ -z $WSL_INTEROP ]]; then
-       echo -e "\033[31mNo working WSL_INTEROP socket found !\033[0m"
+        echo -e "\033[31mNo working WSL_INTEROP socket found!\033[0m"
     fi
 }
 
 # Add a fix for WSL interop in VSCode from the terminal
-function code() {
-    [ "$IS_WSL" == true ] && wsl_interop
-    command code "${@}"
-}
-
-# Add Rust cargo env vars if found
-if [ -f "$HOME/.cargo/env" ]; then
-    # shellcheck disable=SC1091
-    . "$HOME/.cargo/env"
+if [ "$IS_WSL" = true ]; then
+    function code() {
+        wsl_interop
+        command code "$@"
+    }
 fi
 
-# Configure colima if it exists
-if [ -f "$HOME/.colima/default/docker.sock" ]; then
+# Configure Colima if it exists
+if [ -S "$HOME/.colima/default/docker.sock" ]; then
     export DOCKER_SOCK="unix://$HOME/.colima/default/docker.sock"
     export DOCKER_DEFAULT_PLATFORM=linux/amd64
 fi
 
 # Configure SSH agent
-if [ ! -S ~/.ssh/ssh_auth_sock ]; then
-    eval "$(ssh-agent)"
-    ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+SSH_ENV="$HOME/.ssh/agent-environment"
+
+function start_ssh_agent {
+    echo "ℹ️ Starting new SSH agent..."
+    (umask 077; ssh-agent > "$SSH_ENV")
+    chmod 600 "$SSH_ENV"
+    # shellcheck disable=SC1090
+    source "$SSH_ENV" > /dev/null
+    ssh-add
+}
+
+# Source SSH settings, if applicable
+if [ -f "$SSH_ENV" ]; then
+    # shellcheck disable=SC1090
+    source "$SSH_ENV" > /dev/null
+    # Check if the agent is still running
+    if ! ps -p "$SSH_AGENT_PID" > /dev/null 2>&1; then
+        start_ssh_agent
+    fi
+else
+    start_ssh_agent
 fi
-export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-ssh-add -l > /dev/null || ssh-add
