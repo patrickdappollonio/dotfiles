@@ -156,9 +156,9 @@ fi
 
 # Enable NodeJS' NVM if path exists
 export NVM_DIR="$HOME/.nvm"
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
 ############################################################################
@@ -293,3 +293,7 @@ if [ ! -S ~/.ssh/ssh_auth_sock ]; then
 fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 ssh-add -l > /dev/null || ssh-add
+
+# Add completions
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
