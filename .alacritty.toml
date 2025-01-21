@@ -51,6 +51,7 @@ startup_mode = "Windowed"
 
 [font]
 size = 15
+builtin_box_drawing = true
 
 [font.bold]
 family = "MonoLisa Nerd Font Mono"

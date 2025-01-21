@@ -10,7 +10,6 @@ set smartcase					" If searching with upper case letters, then make the search s
 set hlsearch					" Highlights the search term (down below we can disable highlight with <F8>
 set incsearch					" Show search hits while typing it
 set ignorecase					" Ignore case sensitivity in searches, unless you use case sensitive search
-set pastetoggle=<F2>        	" Allow for quick paste toggle. Note: Neovim doesn't seem to support this
 set wildmenu					" On the command bar, when typing a command, autocomplete shows a list
 set splitbelow					" When creating a horizontal split buffer, the new buffer shows below
 set splitright					" When creating a vertical split buffer, the new buffer shows to the right
@@ -20,11 +19,12 @@ set showtabline=2				" Also show tablines (currently opened tabs at the top)
 set backspace=indent,eol,start 	" Makes backspace to behave the same way other editors do
 set confirm						" Confirm on exit
 
+" Emulate set pastetoggle=<F2>
+nnoremap <silent> <f2> :set paste!<cr>
+inoremap <silent> <f2> <esc>:set paste!<cr>i
+
 " App-wide tabulation settings
 set tabstop=4 shiftwidth=4 autoindent smartindent
-
-" Enable colorscheme
-colorscheme chasing_logic
 
 " Enable to use semicolon to quickly launch
 " commands, rather than pressing shift on every
@@ -130,6 +130,11 @@ vnoremap c "_c
 nnoremap C "_C
 vnoremap C "_C
 
+" Configure terminal GUI colors
+if (has("termguicolors"))
+	set termguicolors
+endif
+
 " ===========================================================
 "                    VIM PLUGIN SETTINGS
 " ===========================================================
@@ -137,6 +142,9 @@ vnoremap C "_C
 " Set the runtime path to include Vundle and initialize.
 " All plugins will be installed in ~/.config/nvim-plug
 call plug#begin('~/.config/nvim-plug')
+
+" Themes
+Plug 'mhartington/oceanic-next'
 
 " Generic plugins for any language, makes Vim life easier
 Plug 'vim-airline/vim-airline' 																" Airline is a great plugin to show better information in Vim status bar
@@ -146,13 +154,29 @@ Plug 'jiangmiao/auto-pairs'																	" Auto close pairs: when adding an o
 Plug 'kien/ctrlp.vim'																		" Make vim behave a bit more like VSCode or Sublime Text
 Plug 'preservim/nerdtree'																	" NERDTree, a tree explorer for Vim
 Plug 'preservim/nerdcommenter'																" Easy commenting of lines and blocks
-Plug 'neoclide/coc.nvim', {'branch': 'release'}												" Intellisense for Vim
 Plug 'airblade/vim-gitgutter'																" Show Git file changes in the gutter
-Plug 'sdanielf/vim-stdtabs'																	" Configure tabstop tabwidth and others for some standard languages
-Plug 'github/copilot.vim'																	" Install Copilot
 
-Plug 'nvim-treesitter/nvim-treesitter'
+" Add autocompletions
 Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+" Add vsnip plugin for autocompletion
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
+" Configure language servers
+Plug 'hrsh7th/nvim-cmp'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'dmitmel/cmp-vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'zbirenbaum/copilot-cmp'
+
+" Specific plugins
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
 Plug 'ray-x/go.nvim'
@@ -165,13 +189,15 @@ Plug 'ekalinin/dockerfile.vim'				" Handle Dockerfiles
 Plug 'hashivim/vim-terraform'				" Handle Terraform resources
 Plug 'stephpy/vim-yaml'						" Handle YAML resources
 Plug 'Einenlum/yaml-revealer'				" Adds a breadcrumb navigation to YAML files
-Plug 'leafOfTree/vim-vue-plugin'			" Handle Vue resources
 Plug 'sheerun/vim-polyglot'					" Support for a plethora of Languages
 Plug 'itspriddle/vim-shellcheck'			" Support for shellcheck
 
 " Other plugins that must be loaded last
 Plug 'ryanoasis/vim-devicons'					" Dev icons for multiple plugins
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'	" Dev icon colors for Neovim
+
+" Replacing GitHub Copilot with this custom plugin
+Plug 'zbirenbaum/copilot.lua'
 
 " Wrap-up vundle plugins
 call plug#end()
@@ -181,6 +207,15 @@ call plug#end()
 " so if plugins configure custom filetypes, these can be loaded
 " here.
 filetype plugin indent on
+
+" Enable colorscheme
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
+colorscheme OceanicNext
+hi Normal guibg=NONE ctermbg=NONE
+hi LineNr guibg=NONE ctermbg=NONE
+hi SignColumn guibg=NONE ctermbg=NONE
+hi EndOfBuffer guibg=NONE ctermbg=NONE
 
 " ===========================================================
 "                  PLUGIN-RELATED SETTINGS
@@ -193,55 +228,6 @@ set updatetime=300
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved
 set signcolumn=yes
-
-" Use tab for trigger completion with characters ahead and navigate
-" NOTE: There's always complete item selected by default, you may want to enable
-" no select by `"suggest.noselect": true` in your configuration file
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" GoTo code navigation
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Highlight the symbol and its references when holding the cursor
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-" Add (Neo)Vim's native statusline support
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Toggle line numbers, git gutter and indent lines
 function! ToggleVisuals() abort
@@ -274,7 +260,7 @@ augroup END
 inoremap <C-e> <Esc>:call emmet#expandAbbr(3, "")<cr>i
 
 " vim-airline/vim-airline
-let g:airline_theme = 'luna'
+let g:airline_theme = 'oceanicnext'
 let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
@@ -342,28 +328,9 @@ let g:go_highlight_space_tab_error = 1
 let g:go_play_open_browser = 0
 let g:go_gorename_prefill = 0
 let g:go_auto_sameids = 0
-let g:go_fmt_command = "gofumpt" " mvdan.cc/gofumpt
+let g:go_fmt_command = "gofumpt"
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-let g:go_def_mapping_enabled = 0 " disable go-def mapping for vim-go, keep it in coc plugin
-
-" neoclide/coc.nvim
-let g:coc_global_extensions = [
-	\'coc-go',
-	\'coc-tsserver',
-	\'coc-json',
-	\'coc-sh',
-	\'coc-html',
-	\'coc-markdownlint',
-	\'coc-docker',
-	\'coc-yaml',
-	\'coc-lua',
-	\'coc-diagnostic',
-	\'coc-python',
-	\'coc-explorer',
-	\'coc-svelte',
-	\'coc-vetur'
-	\]
 
 " alvan/vim-closetag
 let g:closetag_filetypes = 'html,xhtml,phtml,vue,handlebars,gohtmltmpl'
@@ -371,4 +338,146 @@ let g:closetag_filetypes = 'html,xhtml,phtml,vue,handlebars,gohtmltmpl'
 " iamcco/markdown-preview.nvim
 let g:mkdp_echo_preview_url = 1
 let g:mkdp_open_to_the_world = 1
+
+" ===========================================================
+"                    LUA PLUGIN SETTINGS
+" ===========================================================
+lua <<EOL
+	local kind_icons = {
+		Text = "",
+		Method = "m",
+		Function = "",
+		Constructor = "",
+		Field = "",
+		Variable = "",
+		Class = "",
+		Interface = "",
+		Module = "",
+		Property = "",
+		Unit = "",
+		Value = "",
+		Enum = "",
+		Keyword = "",
+		Snippet = "",
+		Color = "",
+		File = "",
+		Reference = "",
+		Folder = "",
+		EnumMember = "",
+		Constant = "",
+		Struct = "",
+		Event = "",
+		Operator = "",
+		TypeParameter = "",
+		Copilot = "",
+	}
+
+	-- Copilot configuration
+	require('copilot').setup({
+	  panel = {
+		enabled = false,
+	  },
+	  suggestion = {
+			enabled = false,
+	  },
+	  filetypes = {
+		gitcommit = false,
+		gitrebase = false,
+		hgcommit = false,
+		svn = false,
+		cvs = false,
+		["."] = false,
+	  },
+	  copilot_node_command = 'node', -- Node.js version must be > 18.x
+	  server_opts_overrides = {},
+	})
+
+	-- Copilot completion
+	require("copilot_cmp").setup()
+
+	-- Set up nvim-cmp.
+	local cmp = require'cmp'
+	cmp.setup({
+		snippet = {
+			expand = function(args)
+				vim.fn["vsnip#anonymous"](args.body)
+			end,
+		},
+
+		mapping = cmp.mapping.preset.insert({
+			['<C-b>'] = cmp.mapping.scroll_docs(-4),
+			['<C-f>'] = cmp.mapping.scroll_docs(4),
+			['<C-Space>'] = cmp.mapping.complete(),
+			['<C-e>'] = cmp.mapping.abort(),
+			['<CR>'] = cmp.mapping.confirm({ select = true }),
+		}),
+
+		sources = cmp.config.sources({
+			{ name = 'copilot' },
+			{ name = 'nvim_lsp' },
+			{ name = 'vsnip' },
+			{ name = 'vim_lsp' },
+			{ name = 'buffer' },
+		}),
+
+		formatting = {
+			fields = { "kind", "abbr", "menu" },
+			format = function(entry, vim_item)
+				-- kind icons
+				vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+
+				vim_item.menu = ({
+					nvim_lsp = "[LSP]",
+					buffer = "[Buffer]",
+					path = "[Path]",
+					copilot = "[Copilot]",
+					vsnip = "[VSnip]",
+					vim_lsp = "[VimLSP]",
+					copilot = "[Copilot]",
+				})[entry.source.name]
+				return vim_item
+			end,
+		},
+
+		confirm_opts = {
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = false,
+		},
+
+		window = {
+			completion = {
+				border = "rounded",
+				winhighlight = "Normal:CmpNormal",
+			},
+			documentation = {
+				border = "rounded",
+				winhighlight = "Normal:CmpDocNormal",
+			}
+		}
+	})
+
+
+	-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+	cmp.setup.cmdline({ '/', '?' }, {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = {
+			{ name = 'buffer' }
+		}
+	})
+
+	-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+	cmp.setup.cmdline(':', {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources({
+			{ name = 'path' }
+		}, {
+			{ name = 'cmdline' }
+		}),
+		matching = { disallow_symbol_nonprefix_matching = false }
+	})
+
+	-- Set up lspconfig.
+	local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+EOL
 
