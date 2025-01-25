@@ -85,6 +85,7 @@ declare -a paths_to_add=(
     "$HOME/.local/bin"                           # Local binaries
     "$HOME/.yarn/bin"                            # Yarn binaries
     "/Applications/Alacritty.app/Contents/MacOS" # Alacritty
+    "$HOME/.foundry/bin"                         # Foundry binaries
 )
 
 # Add existing directories to PATH, avoiding duplicates

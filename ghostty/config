@@ -1,0 +1,3 @@
+font-family = "MonoLisa Nerd Font Mono"
+initial-command = "bash ~/.dotfiles/single.sh"
+font-size = 15
