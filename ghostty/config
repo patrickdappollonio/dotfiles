@@ -5,3 +5,5 @@ macos-titlebar-style = "transparent"
 font-thicken = true
 font-thicken-strength = 50
 link-url = true
+shell-integration = "bash"
+window-save-state = "always"
