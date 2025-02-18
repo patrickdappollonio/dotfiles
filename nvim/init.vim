@@ -130,11 +130,6 @@ vnoremap c "_c
 nnoremap C "_C
 vnoremap C "_C
 
-" Configure terminal GUI colors
-if (has("termguicolors"))
-	set termguicolors
-endif
-
 " ===========================================================
 "                    VIM PLUGIN SETTINGS
 " ===========================================================
@@ -194,6 +189,7 @@ Plug 'itspriddle/vim-shellcheck'			" Support for shellcheck
 
 " Other plugins that must be loaded last
 Plug 'ryanoasis/vim-devicons'					" Dev icons for multiple plugins
+Plug 'nvim-tree/nvim-web-devicons'              " Dev icons for other plugins
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'	" Dev icon colors for Neovim
 
 " Replacing GitHub Copilot with this custom plugin
@@ -208,7 +204,13 @@ call plug#end()
 " here.
 filetype plugin indent on
 
+" Configure terminal GUI colors
+if (has("termguicolors"))
+	set termguicolors
+endif
+
 " Enable colorscheme
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext

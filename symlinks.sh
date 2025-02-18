@@ -9,6 +9,7 @@ function destroy_symlinks() {
     rm -rf ~/.tmux.conf
     rm -rf ~/.alacritty.toml
     rm -rf ~/.config/nvim
+    rm -rf ~/.config/ghostty
 }
 
 # Add new symlinks

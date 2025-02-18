@@ -160,18 +160,22 @@ fi
 
 # Automatically set kubeconfig env var
 function change-k8() {
-    # shellcheck disable=SC2012
-    mapfile -t kks < <(ls -1 "$HOME/.kube/"*.yml 2>/dev/null | sed 's|.*/||')
-    if [ "${#kks[@]}" -eq 0 ]; then
-        echo "No kubeconfig files found in ~/.kube/"
+    local kube_dir="$HOME/.kube"
+    local files=()
+
+    while IFS= read -r -d '' file; do
+        files+=( "$(basename "$file")" )
+    done < <(find "$kube_dir" -type f -name '*.yml' -print0)
+
+    if [ "${#files[@]}" -eq 0 ]; then
+        echo "No kubeconfig files found in $kube_dir"
         return 1
     fi
 
     echo "kubectl: select a kubeconfig file"
-
     PS3="Use number to select a file or 'stop' to cancel: "
 
-    select filename in "${kks[@]}"; do
+    select filename in "${files[@]}"; do
         if [[ "$REPLY" == "stop" ]]; then
             break
         fi
@@ -182,7 +186,7 @@ function change-k8() {
         fi
 
         echo "kubectl config set to: $filename"
-        export KUBECONFIG="$HOME/.kube/$filename"
+        export KUBECONFIG="$kube_dir/$filename"
 
         break
     done
@@ -219,7 +223,7 @@ alias tf='terraform'
 
 # Create a temporary directory and cd into it
 function td() {
-    dir=$(mktemp -d "${GOPATH}/src/github.com/patrickdappollonio/temp-XXXXXX")
+    dir="${GOPATH}/src/github.com/patrickdappollonio/temp-$(date +%Y%m%d%H%M%S)"
     mkdir -p "$dir" && cd "$dir" || return
 }
 
@@ -232,6 +236,9 @@ function cleantd() {
 if [ -x "$(command -v nvim)" ]; then
     alias vim=nvim
 fi
+
+# Enable the use of my "single" script for tmux
+alias single="bash $HOME/.dotfiles/single.sh"
 
 # Fix WSL interop on a long-lived tmux session
 function wsl_interop() {
@@ -288,3 +295,4 @@ if [ -f "$SSH_ENV" ]; then
 else
     start_ssh_agent
 fi
+. "$HOME/.cargo/env"
