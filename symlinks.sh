@@ -13,7 +13,7 @@ function destroy_symlinks() {
 
 # Add new symlinks
 function create_symlinks() {
-    mkdir -p $HOME/.config/{nvim,ghostty}
+    mkdir -p $HOME/.config/
     ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
     ln -s ~/.dotfiles/.inputrc ~/.inputrc
     ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
