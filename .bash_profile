@@ -218,6 +218,39 @@ if command -v kubectl &>/dev/null; then
     source <(command kubectl completion bash)
 fi
 
+# Configure debug pod
+function dp() {
+    local namespace="${1:-default}"
+    if ! kubectl get ns "$namespace" >/dev/null 2>&1; then
+        echo "Error: Namespace '$namespace' does not exist." >&2
+        return 1
+    fi
+
+    # Create the pod via a YAML manifest from stdin
+    cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug-pod
+  namespace: ${namespace}
+spec:
+  containers:
+  - name: debug
+    image: ghcr.io/patrickdappollonio/alpine-utils:latest
+    command: ["/usr/local/bin/pause"]
+  restartPolicy: OnFailure
+EOF
+
+    # Wait until the pod is ready
+    kubectl wait --for=condition=Ready pod/debug-pod --namespace="$namespace"
+
+    # Exec into the pod (change /bin/bash to /bin/sh if needed)
+    kubectl exec -it debug-pod --namespace="$namespace" -- /bin/bash
+
+    # After exiting the shell, delete the pod
+    kubectl delete pod debug-pod --namespace="$namespace"
+}
+
 # Shorthand for terraform
 alias tf='terraform'
 
