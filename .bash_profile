@@ -48,6 +48,8 @@ __prompt_command() {
 # Diverse aliases for my common tasks
 if [ "$IS_LINUX_OS" = true ]; then
     alias ll='ls -lha --color=auto'
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
 fi
 
 if [ "$IS_MAC_OS" = true ]; then
