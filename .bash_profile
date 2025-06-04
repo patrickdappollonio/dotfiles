@@ -300,6 +300,7 @@ fi
 if [ -S "$HOME/.colima/default/docker.sock" ]; then
     export DOCKER_SOCK="unix://$HOME/.colima/default/docker.sock"
     export DOCKER_DEFAULT_PLATFORM=linux/arm64
+    export DOCKER_HOST="unix://$HOME/.colima/docker.sock"
 fi
 
 # Configure SSH agent
