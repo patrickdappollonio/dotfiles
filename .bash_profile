@@ -48,6 +48,8 @@ __prompt_command() {
 # Diverse aliases for my common tasks
 if [ "$IS_LINUX_OS" = true ]; then
     alias ll='ls -lha --color=auto'
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
 fi
 
 if [ "$IS_MAC_OS" = true ]; then
@@ -271,7 +273,7 @@ if [ -x "$(command -v nvim)" ]; then
 fi
 
 # Enable the use of my "single" script for tmux
-alias single="bash $HOME/.dotfiles/single.sh"
+alias single="bash ~/.dotfiles/single.sh"
 
 # Fix WSL interop on a long-lived tmux session
 function wsl_interop() {
@@ -329,4 +331,3 @@ if [ -f "$SSH_ENV" ]; then
 else
     start_ssh_agent
 fi
-. "$HOME/.cargo/env"
