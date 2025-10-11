@@ -1,5 +1,5 @@
 font-family = "MonoLisa Nerd Font Mono"
-initial-command = "bash ~/.dotfiles/single.sh"
+initial-command = "bash /Users/patrick/.dotfiles/single.sh"
 font-size = 15
 macos-titlebar-style = "transparent"
 font-thicken = true

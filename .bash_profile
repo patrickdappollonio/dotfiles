@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Exit if not running in bash
+if [ -z "$BASH_VERSION" ]; then
+    return 2>/dev/null || exit 0
+fi
+
 # Find if it's macOS, Linux, or WSL that we are running
 [ "$(uname -s)" = "Darwin" ] && IS_MAC_OS=true
 [ "$(uname -s)" = "Linux" ] && IS_LINUX_OS=true
@@ -331,3 +336,5 @@ if [ -f "$SSH_ENV" ]; then
 else
     start_ssh_agent
 fi
+
+export PATH="/Users/patrick/.local/share/solana/install/active_release/bin:$PATH"
