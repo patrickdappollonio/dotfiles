@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Exit if not running in bash
-if [ -z "$BASH_VERSION" ]; then
-    return 2>/dev/null || exit 0
+# Don't run this magic for Cursor
+if [ -n "$CURSOR_AGENT" ]; then
+    exit 0
 fi
 
 # Find if it's macOS, Linux, or WSL that we are running
