@@ -2,6 +2,9 @@
 
 # Don't run this magic for Cursor
 if [ -n "$CURSOR_AGENT" ]; then
+    if ! declare -F dump_bash_state >/dev/null 2>&1; then
+      dump_bash_state() { :; }
+    fi
     exit 0
 fi
 
