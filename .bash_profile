@@ -63,8 +63,8 @@ alias ...='cd ../..'
 # Golang aliases
 alias goi='go install'
 alias gob='go build'
-alias got='go test -json -cover -count=1 ./... | tparse -all'
-alias gots='go test -short -json -cover -count=1 ./... | tparse -all'
+alias got='gotestdox -count=1 ./...'
+alias gots='gotestdox -count=1 -short -cover ./...'
 alias gg='go get -u'
 alias ggi='go get -u -insecure'
 alias gobs='CGO_ENABLED=0 go build -a -tags netgo -trimpath -ldflags "-s -w -extldflags '\''-static'\''" .'
@@ -298,13 +298,6 @@ if [ "$IS_WSL" = true ]; then
     }
 fi
 
-# Configure Colima if it exists
-if [ -S "$HOME/.colima/default/docker.sock" ]; then
-    export DOCKER_SOCK="unix://$HOME/.colima/default/docker.sock"
-    export DOCKER_DEFAULT_PLATFORM=linux/arm64
-    export DOCKER_HOST="unix://$HOME/.colima/docker.sock"
-fi
-
 # Configure SSH agent
 SSH_ENV="$HOME/.ssh/agent-environment"
 
@@ -331,3 +324,4 @@ if [ -f "$SSH_ENV" ]; then
 else
     start_ssh_agent
 fi
+
