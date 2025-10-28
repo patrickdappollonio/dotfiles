@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Don't run this magic for Cursor
+if [ -n "$CURSOR_AGENT" ]; then
+    if ! declare -F dump_bash_state >/dev/null 2>&1; then
+      dump_bash_state() { :; }
+    fi
+    exit 0
+fi
+
 # Find if it's macOS, Linux, or WSL that we are running
 [ "$(uname -s)" = "Darwin" ] && IS_MAC_OS=true
 [ "$(uname -s)" = "Linux" ] && IS_LINUX_OS=true
@@ -325,3 +333,4 @@ else
     start_ssh_agent
 fi
 
+export PATH="/Users/patrick/.local/share/solana/install/active_release/bin:$PATH"
