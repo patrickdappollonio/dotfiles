@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Don't run this magic for Cursor
-if [ -n "$CURSOR_AGENT" ]; then
-    if ! declare -F dump_bash_state >/dev/null 2>&1; then
-      dump_bash_state() { :; }
-    fi
-    exit 0
-fi
-
 # Find if it's macOS, Linux, or WSL that we are running
 [ "$(uname -s)" = "Darwin" ] && IS_MAC_OS=true
 [ "$(uname -s)" = "Linux" ] && IS_LINUX_OS=true
@@ -96,6 +88,7 @@ declare -a paths_to_add=(
     "$HOME/.yarn/bin"                            # Yarn binaries
     "/Applications/Alacritty.app/Contents/MacOS" # Alacritty
     "$HOME/.foundry/bin"                         # Foundry binaries
+	"/home/linuxbrew/.linuxbrew/bin"			 # LinuxBrew (note the username)
 )
 
 # Add existing directories to PATH, avoiding duplicates
@@ -334,3 +327,4 @@ else
 fi
 
 export PATH="/Users/patrick/.local/share/solana/install/active_release/bin:$PATH"
+. "$HOME/.cargo/env"
