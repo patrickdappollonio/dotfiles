@@ -88,7 +88,7 @@ declare -a paths_to_add=(
     "$HOME/.yarn/bin"                            # Yarn binaries
     "/Applications/Alacritty.app/Contents/MacOS" # Alacritty
     "$HOME/.foundry/bin"                         # Foundry binaries
-	"/home/linuxbrew/.linuxbrew/bin"			 # LinuxBrew (note the username)
+    "/home/linuxbrew/.linuxbrew/bin"             # LinuxBrew (note the username)
 )
 
 # Add existing directories to PATH, avoiding duplicates
