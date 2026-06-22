@@ -325,6 +325,3 @@ if [ -f "$SSH_ENV" ]; then
 else
     start_ssh_agent
 fi
-
-export PATH="/Users/patrick/.local/share/solana/install/active_release/bin:$PATH"
-. "$HOME/.cargo/env"
