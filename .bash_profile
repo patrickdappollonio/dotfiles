@@ -89,6 +89,7 @@ declare -a paths_to_add=(
     "/Applications/Alacritty.app/Contents/MacOS" # Alacritty
     "$HOME/.foundry/bin"                         # Foundry binaries
     "/home/linuxbrew/.linuxbrew/bin"             # LinuxBrew (note the username)
+    "/home/linuxbrew/.linuxbrew/opt/rustup/bin"  # LinuxBrew Rust
 )
 
 # Add existing directories to PATH, avoiding duplicates
