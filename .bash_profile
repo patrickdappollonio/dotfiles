@@ -88,6 +88,8 @@ declare -a paths_to_add=(
     "$HOME/.yarn/bin"                            # Yarn binaries
     "/Applications/Alacritty.app/Contents/MacOS" # Alacritty
     "$HOME/.foundry/bin"                         # Foundry binaries
+    "/home/linuxbrew/.linuxbrew/bin"             # LinuxBrew (note the username)
+    "/home/linuxbrew/.linuxbrew/opt/rustup/bin"  # LinuxBrew Rust
 )
 
 # Add existing directories to PATH, avoiding duplicates
@@ -325,8 +327,3 @@ if [ -f "$SSH_ENV" ]; then
 else
     start_ssh_agent
 fi
-
-export PATH="/Users/patrick/.local/share/solana/install/active_release/bin:$PATH"
-
-# Added by Antigravity
-export PATH="/Users/patrickdappollonio/.antigravity/antigravity/bin:$PATH"
