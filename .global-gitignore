@@ -24,3 +24,6 @@ $RECYCLE.BIN/
 
 # Mac stuff
 .DS_Store
+
+# Superpowers dotfiles
+docs/superpowers

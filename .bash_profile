@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Don't run this magic for Cursor
-if [ -n "$CURSOR_AGENT" ]; then
-    if ! declare -F dump_bash_state >/dev/null 2>&1; then
-      dump_bash_state() { :; }
-    fi
-    exit 0
-fi
-
 # Find if it's macOS, Linux, or WSL that we are running
 [ "$(uname -s)" = "Darwin" ] && IS_MAC_OS=true
 [ "$(uname -s)" = "Linux" ] && IS_LINUX_OS=true
@@ -110,6 +102,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Array of files to source if they exist
 declare -a files_to_source=(
+    "$HOME/.bashrc"             # Default bash variables
     "$HOME/.config/environment" # Custom environment variables
     "$HOME/.cargo/env"          # Rust environment variables
     "$NVM_DIR/nvm.sh"           # NVM environment variables
@@ -334,3 +327,6 @@ else
 fi
 
 export PATH="/Users/patrick/.local/share/solana/install/active_release/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/patrickdappollonio/.antigravity/antigravity/bin:$PATH"

@@ -168,7 +168,6 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'dmitmel/cmp-vim-lsp'
 Plug 'mattn/vim-lsp-settings'
-Plug 'zbirenbaum/copilot-cmp'
 
 " Specific plugins
 Plug 'nvim-treesitter/nvim-treesitter'
@@ -191,9 +190,6 @@ Plug 'itspriddle/vim-shellcheck'			" Support for shellcheck
 Plug 'ryanoasis/vim-devicons'					" Dev icons for multiple plugins
 Plug 'nvim-tree/nvim-web-devicons'              " Dev icons for other plugins
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'	" Dev icon colors for Neovim
-
-" Replacing GitHub Copilot with this custom plugin
-Plug 'zbirenbaum/copilot.lua'
 
 " Wrap-up vundle plugins
 call plug#end()
@@ -373,29 +369,6 @@ lua <<EOL
 		TypeParameter = "",
 		Copilot = "",
 	}
-
-	-- Copilot configuration
-	require('copilot').setup({
-	  panel = {
-		enabled = false,
-	  },
-	  suggestion = {
-			enabled = false,
-	  },
-	  filetypes = {
-		gitcommit = false,
-		gitrebase = false,
-		hgcommit = false,
-		svn = false,
-		cvs = false,
-		["."] = false,
-	  },
-	  copilot_node_command = 'node', -- Node.js version must be > 18.x
-	  server_opts_overrides = {},
-	})
-
-	-- Copilot completion
-	require("copilot_cmp").setup()
 
 	-- Set up nvim-cmp.
 	local cmp = require'cmp'
