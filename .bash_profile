@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Don't run this magic for Cursor
-if [ -n "$CURSOR_AGENT" ]; then
-    if ! declare -F dump_bash_state >/dev/null 2>&1; then
-      dump_bash_state() { :; }
-    fi
-    exit 0
-fi
-
 # Find if it's macOS, Linux, or WSL that we are running
 [ "$(uname -s)" = "Darwin" ] && IS_MAC_OS=true
 [ "$(uname -s)" = "Linux" ] && IS_LINUX_OS=true
@@ -97,6 +89,8 @@ declare -a paths_to_add=(
     "$HOME/.yarn/bin"                            # Yarn binaries
     "/Applications/Alacritty.app/Contents/MacOS" # Alacritty
     "$HOME/.foundry/bin"                         # Foundry binaries
+    "/home/linuxbrew/.linuxbrew/bin"             # LinuxBrew (note the username)
+    "/home/linuxbrew/.linuxbrew/opt/rustup/bin"  # LinuxBrew Rust
 )
 
 # Add existing directories to PATH, avoiding duplicates
@@ -111,6 +105,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Array of files to source if they exist
 declare -a files_to_source=(
+    "$HOME/.bashrc"             # Default bash variables
     "$HOME/.config/environment" # Custom environment variables
     "$HOME/.cargo/env"          # Rust environment variables
     "$NVM_DIR/nvm.sh"           # NVM environment variables
@@ -307,13 +302,6 @@ if [ "$IS_WSL" = true ]; then
     }
 fi
 
-# Configure Colima if it exists
-if [ -S "$HOME/.colima/default/docker.sock" ]; then
-    export DOCKER_SOCK="unix://$HOME/.colima/default/docker.sock"
-    export DOCKER_DEFAULT_PLATFORM=linux/arm64
-    export DOCKER_HOST="unix://$HOME/.colima/docker.sock"
-fi
-
 # Configure SSH agent
 SSH_ENV="$HOME/.ssh/agent-environment"
 
@@ -340,5 +328,3 @@ if [ -f "$SSH_ENV" ]; then
 else
     start_ssh_agent
 fi
-
-export PATH="/Users/patrick/.local/share/solana/install/active_release/bin:$PATH"
