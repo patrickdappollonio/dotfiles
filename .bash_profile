@@ -329,6 +329,3 @@ else
     start_ssh_agent
 fi
 
-# Source bashrc if exists
-if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
-
