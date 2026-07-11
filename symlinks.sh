@@ -10,6 +10,7 @@ function destroy_symlinks() {
     rm -rf ~/.alacritty.toml
     rm -rf ~/.config/nvim
     rm -rf ~/.config/ghostty
+    rm -rf ~/.config/kitty/kitty.conf
 }
 
 # Add new symlinks
@@ -22,6 +23,8 @@ function create_symlinks() {
     ln -s ~/.dotfiles/.alacritty.toml ~/.alacritty.toml
     ln -s ~/.dotfiles/nvim ~/.config/nvim
     ln -s ~/.dotfiles/ghostty ~/.config/ghostty
+    mkdir -p $HOME/.config/kitty/
+    ln -s ~/.dotfiles/kitty.conf ~/.config/kitty/kitty.conf
 }
 
 # Options for the command
