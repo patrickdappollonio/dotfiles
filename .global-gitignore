@@ -25,5 +25,7 @@ $RECYCLE.BIN/
 # Mac stuff
 .DS_Store
 
-# Superpowers dotfiles
+# Superpowers
 docs/superpowers
+
+**/.claude/settings.local.json

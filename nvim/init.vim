@@ -191,6 +191,10 @@ Plug 'ryanoasis/vim-devicons'					" Dev icons for multiple plugins
 Plug 'nvim-tree/nvim-web-devicons'              " Dev icons for other plugins
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'	" Dev icon colors for Neovim
 
+" Add Git related plugins
+Plug 'justinmk/vim-dirvish'
+Plug 'kristijanhusak/vim-dirvish-git'
+
 " Wrap-up vundle plugins
 call plug#end()
 
@@ -367,7 +371,6 @@ lua <<EOL
 		Event = "",
 		Operator = "",
 		TypeParameter = "",
-		Copilot = "",
 	}
 
 	-- Set up nvim-cmp.
@@ -388,7 +391,6 @@ lua <<EOL
 		}),
 
 		sources = cmp.config.sources({
-			{ name = 'copilot' },
 			{ name = 'nvim_lsp' },
 			{ name = 'vsnip' },
 			{ name = 'vim_lsp' },
@@ -405,10 +407,8 @@ lua <<EOL
 					nvim_lsp = "[LSP]",
 					buffer = "[Buffer]",
 					path = "[Path]",
-					copilot = "[Copilot]",
 					vsnip = "[VSnip]",
 					vim_lsp = "[VimLSP]",
-					copilot = "[Copilot]",
 				})[entry.source.name]
 				return vim_item
 			end,

@@ -63,8 +63,9 @@ alias ...='cd ../..'
 # Golang aliases
 alias goi='go install'
 alias gob='go build'
-alias got='gotestdox -count=1 ./...'
-alias gots='gotestdox -count=1 -short -cover ./...'
+alias got='go test -json -cover -count=1 ./... | tparse -all'
+alias goti='go test -json -cover -count=1 -tags integration ./... | tparse -all'
+alias gots='go test -short -json -cover -count=1 ./... | tparse -all'
 alias gg='go get -u'
 alias ggi='go get -u -insecure'
 alias gobs='CGO_ENABLED=0 go build -a -tags netgo -trimpath -ldflags "-s -w -extldflags '\''-static'\''" .'
@@ -327,3 +328,4 @@ if [ -f "$SSH_ENV" ]; then
 else
     start_ssh_agent
 fi
+
