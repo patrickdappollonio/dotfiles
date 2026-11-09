@@ -155,6 +155,51 @@ function gc() {
     cd "$(gc-rust "$@")" || return
 }
 
+# Shell-level git subcommands, for things git aliases can't do (like cd).
+# `git foo ...` calls the function `__git_shell_foo` with the remaining
+# arguments if one is defined; otherwise it runs the real git. To add one,
+# define `__git_shell_<name>` below. Inside a handler, use `command git` to
+# reach the real git (and your .gitconfig aliases) without recursing.
+#
+# Example: `git root` jumps to the top of the current repo or worktree.
+#
+#   function __git_shell_root() {
+#       cd "$(command git rev-parse --show-toplevel)" || return
+#   }
+#
+# A handler fully owns its subcommand; to keep git's own behavior for the
+# cases it doesn't handle, end with `command git <name> "$@"`.
+function git() {
+    if [[ $# -gt 0 ]] && declare -F "__git_shell_$1" >/dev/null; then
+        local sub="$1"
+        shift
+        "__git_shell_$sub" "$@"
+        return
+    fi
+    command git "$@"
+}
+
+# `git co <branch>`: cd into the worktree when that branch is already checked
+# out in another worktree; otherwise fall back to the `co` alias.
+function __git_shell_co() {
+    if [[ $# -eq 1 && "$1" != -* ]]; then
+        local target="refs/heads/$1" here path="" line wt=""
+        here="$(command git rev-parse --show-toplevel 2>/dev/null)"
+        while IFS= read -r line; do
+            case "$line" in
+                "worktree "*) wt="${line#worktree }" ;;
+                "branch $target") path="$wt"; break ;;
+            esac
+        done < <(command git worktree list --porcelain 2>/dev/null)
+
+        if [[ -n "$path" && "$path" != "$here" ]]; then
+            cd "$path" && echo "Switched to worktree for '$1': $path"
+            return
+        fi
+    fi
+    command git co "$@"
+}
+
 # Alias cat to bat if it's installed
 if command -v bat &>/dev/null; then
     alias cat='bat --style=numbers,changes,grid --paging=never'
