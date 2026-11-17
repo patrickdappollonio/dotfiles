@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Guard for recursive loop
+[ -n "$__BASH_PROFILE_SOURCED" ] && return
+__BASH_PROFILE_SOURCED=1
+
 # Find if it's macOS, Linux, or WSL that we are running
 [ "$(uname -s)" = "Darwin" ] && IS_MAC_OS=true
 [ "$(uname -s)" = "Linux" ] && IS_LINUX_OS=true
